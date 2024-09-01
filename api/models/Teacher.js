@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db')
 const Course = require('./Course')
 const Coordination = require('./Coordination')
+const TeacherCourse = require('./TeacherCourse')
 
 const Teacher = sequelize.define(
     'Teacher',
@@ -25,14 +26,9 @@ const Teacher = sequelize.define(
     }
 )
 
-Teacher.hasMany(Course, {
-    foreignKey: 'teacherId',
-    sourceKey: 'id'
-})
-Course.belongsTo(Teacher, {
-    foreignKey: 'teacherId',
-    targetId: 'id'
-})
+Teacher.belongsToMany(Course, { through: TeacherCourse, foreignKey: 'teacherId' })
+Course.belongsToMany(Teacher, { through: TeacherCourse, foreignKey: 'courseId' })
+
 Teacher.hasMany(Coordination, {
     foreignKey: 'teacherId',
     sourceKey: 'id'
