@@ -9,20 +9,20 @@ const Coordination = sequelize.define(
             primaryKey: true,
             autoIncrement: true
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         days: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        pricePerHour: {
+        hourlyPay: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
         hours: {
             type: DataTypes.FLOAT,
-            allowNull: false
-        },        
-        totalPay: {
-            type: DataTypes.INTEGER,
             allowNull: false
         }
     },

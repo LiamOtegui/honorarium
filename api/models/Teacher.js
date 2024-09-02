@@ -35,7 +35,7 @@ Teacher.hasMany(Coordination, {
 })
 Coordination.belongsTo(Teacher, {
     foreignKey: 'teacherId',
-    targetId: 'id'
+    targetKey: 'id'
 })
 
 module.exports = Teacher

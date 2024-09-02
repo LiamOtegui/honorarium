@@ -3,13 +3,14 @@ const asyncHandler = require('express-async-handler')
 
 const postCoordination = asyncHandler(async (req, res) => {
     try {
-        const { days, pricePerHour, hours, totalPay } = req.body
+        const { name, days, hourlyPay, hours, teacherId } = req.body
 
         const coordination = await Coordination.create({
+            name,
             days,
-            pricePerHour,
+            hourlyPay,
             hours,
-            totalPay
+            teacherId
         })
 
         res.json(coordination)
@@ -44,11 +45,11 @@ const getCoordinationById = asyncHandler(async (req, res) => {
 
 const updateCoordination = asyncHandler(async (req, res) => {
     try {
-        const { days, pricePerHour, hours, totalPay } = req.body
+        const { name, days, hourlyPay, hours } = req.body
         const { id } = req.params
 
         const coordination = await Coordination.update(
-            { days, pricePerHour, hours, totalPay },
+            { name, days, hourlyPay, hours },
             { where: { id: id } }
         )
 

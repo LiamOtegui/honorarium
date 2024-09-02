@@ -13,11 +13,15 @@ const Course = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        days: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         students: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        pricePerHour: {
+        payment: {
             type: DataTypes.INTEGER,
             allowNull: false
         }

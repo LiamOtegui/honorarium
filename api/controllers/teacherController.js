@@ -78,10 +78,74 @@ const deleteTeacher = asyncHandler(async (req, res) => {
     }
 })
 
+//////////////////////////////////////////////////////////////////////////////////
+
+const associateTeacherToCourse = asyncHandler(async (req, res) => {
+    try {
+        const { teacherId, courseId } = req.body
+
+        const teacher = await Teacher.findByPk(teacherId)
+        const course = await Course.findByPk(courseId)
+
+        if (!teacher || !course) {
+            res.status(404)
+            throw new Error('Teacher or Course not found')
+        }
+
+        await teacher.addCourse(course)
+
+        res.json({ message: 'Teacher associated with Course successfully' })
+    } catch (error) {
+        res.status(500)
+        throw new Error(error.message)
+    }
+})
+
+const getTeacherCourses = asyncHandler(async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const teacher = await Teacher.findByPk(id, {
+            include: {
+                model: Course,
+                through: {
+                    attributes: [] // Con esto me devuelve solo la lista de cursos asociados a un profesor sin los detalles de la tabla TeacherCourse
+                }
+            }
+        })
+
+        if (!teacher) {
+            res.status(404)
+            throw new Error('Teacher not found')
+        }
+
+        res.json(teacher.Courses)
+    } catch (error) {
+        res.status(500)
+        throw new Error(error.message)
+    }
+})
+
+const getTeacherCoordinations = asyncHandler(async (req, res) => {
+    try {
+        const { id } = req.params
+        const coordination = await Coordination.findAll(
+            { where: { teacherId: id } }
+        )
+        res.json(coordination)
+    } catch (error) {
+        res.status(500)
+        throw new Error(error.message)
+    }
+})
+
 module.exports = {
     postTeacher,
     getTeachers,
     getTeacherById,
     updateTeacher,
-    deleteTeacher
+    deleteTeacher,
+    associateTeacherToCourse,
+    getTeacherCourses,
+    getTeacherCoordinations
 }
