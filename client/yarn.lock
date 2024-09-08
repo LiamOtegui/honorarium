@@ -1241,6 +1241,7 @@ __metadata:
     "@vitejs/plugin-react": ^4.3.1
     autoprefixer: ^10.4.20
     axios: ^1.7.7
+    dotenv: ^16.4.5
     eslint: ^9.9.0
     eslint-plugin-react: ^7.35.0
     eslint-plugin-react-hooks: ^5.1.0-rc.0
@@ -1454,6 +1455,13 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: a45e277f7feaed309fe658ace1ff286c6e2002ac515af0aaf37145b8baa96e49899638c7cd47dccf84c3d32abfc113246625b3ac8f552d1046072adee13b0dc8
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.4.5":
+  version: 16.4.5
+  resolution: "dotenv@npm:16.4.5"
+  checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
   languageName: node
   linkType: hard
 
