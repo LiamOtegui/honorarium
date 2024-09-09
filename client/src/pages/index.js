@@ -1,6 +1,6 @@
 import Landing from "./Landing";
 import Home from "./Home";
-import Teachers from "./Teachers";
+import TeacherTemplate from "./TeacherTemplate";
 import Courses from "./Courses";
 import Coordinations from "./Coordinations";
 import CreateTeacher from "./CreateTeacher";
@@ -10,7 +10,7 @@ import CreateCoordination from "./CreateCoordination";
 export {
     Landing,
     Home,
-    Teachers,
+    TeacherTemplate,
     Courses,
     Coordinations,
     CreateTeacher,

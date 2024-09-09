@@ -45,11 +45,11 @@ const getCoordinationById = asyncHandler(async (req, res) => {
 
 const updateCoordination = asyncHandler(async (req, res) => {
     try {
-        const { name, days, hourlyPay, hours } = req.body
+        const { name, days, hourlyPay, hours, teacherId } = req.body
         const { id } = req.params
 
         const coordination = await Coordination.update(
-            { name, days, hourlyPay, hours },
+            { name, days, hourlyPay, hours, teacherId },
             { where: { id: id } }
         )
 
