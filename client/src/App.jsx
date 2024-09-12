@@ -9,17 +9,30 @@ function App() {
 
   return (
     <>
-      <div className=''>
+      <div className='flex flex-row bg-cyan-500 h-screen w-screen'>
 
-        <div className='flex flex-row'>
-          <nav>
-            TEC School of English
-            <Link to='/home/courses'>
-              Courses
+        <div className='fixed'>
+          <nav className='flex flex-col items-center bg-cyan-600 text-white h-screen'>
+            <Link to='/home' className='flex text-3xl font-semibold bg-cyan-700 shadow-md text-white px-20 py-3 mb-7'>
+              TEC
             </Link>
-            <Link to='/home/coordinations'>
-              Coordinations
-            </Link>
+            <div className='flex flex-col space-y-7 text-center'>
+              <Link to='/home/courses' className='text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200'>
+                Courses
+              </Link>
+              <Link to='/home/coordinations' className='text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200'>
+                Coordinations
+              </Link>
+              <Link to='/home/create-teacher' className='text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200'>
+                New Teacher
+              </Link>
+              <Link to='/home/create-course' className='text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200'>
+                New Course
+              </Link>
+              <Link to='/home/create-coordination' className='text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200'>
+                New Coordination
+              </Link>
+            </div>
           </nav>
         </div>
 
