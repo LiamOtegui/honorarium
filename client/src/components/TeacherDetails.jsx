@@ -39,7 +39,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                                 setChoosenForEdit(teacher)
                             }
                             }
-                            className='bg-cyan-500 px-3 p [choosenForEdit, setChoosenForEdit]y-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md'>
+                            className='bg-cyan-500 px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md'>
                             Edit
                         </button>
                     </div>
@@ -70,7 +70,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                     )}
                 </div>
             </div>
-            <EditTeacher open={openForEdit} teacher={choosenForEdit} onClose={() => setOpenForEdit(false)}>
+            <EditTeacher open={openForEdit} choosen={choosenForEdit} onClose={() => setOpenForEdit(false)}>
                 Edit Name or Title:
             </EditTeacher>
         </div>
