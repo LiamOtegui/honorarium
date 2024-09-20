@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import EditTeacher from './EditTeacher'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const TeacherDetails = ({ teacher, getTeacherDetails }) => {
 
@@ -18,6 +20,17 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
         fetchDetails()
     }, [teacher.id, getTeacherDetails])
 
+    const deleteTeacher = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/teacher/${id}`)
+            toast.success(`${teacher.name} deleted!`)
+            setTimeout(() => {
+                window.location = '/home'
+            }, 2000)
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
     return (
         <div className='w-[90rem]'>
@@ -45,6 +58,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                                 Edit
                             </button>
                             <button
+                                onClick={() => deleteTeacher(teacher.id)}
                                 className='bg-red-700 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
                                 Delete
                             </button>

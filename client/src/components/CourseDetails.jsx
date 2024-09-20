@@ -8,6 +8,18 @@ const CourseDetails = ({ course }) => {
     const [openForEdit, setOpenForEdit] = useState(false)
     const [choosenForEdit, setChoosenForEdit] = useState(null)
 
+    const deleteCourse = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/course/${id}`)
+            toast.success(`${course.name} deleted!`)
+            setTimeout(() => {
+                window.location = '/home/courses'
+            }, 2000)
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     return (
         <div className='w-[90rem]'>
             <div
@@ -33,6 +45,7 @@ const CourseDetails = ({ course }) => {
                                 Edit
                             </button>
                             <button
+                                onClick={() => deleteCourse(course.id)}
                                 className='bg-red-700 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
                                 Delete
                             </button>
