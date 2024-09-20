@@ -40,6 +40,14 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
     })
   }
 
+  const handleTitle = (event) => {
+    const newTitle = event.target.value === 'yes'
+    setTeacher({
+      ...teacher,
+      title: newTitle
+    })
+  }
+
   return (
     <div
       onClick={onClose}
@@ -53,8 +61,11 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
           onSubmit={updateTeacher}
           className='flex flex-col space-y-1'>
           <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder={teacher.name} className='border border-black rounded-md' />
-          <input type='text' name='title' value={teacher.title} onChange={handleChange} placeholder={teacher.title} className='border border-black rounded-md' />
-          <button>Edit</button>
+          <select value={teacher.title ? 'yes' : 'no'} onChange={handleTitle} className='border border-black rounded-md'>
+            <option value={'yes'}>Tiene título</option>
+            <option value={'no'}>No tiene título</option>
+          </select>
+          <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>Edit</button>
         </form>
         <div>
 

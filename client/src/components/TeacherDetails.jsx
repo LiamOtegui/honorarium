@@ -18,30 +18,37 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
         fetchDetails()
     }, [teacher.id, getTeacherDetails])
 
+
     return (
-        <div>
+        <div className='w-[90rem]'>
             <div
-                className='ml-64 items-center text-lg grid grid-cols-3 md:gap-x-0 lg:gap-x-0 xl:gap-x-0 2xl:gap-x-4 mt-10 bg-cyan-600 rounded-xl text-white border-[0.2rem] border-cyan-700'>
-                <div className='flex items-center space-x-3 bg-cyan-700 rounded-lg m-3'>
-                    <div className='p-3 justify-center items-center hover:bg-cyan-500 m-3 hover:rounded-lg duration-200'>
-                        <div className='text-sm'>
+                className='grid grid-cols-[2fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mt-8 mb-8 bg-cyan-600 rounded-xl text-white border-[0.2rem] border-cyan-700'>
+                <div className='flex items-center bg-cyan-700 rounded-lg m-3 justify-between'>
+                    <button className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-cyan-700 hover:bg-cyan-500 hover:rounded-lg hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
+                        <div className='flex text-sm'>
                             ID: {teacher.id}
                         </div>
                         <div>
                             {teacher.name}
                         </div>
-                    </div>
-                    <div className='flex gap-x-10 items-start justify-center p-3'>
-                        {teacher.title === true ? "Title ✅" : "Title ❌"}
-                        <button
-                            onClick={() => {
-                                setOpenForEdit(true)
-                                setChoosenForEdit(teacher)
-                            }
-                            }
-                            className='bg-cyan-500 px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md'>
-                            Edit
-                        </button>
+                    </button>
+                    <div className='flex gap-x-3 items-start justify-center p-3'>
+                        {teacher.title === true ? "Title:✅" : "Title:❌"}
+                        <div className='flex flex-row gap-x-3'>
+                            <button
+                                onClick={() => {
+                                    setOpenForEdit(true)
+                                    setChoosenForEdit(teacher)
+                                }
+                                }
+                                className='bg-cyan-500 px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md hover:bg-cyan-600 hover:rounded-md hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
+                                Edit
+                            </button>
+                            <button
+                                className='bg-red-700 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1'>
@@ -66,7 +73,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                             <div key={coordination.id} className='text-center'>{coordination.name}</div>
                         ))
                     ) : (
-                        <div className='text-red-500'>No coordinations</div>
+                        <div className='text-yellow-300'>No coordinations</div>
                     )}
                 </div>
             </div>

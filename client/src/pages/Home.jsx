@@ -11,7 +11,8 @@ const Home = () => {
     const getTeachers = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/teacher`)
-            setTeachers(response.data);
+            const sortedTeachers = response.data.sort((a, b) => a.name.localeCompare(b.name))
+            setTeachers(sortedTeachers);
         } catch (error) {
             toast.error(error.message)
         }
@@ -48,7 +49,7 @@ const Home = () => {
                         teachers.map((teacher, index) => (
                             <div key={index}>
                                 <div>
-                                    <TeacherDetails key={index} teacher={teacher} getTeacherDetails={getTeacherDetails} />
+                                    <TeacherDetails teacher={teacher} getTeacherDetails={getTeacherDetails} />
                                 </div>
                             </div>
                         ))

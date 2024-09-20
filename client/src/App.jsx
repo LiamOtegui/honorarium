@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 function App() {
 
   return (
-    <>
-      <div className='flex flex-row bg-cyan-500 h-screen w-screen'>
+    <div className='bg-cyan-500 min-h-screen w-full'>
+      <div className='flex flex-row'>
 
         <div className='fixed'>
           <nav className='flex flex-col items-center bg-cyan-600 text-white h-screen'>
@@ -49,7 +49,7 @@ function App() {
 
         <ToastContainer />
       </div>
-    </>
+    </div>
   )
 }
 
