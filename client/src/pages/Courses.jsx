@@ -7,7 +7,8 @@ import TeacherCourse from '../components/TeacherCourse'
 const Courses = () => {
 
     const [courses, setCourses] = useState([])
-    const [open, setOpen] = useState(false)
+    const [openCreate, setOpenCreate] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
 
     const getCourses = async () => {
         try {
@@ -27,11 +28,13 @@ const Courses = () => {
         <div className='h-screen'>
             <div>
                 <button
-                onClick={() => setOpen(true)}
+                onClick={() => setOpenCreate(true)}
                 className='ml-64 mt-8 bg-cyan-600 border-[0.2rem] rounded-md border-cyan-700 px-4 py-1 duration-200 hover:bg-cyan-700 text-lg text-white'>
                     Associate Teacher
                 </button>
-                <button className='ml-10 mt-8 bg-cyan-600 border-[0.2rem] rounded-md border-cyan-700 px-4 py-1 duration-200 hover:bg-cyan-700 text-lg text-white'>
+                <button
+                onClick={() => setOpenDelete(true)}
+                className='ml-10 mt-8 bg-cyan-600 border-[0.2rem] rounded-md border-cyan-700 px-4 py-1 duration-200 hover:bg-cyan-700 text-lg text-white'>
                     Delete association
                 </button>
             </div>
@@ -46,8 +49,8 @@ const Courses = () => {
                     ))
                 }
             </div>
-            <TeacherCourse open={open} onClose={() => setOpen(false)}>
-                Associate by IDs
+            <TeacherCourse openCreate={openCreate} openDelete={openDelete} onCloseCreate={() => setOpenCreate(false)} onCloseDeleted={() => setOpenDelete(false)}>
+                Associate by IDs:
             </TeacherCourse>
         </div>
     )
