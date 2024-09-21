@@ -54,14 +54,14 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
       className={`flex fixed inset-0 justify-center items-center transition-colors ${open ? 'visible bg-black/50' : 'invisible'}`}>
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-white px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
+        className={`flex flex-col justify-center items-center bg-white px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
         {children}
         <button onClick={onClose} className='absolute right-2 top-0'>x</button>
         <form
           onSubmit={updateTeacher}
-          className='flex flex-col space-y-1'>
-          <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder={teacher.name} className='border border-black rounded-md' />
-          <select value={teacher.title ? 'yes' : 'no'} onChange={handleTitle} className='border border-black rounded-md'>
+          className='flex flex-col items-center space-y-1'>
+          Name: <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder={teacher.name} className='flex p-1 border border-black rounded-md' />
+          Title: <select value={teacher.title ? 'yes' : 'no'} onChange={handleTitle} className='flex p-1 border border-black rounded-md'>
             <option value={'yes'}>Tiene título</option>
             <option value={'no'}>No tiene título</option>
           </select>

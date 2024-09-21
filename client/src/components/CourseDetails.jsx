@@ -61,9 +61,6 @@ const CourseDetails = ({ course }) => {
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mr-3'>
                     Course payment: ${course.payment}
                 </div>
-                <button className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mr-3 mb-3 ml-3'>
-                    Change the teacher with whom the course is associated
-                </button>
             </div>
             <EditCourse open={openForEdit} choosen={choosenForEdit} onClose={() => setOpenForEdit(false)}>
                 Edit Course:

@@ -22,27 +22,27 @@ function App() {
             <div className='flex flex-col space-y-7 text-center'>
               <Link
                 to='/home/courses'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/courses' ? "bg-cyan-800 hover:bg-cyan-800" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/courses' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
                 Courses
               </Link>
               <Link
                 to='/home/coordinations'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/coordinations' ? "bg-cyan-800 hover:bg-cyan-800" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/coordinations' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
                 Coordinations
               </Link>
               <Link
                 to='/home/create-teacher'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-teacher' ? "bg-cyan-800 hover:bg-cyan-800" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-teacher' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
                 New Teacher
               </Link>
               <Link
                 to='/home/create-course'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-course' ? "bg-cyan-800 hover:bg-cyan-800" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-course' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
                 New Course
               </Link>
               <Link
                 to='/home/create-coordination'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-coordination' ? "bg-cyan-800 hover:bg-cyan-800" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-coordination' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
                 New Coordination
               </Link>
             </div>
