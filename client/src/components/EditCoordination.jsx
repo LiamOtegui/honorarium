@@ -62,7 +62,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
           Days: <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder={coordination.days} className='border border-black rounded-md' />
           Hourly Pay: <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder={coordination.hourlyPay} className='border border-black rounded-md' />
           Hours: <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder={coordination.hours} className='border border-black rounded-md' />
-          Teacher associated: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />
+          Teacher ID associated: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />
           <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
             Edit
           </button>
