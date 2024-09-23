@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EditTeacher from './EditTeacher'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const TeacherDetails = ({ teacher, getTeacherDetails }) => {
 
@@ -9,6 +10,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
         courses: [],
         coordinations: []
     })
+
     const [openForEdit, setOpenForEdit] = useState(false)
     const [choosenForEdit, setChoosenForEdit] = useState(null)
 
@@ -31,20 +33,24 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
             toast.error(error.message)
         }
     }
+    
 
     return (
         <div className='w-[90rem]'>
             <div
                 className='grid grid-cols-[2fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mt-8 mb-8 bg-cyan-600 rounded-xl text-white border-[0.2rem] border-cyan-700'>
                 <div className='flex items-center bg-cyan-700 rounded-lg m-3 justify-between'>
-                    <button className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-cyan-700 hover:bg-cyan-500 hover:rounded-lg hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
-                        <div className='flex text-sm'>
-                            ID: {teacher.id}
-                        </div>
-                        <div>
-                            {teacher.name}
-                        </div>
-                    </button>
+                    <Link to={`/home/${teacher.id}`} state={{ teacherId: teacher.id }}>
+                        <button
+                            className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-cyan-700 hover:bg-cyan-500 hover:rounded-lg hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
+                            <div className='flex text-sm'>
+                                ID: {teacher.id}
+                            </div>
+                            <div>
+                                {teacher.name}
+                            </div>
+                        </button>
+                    </Link>
                     <div className='flex gap-x-3 items-start justify-center p-3'>
                         {teacher.title === true ? "Title:✅" : "Title:❌"}
                         <div className='flex flex-row gap-x-3'>

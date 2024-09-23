@@ -6,7 +6,7 @@ const CreateTeacher = () => {
 
   const [teacher, setTeacher] = useState({
     name: "",
-    title: null
+    title: false
   })
 
   const create = async (event) => {
