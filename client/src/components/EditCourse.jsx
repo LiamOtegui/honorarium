@@ -50,7 +50,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
       className={`flex fixed inset-0 justify-center items-center transition-colors ${open ? 'visible bg-black/50' : 'invisible'}`}>
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-white px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
+        className={`bg-white flex flex-col items-center px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
         {children}
         <button onClick={onClose} className='absolute right-2 top-0'>x</button>
         <form
