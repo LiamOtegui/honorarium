@@ -27,7 +27,7 @@ const CoordinationDetails = ({ coordination }) => {
                 <div className='flex items-center bg-cyan-700 rounded-lg m-3 justify-between'>
                     <div className='flex flex-col my-2 mx-1 p-2 items-center border-[0.1rem] duration-200 border-cyan-700'>
                         <div className='flex text-sm'>
-                            Coordination ID: {coordination.id}
+                            Coordinación ID: {coordination.id}
                         </div>
                         <div className='flex items-center'>
                             {coordination.name}
@@ -41,32 +41,32 @@ const CoordinationDetails = ({ coordination }) => {
                                     setChoosenForEdit(coordination)
                                 }
                                 }
-                                className='bg-cyan-500 px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md hover:bg-cyan-600 hover:rounded-md hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
-                                Edit
+                                className='bg-cyan-500 text-xs px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md hover:bg-cyan-600 hover:rounded-md hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
+                                Editar
                             </button>
                             <button
                                 onClick={() => deleteCoordination(coordination.id)}
-                                className='bg-red-700 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
-                                Delete
+                                className='bg-red-700 px-3 py-1 text-xs rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
+                                Eliminar
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mt-10'>
-                    Days working: {coordination.days}
+                    Días trabajando: {coordination.days}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mt-10'>
-                    Hourly Pay: ${coordination.hourlyPay}
+                    Pago por hora: ${coordination.hourlyPay}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mt-10 mr-3'>
-                    Hours Working: {coordination.hours}
+                    Horas trabajando: {coordination.hours}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mr-3 mb-3 ml-3'>
-                    Teacher associated: {coordination.teacherId ? coordination.teacherId : "Not associated"}
+                    Teacher asociado: {coordination.teacherId ? coordination.teacherId : "❌"}
                 </div>
             </div>
             <EditCoordination open={openForEdit} choosen={choosenForEdit} onClose={() => setOpenForEdit(false)}>
-                Edit Coordination:
+                Editar Coordinación:
             </EditCoordination>
         </div>
     )

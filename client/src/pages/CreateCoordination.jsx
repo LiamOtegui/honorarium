@@ -33,25 +33,25 @@ const CreateCoordination = () => {
     <div className='flex ml-[27.5rem] mt-[1.3rem] text-white font-medium bg-cyan-700 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-3xl'>
         <div className='text-[3rem] bg-cyan-800 py-5 px-16 rounded-md border-[0.1rem] border-cyan-800'>
-          Create a new Coordination
+          Crear Nueva Coordinación
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>
           <div className='mb-1'>
-            Name:
+            Nombre:
           </div>
-          <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder="Name" className='text-black p-1 mb-2' />
+          <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder="Nombre" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Days:
+            Días:
           </div>
-          <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder="Days" className='text-black p-1 mb-2' />
+          <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder="Días" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Hourly Payment:
+            Pago por hora:
           </div>
-          <input type='number' name='students' value={coordination.hourlyPay} onChange={handleChange} placeholder="Hourly Pay" className='text-black p-1 mb-2' />
+          <input type='number' name='students' value={coordination.hourlyPay} onChange={handleChange} placeholder="Pago por hora" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Hours working:
+            Horas trabajando:
           </div>
-          <input type='number' name='payment' value={coordination.hours} onChange={handleChange} placeholder="Hours" className='text-black p-1 mb-2' />
+          <input type='number' name='payment' value={coordination.hours} onChange={handleChange} placeholder="Horas" className='text-black p-1 mb-2' />
           <button className='bg-cyan-500 py-2 px-3 rounded-md mt-8 hover:bg-cyan-400 duration-100 border-[0.1rem] border-cyan-600'>Crear</button>
         </form>
       </div>

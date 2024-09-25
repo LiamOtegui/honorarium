@@ -60,8 +60,8 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
         <form
           onSubmit={updateTeacher}
           className='flex flex-col items-center space-y-1'>
-          Name: <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder={teacher.name} className='flex p-1 border border-black rounded-md' />
-          Title: <select value={teacher.title ? 'yes' : 'no'} onChange={handleTitle} className='flex p-1 border border-black rounded-md'>
+          Nombre: <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder={teacher.name} className='flex p-1 border border-black rounded-md' />
+          Título: <select value={teacher.title ? 'yes' : 'no'} onChange={handleTitle} className='flex p-1 border border-black rounded-md'>
             <option value={'yes'}>Tiene título</option>
             <option value={'no'}>No tiene título</option>
           </select>

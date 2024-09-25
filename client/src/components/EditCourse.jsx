@@ -56,12 +56,12 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
         <form
           onSubmit={updateCourse}
           className='flex flex-col space-y-1 items-center'>
-          Name: <input type='text' name='name' value={course.name} onChange={handleChange} placeholder={course.name} className='border border-black rounded-md' />
-          Days: <input type='number' name='days' value={course.days} onChange={handleChange} placeholder={course.days} className='border border-black rounded-md' />
-          Students: <input type='number' name='students' value={course.students} onChange={handleChange} placeholder={course.students} className='border border-black rounded-md' />
-          Payment: <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder={course.payment} className='border border-black rounded-md' />
+          Nombre: <input type='text' name='name' value={course.name} onChange={handleChange} placeholder={course.name} className='border border-black rounded-md' />
+          Días: <input type='number' name='days' value={course.days} onChange={handleChange} placeholder={course.days} className='border border-black rounded-md' />
+          Estudiantes: <input type='number' name='students' value={course.students} onChange={handleChange} placeholder={course.students} className='border border-black rounded-md' />
+          Pago: <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder={course.payment} className='border border-black rounded-md' />
           <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
-            Edit
+            Editar
           </button>
         </form>
         <div>

@@ -39,15 +39,15 @@ const CreateTeacher = () => {
     <div className='flex ml-[31rem] mt-[7rem] text-white font-medium bg-cyan-700 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-3xl'>
         <div className='text-[3rem] bg-cyan-800 py-5 px-16 rounded-md border-[0.1rem] border-cyan-800'>
-          Create a new Teacher
+          Crear Nuevo Teacher
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>
           <div className='mb-1'>
-            Name:
+            Nombre:
           </div>
-          <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder="Name" className='text-black p-1 mb-2' />
+          <input type='text' name='name' value={teacher.name} onChange={handleChange} placeholder="Nombre" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Title:
+            Título:
           </div>
           <select value={teacher.title ? "yes" : "no"} onChange={handleChangeTitle} className='text-black p-1'>
             <option value={"yes"}>Con título</option>

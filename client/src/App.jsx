@@ -21,29 +21,29 @@ function App() {
             </Link>
             <div className='flex flex-col space-y-7 text-center'>
               <Link
-                to='/home/courses'
+                to='/home/cursos'
                 className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/courses' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
-                Courses
+                Cursos
               </Link>
               <Link
-                to='/home/coordinations'
+                to='/home/coordinaciones'
                 className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/coordinations' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
-                Coordinations
+                Coordinaciones
               </Link>
               <Link
-                to='/home/create-teacher'
+                to='/home/crear-teacher'
                 className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-teacher' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
-                New Teacher
+                Nuevo Teacher
               </Link>
               <Link
-                to='/home/create-course'
+                to='/home/crear-curso'
                 className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-course' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
-                New Course
+                Nuevo Curso
               </Link>
               <Link
-                to='/home/create-coordination'
+                to='/home/crear-coordinacion'
                 className={`text-lg font-semibold border-[0.2rem] shadow-md border-cyan-700 text-white p-3 rounded-md hover:bg-cyan-700 transition-all duration-200 ${location.pathname === '/home/create-coordination' ? "bg-cyan-800 hover:bg-cyan-800 border-cyan-900 shadow-lg" : ""}`}>
-                New Coordination
+                Nueva Coordinación
               </Link>
             </div>
           </nav>
@@ -53,11 +53,11 @@ function App() {
           <Route index element={<Landing />} />
           <Route path='/home' element={<Home />} />
           <Route path='/home/:id' element={<TeacherTemplate />} />
-          <Route path='/home/courses' element={<Courses />} />
-          <Route path='/home/coordinations' element={<Coordinations />} />
-          <Route path='/home/create-teacher' element={<CreateTeacher />} />
-          <Route path='/home/create-course' element={<CreateCourse />} />
-          <Route path='/home/create-coordination' element={<CreateCoordination />} />
+          <Route path='/home/cursos' element={<Courses />} />
+          <Route path='/home/coordinaciones' element={<Coordinations />} />
+          <Route path='/home/crear-teacher' element={<CreateTeacher />} />
+          <Route path='/home/crear-curso' element={<CreateCourse />} />
+          <Route path='/home/crear-coordinacion' element={<CreateCoordination />} />
         </Routes>
 
         <ToastContainer />

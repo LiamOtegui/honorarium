@@ -52,7 +52,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                         </button>
                     </Link>
                     <div className='flex gap-x-3 items-start justify-center p-3'>
-                        {teacher.title === true ? "Title:✅" : "Title:❌"}
+                        {teacher.title === true ? "Título:✅" : "Título:❌"}
                         <div className='flex flex-row gap-x-3'>
                             <button
                                 onClick={() => {
@@ -61,12 +61,12 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                                 }
                                 }
                                 className='bg-cyan-500 px-3 py-1 rounded-md border-[0.1rem] border-cyan-300 shadow-md hover:bg-cyan-600 hover:rounded-md hover:border-[0.1rem] hover:border-cyan-300 hover:duration-200'>
-                                Edit
+                                Editar
                             </button>
                             <button
                                 onClick={() => deleteTeacher(teacher.id)}
                                 className='bg-red-700 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-800 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
-                                Delete
+                                Eliminar
                             </button>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                             </div>
                         ))
                     ) : (
-                        <div className='text-red-500'>No courses</div>
+                        <div className='text-red-500'>Sin cursos</div>
                     )}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-cyan-700 rounded-lg py-1 mr-3'>
@@ -93,12 +93,12 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                             <div key={coordination.id} className='text-center'>{coordination.name}</div>
                         ))
                     ) : (
-                        <div className='text-yellow-300'>No coordinations</div>
+                        <div className='text-yellow-300'>Sin coordinación</div>
                     )}
                 </div>
             </div>
             <EditTeacher open={openForEdit} choosen={choosenForEdit} onClose={() => setOpenForEdit(false)}>
-                Edit Name or Title:
+                Editar Nombre y/o Título:
             </EditTeacher>
         </div>
     )

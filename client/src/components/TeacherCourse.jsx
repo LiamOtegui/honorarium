@@ -74,9 +74,9 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         onSubmit={createAssociation}
                         className='flex flex-col items-center mt-3'>
                         Teacher ID: <input type='number' name='teacherId' value={associate.teacherId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
-                        Course ID: <input type='number' name='courseId' value={associate.courseId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
+                        Curso ID: <input type='number' name='courseId' value={associate.courseId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
                         <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
-                            Associate
+                            Asociar
                         </button>
                     </form>
                 </div>
@@ -89,16 +89,16 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                     onClick={(event) => event.stopPropagation()}
                     className={`bg-white flex flex-col items-center px-5 py-5 rounded-md shadow-lg transition-all ${openDelete ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
                     <div className='text-xl font-semibold'>
-                        Delete association:
+                        Eliminar asociación:
                     </div>
                     <button onClick={onCloseDeleted} className='absolute right-2 top-0'>x</button>
                     <form
                         onSubmit={deleteAssociation}
                         className='flex flex-col mt-3 items-center'>
                         Teacher ID:<input type='number' name='teacherId' value={deleted.teacherId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
-                        Course ID:<input type='number' name='courseId' value={deleted.courseId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
+                        Curso ID:<input type='number' name='courseId' value={deleted.courseId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
                         <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
-                            Delete
+                            Eliminar
                         </button>
                     </form>
                 </div>

@@ -119,11 +119,10 @@ const TeacherTemplate = () => {
   const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalTitle + subTotalPremio + subTotalFotocopias
 
   return (
-    <div className='bg-cyan-800 m-3'>
+    <div className=''>
 
-      <div className='absolute right-20 top-10 grid grid-rows space-y-[1.5rem] font-mono'>
+      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-cyan-600 p-3 rounded-lg border-[0.3rem] border-cyan-800 text-sm space-y-[1rem]'>
 
-        {/* Encabezado */}
         <div className='flex justify-between space-x-[10rem]'>
           <div className='flex space-x-2'>
             <div>Profesor/a:</div>
@@ -144,16 +143,16 @@ const TeacherTemplate = () => {
             </div>
           </div>
           <div className='flex'>
-            Viaticos:
+            Viáticos:
             <div className='flex flex-col text-sm space-y-1'>
-              Viaje:
+              Costo de viaje:
               <input
                 className='border w-1/3'
                 type='number'
                 value={viaticos.travel}
                 onChange={(event) => setViaticos({ ...viaticos, travel: Number(event.target.value) })}
               />
-              Dias:
+              Cantidad de viajes:
               <input
                 className='border w-1/3'
                 type='number'
@@ -170,13 +169,12 @@ const TeacherTemplate = () => {
           </div>
         </div>
 
-        {/* Coordinaciones */}
         <div>
           {details.coordinations.map((coordination, index) => (
             <div key={index} className='flex justify-between'>
               <div className='font-semibold'>{coordination.name}</div>
               <div className='flex gap-1'>
-                <div>Dias:</div>
+                <div>Días:</div>
                 <input
                   className='border w-1/5'
                   type="number"
@@ -186,7 +184,7 @@ const TeacherTemplate = () => {
               </div>
               <div className='flex gap-1'>
                 <div>Pago por hora:</div>
-                <input
+                $<input
                   className='border w-1/5'
                   type="number"
                   value={coordination.hourlyPay}
@@ -209,7 +207,6 @@ const TeacherTemplate = () => {
           ))}
         </div>
 
-        {/* Cursos */}
         <div>
           {details.courses.map((course, index) => (
             <div key={index} className='flex justify-between items-center py-12'>
@@ -241,7 +238,7 @@ const TeacherTemplate = () => {
                 </div>
               </div>
               <div className='flex gap-1'>
-                <div>Dias:</div>
+                <div>Días:</div>
                 <input
                   className='border w-10'
                   type="number"
@@ -260,7 +257,7 @@ const TeacherTemplate = () => {
               </div>
               <div className='flex gap-1'>
                 <div>Clase:</div>
-                <input
+                $<input
                   className='border w-16'
                   type="number"
                   value={course.payment}
@@ -276,20 +273,19 @@ const TeacherTemplate = () => {
 
       </div>
 
-      {/* Totales */}
-      <div className='flex flex-col absolute right-20 bottom-5 border-[0.3rem] rounded-lg border-cyan-800 bg-cyan-600 py-3 px-5 text-white'>
-        Total Coordinacion: ${subTotalCoordinaciones}
+      <div className='flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-cyan-800 bg-cyan-600 py-3 px-5 text-white'>
+        Total Coordinación: ${subTotalCoordinaciones}
         <br />
         Total Cursos: ${subTotalCursos}
         <br />
         <br />
 
-        Viaticos: ${subTotalViaticos}
+        Viáticos: ${subTotalViaticos}
         <br />
         {
           teacherTemplate.title
             ? <div>
-              Titulo: $
+              Título: $
               <input
                 className='border w-1/6 text-black'
                 type='number'

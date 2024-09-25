@@ -52,19 +52,19 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
       className={`flex fixed inset-0 justify-center items-center transition-colors ${open ? 'visible bg-black/50' : 'invisible'}`}>
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-white px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
+        className={`bg-white flex flex-col items-center px-5 py-5 rounded-md shadow-lg transition-all ${open ? 'scale-125 opacity-100' : 'scale-100 opacity-0'}`}>
         {children}
         <button onClick={onClose} className='absolute right-2 top-0'>x</button>
         <form
           onSubmit={updateCoordination}
           className='flex flex-col space-y-1 items-center'>
-          Name: <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder={coordination.name} className='border border-black rounded-md' />
-          Days: <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder={coordination.days} className='border border-black rounded-md' />
-          Hourly Pay: <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder={coordination.hourlyPay} className='border border-black rounded-md' />
-          Hours: <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder={coordination.hours} className='border border-black rounded-md' />
-          Teacher ID associated: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />
+          Nombre: <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder={coordination.name} className='border border-black rounded-md' />
+          Días: <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder={coordination.days} className='border border-black rounded-md' />
+          Pago por hora: <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder={coordination.hourlyPay} className='border border-black rounded-md' />
+          Horas: <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder={coordination.hours} className='border border-black rounded-md' />
+          ID de Teacher asociado: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />
           <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
-            Edit
+            Editar
           </button>
         </form>
         <div>
