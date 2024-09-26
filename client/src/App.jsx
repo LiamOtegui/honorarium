@@ -22,27 +22,27 @@ function App() {
             <div className='flex flex-col space-y-7 text-center'>
               <Link
                 to='/home/cursos'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/cursos' ? "bg-stone-800 hover:bg-stone-800 border-stone-900 shadow-lg" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/cursos' ? "bg-stone-600 hover:bg-stone-600 border-stone-600 shadow-lg" : ""}`}>
                 Cursos
               </Link>
               <Link
                 to='/home/coordinaciones'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/coordinaciones' ? "bg-stone-800 hover:bg-stone-800 border-stone-900 shadow-lg" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/coordinaciones' ? "bg-stone-600 hover:bg-stone-600 border-stone-600 shadow-lg" : ""}`}>
                 Coordinaciones
               </Link>
               <Link
                 to='/home/crear-teacher'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-teacher' ? "bg-stone-800 hover:bg-stone-800 border-stone-900 shadow-lg" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-teacher' ? "bg-stone-600 hover:bg-stone-600 border-stone-600 shadow-lg" : ""}`}>
                 Nuevo Teacher
               </Link>
               <Link
                 to='/home/crear-curso'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-curso' ? "bg-stone-800 hover:bg-stone-800 border-stone-900 shadow-lg" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-curso' ? "bg-stone-600 hover:bg-stone-600 border-stone-600 shadow-lg" : ""}`}>
                 Nuevo Curso
               </Link>
               <Link
                 to='/home/crear-coordinacion'
-                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-coordinacion' ? "bg-stone-800 hover:bg-stone-800 border-stone-900 shadow-lg" : ""}`}>
+                className={`text-lg font-semibold border-[0.2rem] shadow-md border-stone-500 text-white p-3 rounded-md hover:bg-stone-500 transition-all duration-200 ${location.pathname === '/home/crear-coordinacion' ? "bg-stone-600 hover:bg-stone-600 border-stone-600 shadow-lg" : ""}`}>
                 Nueva Coordinación
               </Link>
             </div>
