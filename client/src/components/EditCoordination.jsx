@@ -29,9 +29,9 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
     try {
       const response = await axios.put(`http://localhost:5000/coordination/${choosen.id}`, coordination)
       onClose()
-      toast.success(`Coordination: ${coordination.name} updated`)
+      toast.success(`Coordinación: ${coordination.name} actualizada!`)
       setTimeout(() => {
-        window.location = '/home/coordinations'
+        window.location = '/home/coordinaciones'
       }, 2000)
     } catch (error) {
       toast.error(error.message)
@@ -63,7 +63,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
           Pago por hora: <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder={coordination.hourlyPay} className='border border-black rounded-md' />
           Horas: <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder={coordination.hours} className='border border-black rounded-md' />
           ID de Teacher asociado: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />
-          <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
+          <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
             Editar
           </button>
         </form>

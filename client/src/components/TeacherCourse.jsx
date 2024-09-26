@@ -18,9 +18,9 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
         try {
             const response = await axios.post(`http://localhost:5000/teacher/associate-course`, associate)
             onCloseCreate()
-            toast.success(`Course succesfully associated!`)
+            toast.success(`Curso asociado!`)
             setTimeout(() => {
-                window.location = '/home/courses'
+                window.location = '/home/cursos'
             }, 2000)
         } catch (error) {
             toast.error(error.message)
@@ -32,9 +32,9 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
         try {
             const response = await axios.delete(`http://localhost:5000/teacher/associate-course/${deleted.teacherId}/${deleted.courseId}`, deleted)
             onCloseDeleted()
-            toast.success('Association deleted!')
+            toast.success('Asociación eliminada!')
             setTimeout(() => {
-                window.location = '/home/courses'
+                window.location = '/home/cursos'
             }, 2000)
         } catch (error) {
             toast.error(error.message)
@@ -75,7 +75,7 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         className='flex flex-col items-center mt-3'>
                         Teacher ID: <input type='number' name='teacherId' value={associate.teacherId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
                         Curso ID: <input type='number' name='courseId' value={associate.courseId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
-                        <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
+                        <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
                             Asociar
                         </button>
                     </form>
@@ -97,7 +97,7 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         className='flex flex-col mt-3 items-center'>
                         Teacher ID:<input type='number' name='teacherId' value={deleted.teacherId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
                         Curso ID:<input type='number' name='courseId' value={deleted.courseId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
-                        <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
+                        <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
                             Eliminar
                         </button>
                     </form>

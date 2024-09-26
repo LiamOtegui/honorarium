@@ -23,7 +23,7 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
     try {
       const response = await axios.put(`http://localhost:5000/teacher/${choosen.id}`, teacher)
       onClose()
-      toast.success(`Teacher ${teacher.name} updated`)
+      toast.success(`Teacher: ${teacher.name} actualizado!`)
       setTimeout(() => {
         window.location = '/home'
       }, 2000)
@@ -65,7 +65,7 @@ const EditTeacher = ({ open, choosen, onClose, children }) => {
             <option value={'yes'}>Tiene título</option>
             <option value={'no'}>No tiene título</option>
           </select>
-          <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>Edit</button>
+          <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>Editar</button>
         </form>
         <div>
 

@@ -29,12 +29,12 @@ const Courses = () => {
             <div>
                 <button
                 onClick={() => setOpenCreate(true)}
-                className='ml-64 mt-8 bg-cyan-600 border-[0.2rem] rounded-md border-cyan-700 px-4 py-1 duration-200 hover:bg-cyan-700 text-lg text-white'>
+                className='ml-64 mt-8 bg-stone-400 border-[0.2rem] rounded-md border-stone-500 px-4 py-1 duration-200 hover:bg-stone-500 text-lg text-white'>
                     Asociar Teacher
                 </button>
                 <button
                 onClick={() => setOpenDelete(true)}
-                className='ml-10 mt-8 bg-cyan-600 border-[0.2rem] rounded-md border-cyan-700 px-4 py-1 duration-200 hover:bg-cyan-700 text-lg text-white'>
+                className='ml-10 mt-8 bg-stone-400 border-[0.2rem] rounded-md border-stone-500 px-4 py-1 duration-200 hover:bg-stone-500 text-lg text-white'>
                     Eliminar asociación
                 </button>
             </div>

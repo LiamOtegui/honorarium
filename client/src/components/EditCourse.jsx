@@ -27,9 +27,9 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
     try {
       const response = await axios.put(`http://localhost:5000/course/${choosen.id}`, course)
       onClose()
-      toast.success(`Course ${course.name} updated`)
+      toast.success(`Curso: ${course.name} actualizado!`)
       setTimeout(() => {
-        window.location = '/home/courses'
+        window.location = '/home/cursos'
       }, 2000)
     } catch (error) {
       toast.error(error.message)
@@ -60,7 +60,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
           Días: <input type='number' name='days' value={course.days} onChange={handleChange} placeholder={course.days} className='border border-black rounded-md' />
           Estudiantes: <input type='number' name='students' value={course.students} onChange={handleChange} placeholder={course.students} className='border border-black rounded-md' />
           Pago: <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder={course.payment} className='border border-black rounded-md' />
-          <button className='relative bg-cyan-600 text-white px-3 py-1 rounded-md border-[0.1rem] border-cyan-800 duration-200 hover:bg-cyan-500 hover:border-[0.1rem] hover:border-cyan-600 hover:duration-200'>
+          <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
             Editar
           </button>
         </form>

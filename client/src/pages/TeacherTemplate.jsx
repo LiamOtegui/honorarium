@@ -121,7 +121,7 @@ const TeacherTemplate = () => {
   return (
     <div className=''>
 
-      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-cyan-600 p-3 rounded-lg border-[0.3rem] border-cyan-800 text-sm space-y-[1rem]'>
+      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-stone-400 p-3 rounded-lg border-[0.3rem] border-stone-600 text-sm space-y-[1rem]'>
 
         <div className='flex justify-between space-x-[10rem]'>
           <div className='flex space-x-2'>
@@ -273,7 +273,7 @@ const TeacherTemplate = () => {
 
       </div>
 
-      <div className='flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-cyan-800 bg-cyan-600 py-3 px-5 text-white'>
+      <div className='flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-stone-600 bg-stone-400 py-3 px-5'>
         Total Coordinación: ${subTotalCoordinaciones}
         <br />
         Total Cursos: ${subTotalCursos}

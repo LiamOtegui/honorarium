@@ -15,7 +15,7 @@ const CreateCoordination = () => {
     event.preventDefault()
     try {
       const response = await axios.post(`http://localhost:5000/coordination`, coordination)
-      toast.success('Coordination created!')
+      toast.success('Coordinación creada!')
     } catch (error) {
       toast.error(error.message)
     }
@@ -30,9 +30,9 @@ const CreateCoordination = () => {
   }
 
   return (
-    <div className='flex ml-[27.5rem] mt-[1.3rem] text-white font-medium bg-cyan-700 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
+    <div className='flex ml-[27.5rem] mt-[1.3rem] text-white font-medium bg-stone-500 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-3xl'>
-        <div className='text-[3rem] bg-cyan-800 py-5 px-16 rounded-md border-[0.1rem] border-cyan-800'>
+        <div className='text-[3rem] bg-stone-700 py-5 px-16'>
           Crear Nueva Coordinación
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>
@@ -52,7 +52,7 @@ const CreateCoordination = () => {
             Horas trabajando:
           </div>
           <input type='number' name='payment' value={coordination.hours} onChange={handleChange} placeholder="Horas" className='text-black p-1 mb-2' />
-          <button className='bg-cyan-500 py-2 px-3 rounded-md mt-8 hover:bg-cyan-400 duration-100 border-[0.1rem] border-cyan-600'>Crear</button>
+          <button className='bg-stone-400 py-2 px-3 rounded-md mt-8 hover:bg-stone-600 duration-200'>Crear</button>
         </form>
       </div>
     </div>
