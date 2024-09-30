@@ -121,7 +121,9 @@ const TeacherTemplate = () => {
   return (
     <div className=''>
 
-      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-stone-400 p-3 rounded-lg border-[0.3rem] border-stone-600 text-sm space-y-[1rem]'>
+      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-fuchsia-900 p-3 rounded-lg border-[0.3rem] border-fuchsia-950 text-white text-sm space-y-[1rem]'>
+
+        {/* Cambiar color del texto de los inputs a negro */}
 
         <div className='flex justify-between space-x-[10rem]'>
           <div className='flex space-x-2'>
@@ -137,8 +139,8 @@ const TeacherTemplate = () => {
             <div>
               {
                 teacherTemplate.title
-                  ? "✅"
-                  : "❌"
+                  ? "Sí"
+                  : "No"
               }
             </div>
           </div>
@@ -147,14 +149,14 @@ const TeacherTemplate = () => {
             <div className='flex flex-col text-sm space-y-1'>
               Costo de viaje:
               <input
-                className='border w-1/3'
+                className='text-black border w-1/3'
                 type='number'
                 value={viaticos.travel}
                 onChange={(event) => setViaticos({ ...viaticos, travel: Number(event.target.value) })}
               />
               Cantidad de viajes:
               <input
-                className='border w-1/3'
+                className='text-black border w-1/3'
                 type='number'
                 value={viaticos.days}
                 onChange={(event) => setViaticos({ ...viaticos, days: Number(event.target.value) })}
@@ -176,7 +178,7 @@ const TeacherTemplate = () => {
               <div className='flex gap-1'>
                 <div>Días:</div>
                 <input
-                  className='border w-1/5'
+                  className='text-black border w-1/5'
                   type="number"
                   value={coordination.days}
                   onChange={(e) => handleInputChange(e, index, 'coordinations', 'days')}
@@ -185,7 +187,7 @@ const TeacherTemplate = () => {
               <div className='flex gap-1'>
                 <div>Pago por hora:</div>
                 $<input
-                  className='border w-1/5'
+                  className='text-black border w-1/5'
                   type="number"
                   value={coordination.hourlyPay}
                   onChange={(e) => handleInputChange(e, index, 'coordinations', 'hourlyPay')}
@@ -194,14 +196,14 @@ const TeacherTemplate = () => {
               <div className='flex gap-1'>
                 <div>Horas:</div>
                 <input
-                  className='border w-1/5'
+                  className='text-black border w-1/5'
                   type="number"
                   value={coordination.hours}
                   onChange={(e) => handleInputChange(e, index, 'coordinations', 'hours')}
                 />
               </div>
               <div className='font-semibold'>
-                Subtotal: ${coordination.days * (coordination.hourlyPay * coordination.hours)}
+                Subtotal Coordinación: ${coordination.days * (coordination.hourlyPay * coordination.hours)}
               </div>
             </div>
           ))}
@@ -221,7 +223,7 @@ const TeacherTemplate = () => {
                 <div>
                   Precio:
                   $<input
-                    className='border w-14'
+                    className='text-black border w-14'
                     type="number"
                     value={course.fotocopias.precio}
                     onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
@@ -229,7 +231,7 @@ const TeacherTemplate = () => {
                   />
                   Cantidad:
                   <input
-                    className='border w-14'
+                    className='border w-14 text-black'
                     type="number"
                     value={course.fotocopias.cantidad}
                     onChange={(e) => handleInputChangeFotocopias(e, index, 'cantidad')}
@@ -238,9 +240,9 @@ const TeacherTemplate = () => {
                 </div>
               </div>
               <div className='flex gap-1'>
-                <div>Días:</div>
+                <div>Clases:</div>
                 <input
-                  className='border w-10'
+                  className='text-black border w-10'
                   type="number"
                   value={course.days}
                   onChange={(e) => handleInputChange(e, index, 'courses', 'days')}
@@ -249,23 +251,23 @@ const TeacherTemplate = () => {
               <div className='flex gap-1'>
                 <div>Estudiantes:</div>
                 <input
-                  className='border w-12'
+                  className='text-black border w-12'
                   type="number"
                   value={course.students}
                   onChange={(e) => handleInputChange(e, index, 'courses', 'students')}
                 />
               </div>
               <div className='flex gap-1'>
-                <div>Clase:</div>
+                <div>$ Clase:</div>
                 $<input
-                  className='border w-16'
+                  className='text-black border w-16'
                   type="number"
                   value={course.payment}
                   onChange={(e) => handleInputChange(e, index, 'courses', 'payment')}
                 />
               </div>
               <div className='font-semibold'>
-                Subtotal: ${course.days * (course.payment * course.students)}
+                Subtotal Curso: ${course.days * (course.payment * course.students)}
               </div>
             </div>
           ))}
@@ -273,7 +275,7 @@ const TeacherTemplate = () => {
 
       </div>
 
-      <div className='flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-stone-600 bg-stone-400 py-3 px-5'>
+      <div className='text-white flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-fuchsia-950 bg-fuchsia-900 py-3 px-5'>
         Total Coordinación: ${subTotalCoordinaciones}
         <br />
         Total Cursos: ${subTotalCursos}
@@ -305,6 +307,7 @@ const TeacherTemplate = () => {
             />
           }
         </div>
+
         <br />
         Total a percibir: ${total}
       </div>

@@ -9,7 +9,7 @@ teacherRouter.put('/:id', updateTeacher)
 teacherRouter.delete('/:id', deleteTeacher)
 
 teacherRouter.post('/associate-course', associateTeacherToCourse)
-teacherRouter.delete('/associate-course/:teacherId/:courseId', deleteAssociation)
+teacherRouter.delete('/delete-association/:teacherName/:courseName', deleteAssociation)
 
 teacherRouter.get('/:id/courses', getTeacherCourses)
 teacherRouter.get('/:id/coordinations', getTeacherCoordinations)

@@ -50,7 +50,7 @@ const Courses = () => {
                 }
             </div>
             <TeacherCourse openCreate={openCreate} openDelete={openDelete} onCloseCreate={() => setOpenCreate(false)} onCloseDeleted={() => setOpenDelete(false)}>
-                Asociar por IDs:
+                Asociar Teacher:
             </TeacherCourse>
         </div>
     )

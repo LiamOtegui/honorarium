@@ -5,12 +5,12 @@ import { toast } from 'react-toastify'
 const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, children }) => {
 
     const [associate, setAssociate] = useState({
-        teacherId: 0,
-        courseId: 0
+        teacherName: "",
+        courseName: ""
     })
     const [deleted, setDeleted] = useState({
-        teacherId: 0,
-        courseId: 0
+        teacherName: "",
+        courseName: ""
     })
 
     const createAssociation = async (event) => {
@@ -30,7 +30,7 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
     const deleteAssociation = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.delete(`http://localhost:5000/teacher/associate-course/${deleted.teacherId}/${deleted.courseId}`, deleted)
+            const response = await axios.delete(`http://localhost:5000/teacher/delete-association/${deleted.teacherName}/${deleted.courseName}`, deleted)
             onCloseDeleted()
             toast.success('Asociación eliminada!')
             setTimeout(() => {
@@ -73,8 +73,8 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                     <form
                         onSubmit={createAssociation}
                         className='flex flex-col items-center mt-3'>
-                        Teacher ID: <input type='number' name='teacherId' value={associate.teacherId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
-                        Curso ID: <input type='number' name='courseId' value={associate.courseId} onChange={handleChangeCreate} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
+                        Teacher: <input type='text' name='teacherName' value={associate.teacherName} onChange={handleChangeCreate} placeholder={"Nombre"} className='p-1 mb-2 border border-black rounded-md' />
+                        Curso: <input type='text' name='courseName' value={associate.courseName} onChange={handleChangeCreate} placeholder={"Nombre"} className='p-1 mb-5 border border-black rounded-md' />
                         <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
                             Asociar
                         </button>
@@ -95,8 +95,8 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                     <form
                         onSubmit={deleteAssociation}
                         className='flex flex-col mt-3 items-center'>
-                        Teacher ID:<input type='number' name='teacherId' value={deleted.teacherId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-2 border border-black rounded-md' />
-                        Curso ID:<input type='number' name='courseId' value={deleted.courseId} onChange={handleChangeDeleted} placeholder={0} className='p-1 mb-5 border border-black rounded-md' />
+                        Teacher:<input type='text' name='teacherName' value={deleted.teacherName} onChange={handleChangeDeleted} placeholder={"Nombre"} className='p-1 mb-2 border border-black rounded-md' />
+                        Curso:<input type='text' name='courseName' value={deleted.courseName} onChange={handleChangeDeleted} placeholder={"Nombre"} className='p-1 mb-5 border border-black rounded-md' />
                         <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
                             Eliminar
                         </button>

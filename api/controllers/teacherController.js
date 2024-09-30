@@ -82,10 +82,10 @@ const deleteTeacher = asyncHandler(async (req, res) => {
 
 const associateTeacherToCourse = asyncHandler(async (req, res) => {
     try {
-        const { teacherId, courseId } = req.body
+        const { teacherName, courseName } = req.body
 
-        const teacher = await Teacher.findByPk(teacherId)
-        const course = await Course.findByPk(courseId)
+        const teacher = await Teacher.findOne({ where: { name: teacherName } })
+        const course = await Course.findOne({ where: { name: courseName } })
 
         if (!teacher || !course) {
             res.status(404)
@@ -103,22 +103,17 @@ const associateTeacherToCourse = asyncHandler(async (req, res) => {
 
 const deleteAssociation = asyncHandler(async (req, res) => {
     try {
-        const { teacherId, courseId } = req.params
+        const { teacherName, courseName } = req.params
 
-        if (isNaN(teacherId) || isNaN(courseId)) {
-            res.status(400);
-            throw new Error('Invalid teacherId or courseId');
-        }
-
-        const teacher = await Teacher.findByPk(teacherId)
-        const course = await Course.findByPk(courseId)
+        const teacher = await Teacher.findOne({ where: { name: teacherName } })
+        const course = await Course.findOne({ where: { name: courseName } })
 
         if (!teacher || !course) {
             res.status(404)
             throw new Error('Teacher or Course not found')
         }
 
-        await teacher.removeCourse(course)
+        await teacher.removeCourse(course);
 
         res.json({ message: 'Association deleted with success!' })
     } catch (error) {

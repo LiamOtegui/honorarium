@@ -47,7 +47,7 @@ const Home = () => {
                 <div>
                     {
                         teachers.map((teacher, index) => (
-                            <div key={index}>
+                            <div key={index} className=''>
                                 <div>
                                     <TeacherDetails teacher={teacher} getTeacherDetails={getTeacherDetails} />
                                 </div>
