@@ -53,7 +53,10 @@ const CoordinationDetails = ({ coordination }) => {
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1 mt-10'>
-                    Días trabajando: {coordination.days}
+                    Día: {coordination.day}
+                </div>
+                <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1 mt-10'>
+                    Cantidad de días: {coordination.days}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1 mt-10'>
                     Pago por hora: ${coordination.hourlyPay}

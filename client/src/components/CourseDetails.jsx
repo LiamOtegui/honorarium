@@ -53,7 +53,10 @@ const CourseDetails = ({ course }) => {
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1'>
-                    Días trabajando: {course.days}
+                    Día: {course.day}
+                </div>
+                <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1'>
+                    Cantidad de días: {course.days}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-stone-500 rounded-lg py-1 mr-3'>
                     Estudiantes: {course.students}

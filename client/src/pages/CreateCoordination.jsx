@@ -6,6 +6,7 @@ const CreateCoordination = () => {
 
   const [coordination, setCoordination] = useState({
     name: "",
+    day: "",
     days: null,
     hourlyPay: null,
     hours: null
@@ -41,13 +42,17 @@ const CreateCoordination = () => {
           </div>
           <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder="Nombre" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Días:
+            Día:
           </div>
-          <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder="Días" className='text-black p-1 mb-2' />
+          <input type='text' name='day' value={coordination.day} onChange={handleChange} placeholder="Día" className='text-black p-1 mb-2' />
+          <div className='mb-1'>
+            Cantidad de días:
+          </div>
+          <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder="Cantidad de días" className='text-black p-1 mb-2' />
           <div className='mb-1'>
             Pago por hora:
           </div>
-          <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder="Pago por hora" className='text-black p-1 mb-2' />
+          <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder="$$$" className='text-black p-1 mb-2' />
           <div className='mb-1'>
             Horas trabajando:
           </div>

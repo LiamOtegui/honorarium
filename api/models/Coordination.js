@@ -35,4 +35,4 @@ const Coordination = sequelize.define(
     }
 );
 
-module.exports = Coordination;
+module.exports = Coordination

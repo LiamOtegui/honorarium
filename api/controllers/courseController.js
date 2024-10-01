@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 const postCourse = asyncHandler(async (req, res) => {
     try {
-        const { name, days, students, payment } = req.body
+        const { name, day, days, students, payment } = req.body
 
         const course = await Course.create({
             name,

@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 const postCoordination = asyncHandler(async (req, res) => {
     try {
-        const { name, days, hourlyPay, hours, teacherId } = req.body
+        const { name, day, days, hourlyPay, hours, teacherId } = req.body
 
         const coordination = await Coordination.create({
             name,

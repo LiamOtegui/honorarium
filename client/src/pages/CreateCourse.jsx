@@ -6,6 +6,7 @@ const CreateCourse = () => {
 
   const [course, setCourse] = useState({
     name: "",
+    day: "",
     days: 0,
     students: 0,
     payment: 0
@@ -41,9 +42,13 @@ const CreateCourse = () => {
           </div>
           <input type='text' name='name' value={course.name} onChange={handleChange} placeholder="Nombre" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Días:
+            Día:
           </div>
-          <input type='number' name='days' value={course.days} onChange={handleChange} placeholder="Días" className='text-black p-1 mb-2' />
+          <input type='text' name='day' value={course.day} onChange={handleChange} placeholder="Día" className='text-black p-1 mb-2' />
+          <div className='mb-1'>
+            Cantidad de días:
+          </div>
+          <input type='number' name='days' value={course.days} onChange={handleChange} placeholder="Cantidad de días" className='text-black p-1 mb-2' />
           <div className='mb-1'>
             Estudiantes:
           </div>
@@ -51,7 +56,7 @@ const CreateCourse = () => {
           <div className='mb-1'>
             Pago:
           </div>
-          <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder="Pago" className='text-black p-1 mb-2' />
+          <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder="$$$" className='text-black p-1 mb-2' />
           <button className='bg-stone-400 py-2 px-3 rounded-md mt-8 hover:bg-stone-600 duration-200'>Crear</button>
         </form>
       </div>

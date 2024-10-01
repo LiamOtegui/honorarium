@@ -6,6 +6,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
 
   const [coordination, setCoordination] = useState({
     name: '',
+    day: '',
     days: 0,
     hourlyPay: 0,
     hours: 0,
@@ -16,6 +17,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
     if (choosen !== null) {
       setCoordination({
         name: choosen.name,
+        day: choosen.day,
         days: choosen.days,
         hourlyPay: choosen.hourlyPay,
         hours: choosen.hours,
@@ -59,7 +61,8 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
           onSubmit={updateCoordination}
           className='flex flex-col space-y-1 items-center'>
           Nombre: <input type='text' name='name' value={coordination.name} onChange={handleChange} placeholder={coordination.name} className='border border-black rounded-md' />
-          Días: <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder={coordination.days} className='border border-black rounded-md' />
+          Día: <input type='text' name='day' value={coordination.day} onChange={handleChange} placeholder={coordination.day} className='border border-black rounded-md' />
+          Cantidad de días: <input type='number' name='days' value={coordination.days} onChange={handleChange} placeholder={coordination.days} className='border border-black rounded-md' />
           Pago por hora: <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder={coordination.hourlyPay} className='border border-black rounded-md' />
           Horas: <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder={coordination.hours} className='border border-black rounded-md' />
           ID de Teacher asociado: <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='border border-black rounded-md' />

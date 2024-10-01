@@ -6,6 +6,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
 
   const [course, setCourse] = useState({
     name: '',
+    day: '',
     days: 0,
     students: 0,
     payment: 0
@@ -15,6 +16,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
     if (choosen !== null) {
       setCourse({
         name: choosen.name,
+        day: choosen.day,
         days: choosen.days,
         students: choosen.students,
         payment: choosen.payment
@@ -57,7 +59,8 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
           onSubmit={updateCourse}
           className='flex flex-col space-y-1 items-center'>
           Nombre: <input type='text' name='name' value={course.name} onChange={handleChange} placeholder={course.name} className='border border-black rounded-md' />
-          Días: <input type='number' name='days' value={course.days} onChange={handleChange} placeholder={course.days} className='border border-black rounded-md' />
+          Día: <input type='text' name='day' value={course.day} onChange={handleChange} placeholder={course.day} className='border border-black rounded-md' />
+          Cantidad de días: <input type='number' name='days' value={course.days} onChange={handleChange} placeholder={course.days} className='border border-black rounded-md' />
           Estudiantes: <input type='number' name='students' value={course.students} onChange={handleChange} placeholder={course.students} className='border border-black rounded-md' />
           Pago: <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder={course.payment} className='border border-black rounded-md' />
           <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
