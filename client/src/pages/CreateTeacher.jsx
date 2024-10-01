@@ -36,9 +36,9 @@ const CreateTeacher = () => {
   }
 
   return (
-    <div className='flex ml-[31rem] mt-[7rem] text-white font-medium bg-stone-500 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
+    <div className='flex ml-[31rem] mt-[7rem] text-white font-medium bg-green-800 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-3xl'>
-        <div className='text-[3rem] bg-stone-700 py-5 px-16 rounded-md'>
+        <div className='text-[3rem] bg-green-600 py-5 px-16 rounded-md'>
           Crear Nuevo Teacher
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>
@@ -53,7 +53,7 @@ const CreateTeacher = () => {
             <option value={"yes"}>Con título</option>
             <option value={"no"}>Sin título</option>
           </select>
-          <button className='bg-stone-400 py-2 px-3 rounded-md mt-8 hover:bg-stone-600 duration-200'>Crear</button>
+          <button className='bg-green-600 py-2 px-3 rounded-md mt-8 hover:bg-green-500 duration-200'>Crear</button>
         </form>
       </div>
     </div>

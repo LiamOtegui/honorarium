@@ -22,7 +22,7 @@ const Coordinations = () => {
     }, [])
 
     return (
-        <div className='h-screen'>
+        <div className='h-full'>
             <div>
                 {
                     coordination.map((coordination, index) => (

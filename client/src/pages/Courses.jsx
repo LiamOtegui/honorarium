@@ -25,7 +25,7 @@ const Courses = () => {
     }, [])
 
     return (
-        <div className='h-screen'>
+        <div className='h-full'>
             <div>
                 <button
                 onClick={() => setOpenCreate(true)}

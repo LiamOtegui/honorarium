@@ -10,9 +10,9 @@ function App() {
 
   return (
     <div className='bg-yellow-300 min-h-screen w-full'>
-      <div className='flex flex-row'>
+      <div className='flex flex-row h-full'>
 
-        <div className='fixed'>
+        <div className='fixed h-full'>
           <nav className='flex flex-col items-center bg-green-950 text-white h-screen'>
             <Link
               to='/home'

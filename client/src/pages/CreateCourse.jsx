@@ -7,9 +7,9 @@ const CreateCourse = () => {
   const [course, setCourse] = useState({
     name: "",
     day: "",
-    days: 0,
-    students: 0,
-    payment: 0
+    days: null,
+    students: null,
+    payment: null
   })
 
   const create = async (event) => {
@@ -31,9 +31,9 @@ const CreateCourse = () => {
   }
 
   return (
-    <div className='flex ml-[31.5rem] mt-[1.3rem] text-white font-medium bg-stone-500 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
-      <div className='flex flex-col items-center text-3xl'>
-        <div className='text-[3rem] bg-stone-700 py-5 px-16 rounded-md'>
+    <div className='grid grid-rows-1 mb-[1rem] ml-[37rem] mt-[1.3rem] text-white font-medium bg-green-800 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
+      <div className='flex flex-col items-center text-xl'>
+        <div className='text-[2rem] bg-green-600 py-5 px-16 rounded-md'>
           Crear Nuevo Curso
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>
@@ -57,7 +57,7 @@ const CreateCourse = () => {
             Pago:
           </div>
           <input type='number' name='payment' value={course.payment} onChange={handleChange} placeholder="$$$" className='text-black p-1 mb-2' />
-          <button className='bg-stone-400 py-2 px-3 rounded-md mt-8 hover:bg-stone-600 duration-200'>Crear</button>
+          <button className='bg-green-600 py-2 px-3 rounded-md mt-8 hover:bg-green-500 duration-200'>Crear</button>
         </form>
       </div>
     </div>
