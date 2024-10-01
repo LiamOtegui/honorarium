@@ -59,7 +59,7 @@ const TeacherTemplate = () => {
         ...course,
         fotocopias: {
           precio: 0,
-          cantidad: 0
+          cantidad: course.students * 2
         }
       }))
 
@@ -90,12 +90,14 @@ const TeacherTemplate = () => {
   const mesNumero = fecha.getMonth()
   const mesActual = meses[mesNumero]
 
+  const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
+
   const calcularSubTotalCoordinaciones = () => {
     return details.coordinations.reduce((acc, curr) => acc + (curr.days * (curr.hourlyPay * curr.hours)), 0)
   }
 
   const calcularSubTotalCursos = () => {
-    return details.courses.reduce((acc, curr) => acc + (curr.days * (curr.payment * curr.students)), 0)
+    return details.courses.reduce((acc, curr) => acc + (curr.days * curr.payment ), 0)
   }
 
   const calcularViaticos = () => {
@@ -108,7 +110,6 @@ const TeacherTemplate = () => {
     const total = course.fotocopias.precio * course.fotocopias.cantidad
     return total
   }
-
 
   const subTotalCoordinaciones = calcularSubTotalCoordinaciones()
   const subTotalCursos = calcularSubTotalCursos()
@@ -123,8 +124,6 @@ const TeacherTemplate = () => {
 
       <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-fuchsia-900 p-3 rounded-lg border-[0.3rem] border-fuchsia-950 text-white text-sm space-y-[1rem]'>
 
-        {/* Cambiar color del texto de los inputs a negro */}
-
         <div className='flex justify-between space-x-[10rem]'>
           <div className='flex space-x-2'>
             <div>Profesor/a:</div>
@@ -132,7 +131,13 @@ const TeacherTemplate = () => {
           </div>
           <div className='flex space-x-2'>
             <div>Mes:</div>
-            <div className='font-semibold'>{mesActual}</div>
+            <select className='font-semibold text-black h-8 leading-tight' defaultValue={mesActual}>
+              {meses.map((mes, index) => (
+                <option key={index} value={mes}>
+                  {mes}
+                </option>
+              ))}
+            </select>
           </div>
           <div className='flex space-x-1'>
             <div>Título:</div>
@@ -240,7 +245,7 @@ const TeacherTemplate = () => {
                 </div>
               </div>
               <div className='flex gap-1'>
-                <div>Clases:</div>
+                <div>Clases por mes:</div>
                 <input
                   className='text-black border w-10'
                   type="number"
@@ -258,7 +263,7 @@ const TeacherTemplate = () => {
                 />
               </div>
               <div className='flex gap-1'>
-                <div>$ Clase:</div>
+                <div>Pago por clase:</div>
                 $<input
                   className='text-black border w-16'
                   type="number"
@@ -267,7 +272,7 @@ const TeacherTemplate = () => {
                 />
               </div>
               <div className='font-semibold'>
-                Subtotal Curso: ${course.days * (course.payment * course.students)}
+                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.cantidad * course.fotocopias.precio)}
               </div>
             </div>
           ))}

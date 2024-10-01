@@ -8,11 +8,15 @@ const Home = () => {
 
     const [teachers, setTeachers] = useState([])
 
+    const [searchTerm, setSearchTerm] = useState('')
+    const [filteredTeachers, setFilteredTeachers] = useState([])
+
     const getTeachers = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/teacher`)
             const sortedTeachers = response.data.sort((a, b) => a.name.localeCompare(b.name))
             setTeachers(sortedTeachers);
+            setFilteredTeachers(sortedTeachers)
         } catch (error) {
             toast.error(error.message)
         }
@@ -41,20 +45,36 @@ const Home = () => {
         getTeachers()
     }, [])
 
+    useEffect(() => {
+        setFilteredTeachers(
+            teachers.filter(teacher => teacher.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        )
+    }, [searchTerm, teachers])
+
     return (
         <div>
-            <div>
-                <div>
-                    {
-                        teachers.map((teacher, index) => (
-                            <div key={index} className=''>
-                                <div>
-                                    <TeacherDetails teacher={teacher} getTeacherDetails={getTeacherDetails} />
-                                </div>
-                            </div>
-                        ))
-                    }
+            <nav className='flex fixed w-full ml-[10.97rem] bg-fuchsia-900 shadow-md py-[0.63rem] text-white'>
+                <div className='flex justify-center ml-[3rem]'>
+                    <input
+                        type='text'
+                        placeholder='Buscar teacher...'
+                        className='py-2 pl-3 pr-10 rounded-md text-black'
+                        value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}
+                    />
                 </div>
+            </nav>
+
+            <div className='mt-[5rem]'>
+                {
+                    filteredTeachers.map((teacher, index) => (
+                        <div key={index} className=''>
+                            <div>
+                                <TeacherDetails teacher={teacher} getTeacherDetails={getTeacherDetails} />
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

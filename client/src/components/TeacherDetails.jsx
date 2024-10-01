@@ -33,7 +33,6 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
             toast.error(error.message)
         }
     }
-    
 
     return (
         <div className='w-[60rem] ml-[24rem]'>

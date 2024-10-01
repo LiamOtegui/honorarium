@@ -75,7 +75,7 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         className='flex flex-col items-center mt-3'>
                         Teacher: <input type='text' name='teacherName' value={associate.teacherName} onChange={handleChangeCreate} placeholder={"Nombre"} className='p-1 mb-2 border border-black rounded-md' />
                         Curso: <input type='text' name='courseName' value={associate.courseName} onChange={handleChangeCreate} placeholder={"Nombre"} className='p-1 mb-5 border border-black rounded-md' />
-                        <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
+                        <button className='relative bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-800 duration-200 hover:bg-green-600 hover:border-[0.1rem] hover:border-green-700 hover:duration-200'>
                             Asociar
                         </button>
                     </form>
@@ -97,7 +97,7 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         className='flex flex-col mt-3 items-center'>
                         Teacher:<input type='text' name='teacherName' value={deleted.teacherName} onChange={handleChangeDeleted} placeholder={"Nombre"} className='p-1 mb-2 border border-black rounded-md' />
                         Curso:<input type='text' name='courseName' value={deleted.courseName} onChange={handleChangeDeleted} placeholder={"Nombre"} className='p-1 mb-5 border border-black rounded-md' />
-                        <button className='relative bg-stone-500 text-white px-3 py-1 rounded-md border-[0.1rem] border-stone-600 duration-200 hover:bg-stone-400 hover:border-[0.1rem] hover:border-stone-500 hover:duration-200'>
+                        <button className='relative bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-800 duration-200 hover:bg-green-600 hover:border-[0.1rem] hover:border-green-700 hover:duration-200'>
                             Eliminar
                         </button>
                     </form>
