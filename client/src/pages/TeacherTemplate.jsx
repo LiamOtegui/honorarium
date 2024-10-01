@@ -9,7 +9,7 @@ const TeacherTemplate = () => {
 
   const [teacherTemplate, setTeacherTemplate] = useState({
     name: "",
-    title: null
+    title: 0
   })
 
   const [details, setDetails] = useState({
@@ -17,26 +17,26 @@ const TeacherTemplate = () => {
     coordinations: []
   })
   const [viaticos, setViaticos] = useState({
-    travel: 0,
-    days: 0
+    travel: "",
+    days: ""
   })
-  const [pagoTitle, setPagoTitle] = useState(0)
-  const [premio, setPremio] = useState(0)
+  const [pagoTitle, setPagoTitle] = useState("")
+  const [premio, setPremio] = useState("")
 
   const handleInputChange = (e, index, type, field) => {
     const newDetails = { ...details }
-    newDetails[type][index][field] = e.target.value
+    newDetails[type][index][field] = e.target.value === "" ? "" : Number(e.target.value)
     setDetails(newDetails)
   }
 
   const handleInputChangeFotocopias = (e, index, field) => {
     const updatedCourses = [...details.courses];
-    updatedCourses[index].fotocopias[field] = Number(e.target.value);
+    updatedCourses[index].fotocopias[field] = e.target.value === "" ? "" : Number(e.target.value);
     setDetails({
       ...details,
       courses: updatedCourses
-    });
-  };
+    })
+  }
 
   const getTeacherById = async (id) => {
     try {
@@ -97,7 +97,7 @@ const TeacherTemplate = () => {
   }
 
   const calcularSubTotalCursos = () => {
-    return details.courses.reduce((acc, curr) => acc + (curr.days * curr.payment ), 0)
+    return details.courses.reduce((acc, curr) => acc + (curr.days * curr.payment), 0)
   }
 
   const calcularViaticos = () => {
@@ -117,7 +117,7 @@ const TeacherTemplate = () => {
   const subTotalTitle = pagoTitle
   const subTotalPremio = premio
   const subTotalFotocopias = details.courses.reduce((acc, _, index) => acc + calcularFotocopias(index), 0)
-  const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalTitle + subTotalPremio + subTotalFotocopias
+  const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalFotocopias
 
   return (
     <div className=''>
@@ -144,8 +144,8 @@ const TeacherTemplate = () => {
             <div>
               {
                 teacherTemplate.title
-                  ? "Sí"
-                  : "No"
+                  ? <div className='font-bold'>Sí</div>
+                  : <div className='font-bold'>No</div>
               }
             </div>
           </div>
@@ -156,15 +156,15 @@ const TeacherTemplate = () => {
               <input
                 className='text-black border w-1/3'
                 type='number'
-                value={viaticos.travel}
-                onChange={(event) => setViaticos({ ...viaticos, travel: Number(event.target.value) })}
+                value={viaticos.travel === "" ? "" : viaticos.travel}
+                onChange={(event) => setViaticos({ ...viaticos, travel: event.target.value })}
               />
               Cantidad de viajes:
               <input
                 className='text-black border w-1/3'
                 type='number'
-                value={viaticos.days}
-                onChange={(event) => setViaticos({ ...viaticos, days: Number(event.target.value) })}
+                value={viaticos.days === "" ? "" : viaticos.days}
+                onChange={(event) => setViaticos({ ...viaticos, days: event.target.value })}
               />
               <div className='flex'>
                 Total:
@@ -180,6 +180,13 @@ const TeacherTemplate = () => {
           {details.coordinations.map((coordination, index) => (
             <div key={index} className='flex justify-between'>
               <div className='font-semibold'>{coordination.name}</div>
+              <select className='text-black'>
+                {dias.map((dia) => (
+                  <option key={dia} value={dia}>
+                    {dia}
+                  </option>
+                ))}
+              </select>
               <div className='flex gap-1'>
                 <div>Días:</div>
                 <input
@@ -220,6 +227,15 @@ const TeacherTemplate = () => {
               <div className='flex gap-1'>
                 <div>Curso:</div>
                 <div className='font-semibold'>{course.name}</div>
+              </div>
+              <div>
+                <select className='text-black'>
+                  {dias.map((dia) => (
+                    <option key={dia} value={dia}>
+                      {dia}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className='flex gap-1'>
                 <div>
@@ -314,7 +330,7 @@ const TeacherTemplate = () => {
         </div>
 
         <br />
-        Total a percibir: ${total}
+        Total a percibir: ${total + subTotalTitle + subTotalPremio}
       </div>
 
     </div>

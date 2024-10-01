@@ -6,9 +6,9 @@ const CreateCoordination = () => {
 
   const [coordination, setCoordination] = useState({
     name: "",
-    days: 0,
-    hourlyPay: 0,
-    hours: 0
+    days: null,
+    hourlyPay: null,
+    hours: null
   })
 
   const create = async (event) => {
@@ -47,11 +47,11 @@ const CreateCoordination = () => {
           <div className='mb-1'>
             Pago por hora:
           </div>
-          <input type='number' name='students' value={coordination.hourlyPay} onChange={handleChange} placeholder="Pago por hora" className='text-black p-1 mb-2' />
+          <input type='number' name='hourlyPay' value={coordination.hourlyPay} onChange={handleChange} placeholder="Pago por hora" className='text-black p-1 mb-2' />
           <div className='mb-1'>
             Horas trabajando:
           </div>
-          <input type='number' name='payment' value={coordination.hours} onChange={handleChange} placeholder="Horas" className='text-black p-1 mb-2' />
+          <input type='number' name='hours' value={coordination.hours} onChange={handleChange} placeholder="Horas" className='text-black p-1 mb-2' />
           <button className='bg-stone-400 py-2 px-3 rounded-md mt-8 hover:bg-stone-600 duration-200'>Crear</button>
         </form>
       </div>
