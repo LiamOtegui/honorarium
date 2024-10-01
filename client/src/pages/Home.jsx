@@ -53,8 +53,8 @@ const Home = () => {
 
     return (
         <div>
-            <nav className='flex fixed w-full ml-[10.97rem] bg-fuchsia-900 shadow-md py-[0.63rem] text-white'>
-                <div className='flex justify-center ml-[3rem]'>
+            <nav className='flex fixed w-full ml-[13.1rem] bg-fuchsia-900 py-[0.63rem] text-white'>
+                <div className='flex justify-center ml-[0.5rem]'>
                     <input
                         type='text'
                         placeholder='Buscar teacher...'

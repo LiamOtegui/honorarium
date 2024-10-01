@@ -13,6 +13,10 @@ const Coordination = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        day: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         days: {
             type: DataTypes.INTEGER,
             allowNull: false

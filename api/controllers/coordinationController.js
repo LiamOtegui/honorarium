@@ -7,6 +7,7 @@ const postCoordination = asyncHandler(async (req, res) => {
 
         const coordination = await Coordination.create({
             name,
+            day,
             days,
             hourlyPay,
             hours,
@@ -45,11 +46,11 @@ const getCoordinationById = asyncHandler(async (req, res) => {
 
 const updateCoordination = asyncHandler(async (req, res) => {
     try {
-        const { name, days, hourlyPay, hours, teacherId } = req.body
+        const { name, day, days, hourlyPay, hours, teacherId } = req.body
         const { id } = req.params
 
         const coordination = await Coordination.update(
-            { name, days, hourlyPay, hours, teacherId },
+            { name, day, days, hourlyPay, hours, teacherId },
             { where: { id: id } }
         )
 
