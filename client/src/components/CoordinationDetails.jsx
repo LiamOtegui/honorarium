@@ -65,7 +65,7 @@ const CoordinationDetails = ({ coordination }) => {
                     Horas trabajando: {coordination.hours}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mr-3 mb-3 ml-3'>
-                    Teacher asociado: {coordination.teacherId ? coordination.teacherId : "No tiene"}
+                    Teacher asociado: ID {coordination.teacherId ? coordination.teacherId : "No tiene"}
                 </div>
             </div>
             <EditCoordination open={openForEdit} choosen={choosenForEdit} onClose={() => setOpenForEdit(false)}>

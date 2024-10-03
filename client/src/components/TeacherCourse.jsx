@@ -57,18 +57,19 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
         }
     }
 
-    const handleChangeDeleted = (event) => {
-        const { name, value } = event.target
-        setDeleted({
-            ...deleted,
-            [name]: value
-        })
-    }
-
     useEffect(() => {
         getTeachers(),
             getCourses()
     }, [])
+
+    useEffect(() => {
+        if (teachers.length > 0 && courses.length > 0) {
+            setAssociate((prev) => ({ ...prev, teacherName: teachers[0].name })),
+                setAssociate((prev) => ({ ...prev, courseName: courses[0].name })),
+                setDeleted((prev) => ({ ...prev, teacherName: teachers[0].name })),
+                setDeleted((prev) => ({ ...prev, courseName: courses[0].name }))
+        }
+    }, [teachers, courses])
 
     return (
         <div>

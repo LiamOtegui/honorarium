@@ -23,6 +23,8 @@ const TeacherTemplate = () => {
   const [pagoTitle, setPagoTitle] = useState("")
   const [premio, setPremio] = useState("")
 
+  const [choosenDay, setChoosenDay] = useState("")
+
   const handleInputChange = (e, index, type, field) => {
     const newDetails = { ...details }
     newDetails[type][index][field] = e.target.value === "" ? "" : Number(e.target.value)
@@ -122,16 +124,16 @@ const TeacherTemplate = () => {
   return (
     <div className=''>
 
-      <div className='grid grid-rows ml-[18rem] mt-[1rem] bg-fuchsia-900 p-3 rounded-lg border-[0.3rem] border-fuchsia-950 text-white text-sm space-y-[1rem]'>
+      <div className='grid grid-rows ml-[15.5rem] mt-[1rem] bg-white p-3 rounded-lg border-[0.3rem] border-black text-sm space-y-[1rem]'>
 
-        <div className='flex justify-between space-x-[10rem]'>
+        <div className='flex justify-between items-center p-3 space-x-[10rem] border-[0.1rem] rounded-lg border-black'>
           <div className='flex space-x-2'>
-            <div>Profesor/a:</div>
-            <div className='font-semibold'>{teacherTemplate.name}</div>
+            <div className='font-semibold'>Profesor/a:</div>
+            <div className=''>{teacherTemplate.name}</div>
           </div>
-          <div className='flex space-x-2'>
-            <div>Mes:</div>
-            <select className='font-semibold text-black h-8 leading-tight' defaultValue={mesActual}>
+          <div className='flex space-x-2 items-center'>
+            <div className='font-semibold'>Mes:</div>
+            <select className='text-black p-1 leading-tight border border-black rounded-lg' defaultValue={mesActual}>
               {meses.map((mes, index) => (
                 <option key={index} value={mes}>
                   {mes}
@@ -149,25 +151,33 @@ const TeacherTemplate = () => {
               }
             </div>
           </div>
-          <div className='flex'>
-            Viáticos:
-            <div className='flex flex-col text-sm space-y-1'>
-              Costo de viaje:
+          <div className='flex flex-col items-center'>
+            <div className='font-semibold'>
+              Viáticos:
+            </div>
+            <div className='flex flex-row text-sm items-center space-x-1'>
+              <div>
+                $
+              </div>
               <input
-                className='text-black border w-1/3'
+                className='text-black border p-1 border-black rounded-lg w-16'
                 type='number'
                 value={viaticos.travel === "" ? "" : viaticos.travel}
                 onChange={(event) => setViaticos({ ...viaticos, travel: event.target.value })}
               />
-              Cantidad de viajes:
+              <div>
+                x
+              </div>
               <input
-                className='text-black border w-1/3'
+                className='text-black border p-1 border-black rounded-lg w-16'
                 type='number'
                 value={viaticos.days === "" ? "" : viaticos.days}
                 onChange={(event) => setViaticos({ ...viaticos, days: event.target.value })}
               />
               <div className='flex'>
-                Total:
+                <div className='mr-1'>
+                  Total:
+                </div>
                 <div className='font-semibold'>
                   ${subTotalViaticos}
                 </div>
@@ -178,110 +188,137 @@ const TeacherTemplate = () => {
 
         <div>
           {details.coordinations.map((coordination, index) => (
-            <div key={index} className='flex justify-between'>
-              <div className='font-semibold'>{coordination.name}</div>
-              <select className='text-black'>
-                {dias.map((dia) => (
-                  <option key={dia} value={dia}>
-                    {dia}
-                  </option>
-                ))}
-              </select>
-              <div className='flex gap-1'>
-                <div>Días:</div>
-                <input
-                  className='text-black border w-1/5'
-                  type="number"
-                  value={coordination.days}
-                  onChange={(e) => handleInputChange(e, index, 'coordinations', 'days')}
-                />
-              </div>
-              <div className='flex gap-1'>
-                <div>Pago por hora:</div>
-                $<input
-                  className='text-black border w-1/5'
-                  type="number"
-                  value={coordination.hourlyPay}
-                  onChange={(e) => handleInputChange(e, index, 'coordinations', 'hourlyPay')}
-                />
-              </div>
-              <div className='flex gap-1'>
-                <div>Horas:</div>
-                <input
-                  className='text-black border w-1/5'
-                  type="number"
-                  value={coordination.hours}
-                  onChange={(e) => handleInputChange(e, index, 'coordinations', 'hours')}
-                />
-              </div>
-              <div className='font-semibold'>
-                Subtotal Coordinación: ${coordination.days * (coordination.hourlyPay * coordination.hours)}
+            <div key={index} className='border-[0.1rem] border-black rounded-lg p-3'>
+              <div className='flex justify-between'>
+                <div className='flex justify-center items-center font-semibold'>{coordination.name}</div>
+                <div className='ml-3 flex gap-1'>
+                  <div className='flex items-center'>
+                    Día:
+                  </div>
+                  <select
+                    defaultValue={coordination.day}
+                    className='text-black border border-black rounded-lg p-1'>
+                    {
+                      dias.map((dia) => (
+                        <option key={dia} value={dia}>
+                          {dia}
+                        </option>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div className='flex gap-1 justify-center items-center'>
+                  <div>Días:</div>
+                  <input
+                    className='text-black border p-1 border-black rounded-lg w-1/5'
+                    type="number"
+                    value={coordination.days}
+                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'days')}
+                  />
+                </div>
+                <div className='flex gap-1 justify-center items-center'>
+                  <div>Horas:</div>
+                  <input
+                    className='text-black border p-1 border-black rounded-lg w-1/5'
+                    type="number"
+                    value={coordination.hours}
+                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'hours')}
+                  />
+                </div>
+                <div className='flex gap-1 justify-center items-center'>
+                  <div>Pago por hora:</div>
+                  $<input
+                    className='text-black border p-1 border-black rounded-lg w-1/5'
+                    type="number"
+                    value={coordination.hourlyPay}
+                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'hourlyPay')}
+                  />
+                </div>
+                <div className='font-semibold'>
+                  Subtotal Coordinación: ${coordination.days * (coordination.hourlyPay * coordination.hours)}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div>
+        <div className='space-y-3'>
           {details.courses.map((course, index) => (
-            <div key={index} className='flex justify-between items-center py-12'>
-              <div className='flex gap-1'>
+            <div key={index} className='flex justify-between items-center space-x-3 py-12 border-[0.1rem] border-black p-3 rounded-lg'>
+              <div className='flex flex-col space-y-1 mr-3'>
                 <div>Curso:</div>
                 <div className='font-semibold'>{course.name}</div>
               </div>
-              <div>
-                <select className='text-black'>
-                  {dias.map((dia) => (
-                    <option key={dia} value={dia}>
-                      {dia}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className='flex gap-1'>
-                <div>
-                  Fotocopias
+              <div className='ml-3 flex gap-1'>
+                <div className='flex items-center'>
+                  Día:
                 </div>
                 <div>
-                  Precio:
-                  $<input
-                    className='text-black border w-14'
-                    type="number"
-                    value={course.fotocopias.precio}
-                    onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
-
-                  />
-                  Cantidad:
-                  <input
-                    className='border w-14 text-black'
-                    type="number"
-                    value={course.fotocopias.cantidad}
-                    onChange={(e) => handleInputChangeFotocopias(e, index, 'cantidad')}
-
-                  />
+                  <select
+                    defaultValue={course.day}
+                    className='text-black border border-black rounded-lg p-1'>
+                    {
+                      dias.map((dia) => (
+                        <option
+                          key={dia}
+                          value={dia}>
+                          {dia}
+                        </option>
+                      ))
+                    }
+                  </select>
                 </div>
               </div>
-              <div className='flex gap-1'>
-                <div>Clases por mes:</div>
-                <input
-                  className='text-black border w-10'
-                  type="number"
-                  value={course.days}
-                  onChange={(e) => handleInputChange(e, index, 'courses', 'days')}
-                />
+              <div className='flex'>
+                <div className='flex'>
+                  <div className='flex'>
+                    <div className='flex items-center'>
+                      Fotocopia: $
+                    </div>
+                    <input
+                      className='text-black border p-1 border-black rounded-lg w-14'
+                      type="number"
+                      value={course.fotocopias.precio}
+                      onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
+
+                    />
+                  </div>
+                  <div className='flex space-x-1'>
+                    <div className='flex items-center ml-3'>
+                      Cantidad fotocopias:
+                    </div>
+                    <input
+                      className='border p-1 border-black rounded-lg w-14 text-black'
+                      type="number"
+                      value={course.fotocopias.cantidad}
+                      onChange={(e) => handleInputChangeFotocopias(e, index, 'cantidad')}
+
+                    />
+                  </div>
+                </div>
               </div>
-              <div className='flex gap-1'>
+              <div className='flex gap-1 items-center'>
                 <div>Estudiantes:</div>
                 <input
-                  className='text-black border w-12'
+                  className='text-black border p-1 border-black rounded-lg w-12'
                   type="number"
                   value={course.students}
                   onChange={(e) => handleInputChange(e, index, 'courses', 'students')}
                 />
               </div>
-              <div className='flex gap-1'>
-                <div>Pago por clase:</div>
-                $<input
-                  className='text-black border w-16'
+              <div className='flex gap-1 items-center'>
+                <div>Clases por mes:</div>
+                <input
+                  className='text-black border p-1 border-black rounded-lg w-10'
+                  type="number"
+                  value={course.days}
+                  onChange={(e) => handleInputChange(e, index, 'courses', 'days')}
+                />
+              </div>
+              <div className='flex gap- items-center'>
+                <div>Pago por clase: $</div>
+                <input
+                  className='text-black border p-1 border-black rounded-lg w-16'
                   type="number"
                   value={course.payment}
                   onChange={(e) => handleInputChange(e, index, 'courses', 'payment')}
@@ -296,44 +333,80 @@ const TeacherTemplate = () => {
 
       </div>
 
-      <div className='text-white flex-col ml-[65rem] mt-3 inline-block border-[0.3rem] rounded-lg border-fuchsia-950 bg-fuchsia-900 py-3 px-5'>
-        Total Coordinación: ${subTotalCoordinaciones}
-        <br />
-        Total Cursos: ${subTotalCursos}
-        <br />
+      <div className='ml-[75rem] my-3 border-[0.3rem] rounded-lg border-black bg-white py-3 px-5'>
+        <div className='flex flex-col'>
+          <div className='flex space-x-1'>
+            <div>
+              Total Coordinación:
+            </div>
+            <div className='font-semibold'>
+              ${subTotalCoordinaciones}
+            </div>
+          </div>
+          <div className='flex space-x-1'>
+            <div>
+              Total Cursos:
+            </div>
+            <div className='font-semibold'>
+              ${subTotalCursos}
+            </div>
+          </div>
+        </div>
         <br />
 
-        Viáticos: ${subTotalViaticos}
+        <div className='flex space-x-1'>
+          <div>
+            Viáticos:
+          </div>
+          <div className='font-semibold'>
+            ${subTotalViaticos}
+          </div>
+        </div>
         <br />
         {
           teacherTemplate.title
-            ? <div>
-              Título: $
-              <input
-                className='border w-1/6 text-black'
-                type='number'
-                value={pagoTitle}
-                onChange={(event) => setPagoTitle(Number(event.target.value))}
-              />
+            ?
+            <div className='flex space-x-1'>
+              <div>
+                Título:
+              </div>
+              <div className='font-semibold'>
+                $<input
+                  className='border pl-1 border-black rounded-lg w-16 font-semibold'
+                  type='number'
+                  value={pagoTitle}
+                  onChange={(event) => setPagoTitle(Number(event.target.value))}
+                />
+              </div>
             </div>
             : ""
         }
-        <div>
-          Premio por asistencia: ${
-            <input
-              className='border w-1/6 text-black'
+        <div className='flex space-x-1'>
+          <div>
+            Premio por asistencia:
+          </div>
+          <div className='font-semibold'>
+            $<input
+              className='border pl-1 border-black rounded-lg w-16 font-semibold'
               type='number'
               value={premio}
               onChange={(event) => setPremio(Number(event.target.value))}
             />
-          }
+          </div>
         </div>
 
         <br />
-        Total a percibir: ${total + subTotalTitle + subTotalPremio}
+        <div className='border p-3 border-black rounded-lg'>
+          <div className='font-semibold'>
+            Total a percibir:
+          </div>
+          <div className='font-bold'>
+            ${total + subTotalTitle + subTotalPremio}
+          </div>
+        </div>
       </div>
 
-    </div>
+    </div >
   )
 }
 
