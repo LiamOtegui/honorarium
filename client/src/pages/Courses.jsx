@@ -10,11 +10,16 @@ const Courses = () => {
     const [openCreate, setOpenCreate] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
 
+    const [filteredCourses, setFilteredCourses] = useState([])
+
+    const [searchedCourse, setSearchedCourse] = useState("")
+
     const getCourses = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/course`)
             const sortedCourses = response.data.sort((a, b) => a.name.localeCompare(b.name))
             setCourses(sortedCourses)
+            setFilteredCourses(sortedCourses)
         } catch (error) {
             toast.error(error.message)
         }
@@ -24,23 +29,40 @@ const Courses = () => {
         getCourses()
     }, [])
 
+    useEffect(() => {
+        setFilteredCourses(
+            courses.filter((course) => course.name.toLowerCase().includes(searchedCourse.toLowerCase()))
+        )
+    }, [searchedCourse, courses])
+
     return (
         <div className='h-full'>
-            <div>
+
+            <nav className='flex fixed w-full ml-[13.1rem] bg-green-700 py-[0.54rem] text-white'>
+                <div className='flex justify-center ml-[0.5rem]'>
+                    <input
+                        type='text'
+                        placeholder='Buscar curso...'
+                        className='py-2 pl-3 pr-10 rounded-md text-black focus:outline-none'
+                        value={searchedCourse}
+                        onChange={(event) => setSearchedCourse(event.target.value)}
+                    />
+                </div>
                 <button
-                onClick={() => setOpenCreate(true)}
-                className='ml-64 mt-8 bg-green-700 border-[0.2rem] rounded-md border-green-800 px-4 py-1 duration-200 hover:bg-green-600 text-lg text-white'>
+                    onClick={() => setOpenCreate(true)}
+                    className='ml-5 bg-green-700 border-[0.2rem] rounded-md border-green-900 px-4 py-1 duration-200 hover:bg-green-600 hover:border-green-800 text-lg text-white'>
                     Asociar Teacher
                 </button>
                 <button
-                onClick={() => setOpenDelete(true)}
-                className='ml-10 mt-8 bg-green-700 border-[0.2rem] rounded-md border-green-800 px-4 py-1 duration-200 hover:bg-green-600 text-lg text-white'>
+                    onClick={() => setOpenDelete(true)}
+                    className='ml-5 bg-green-700 border-[0.2rem] rounded-md border-green-900 px-4 py-1 duration-200 hover:bg-green-600 hover:border-green-800 text-lg text-white'>
                     Eliminar asociación
                 </button>
-            </div>
-            <div>
+            </nav>
+
+            <div className='mt-[5rem]'>
                 {
-                    courses.map((course, index) => (
+                    filteredCourses.map((course, index) => (
                         <div key={index}>
                             <div>
                                 <CourseDetails course={course} />

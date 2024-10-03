@@ -57,7 +57,7 @@ const Home = () => {
                     <input
                         type='text'
                         placeholder='Buscar teacher...'
-                        className='py-2 pl-3 pr-10 rounded-md text-black'
+                        className='py-2 pl-3 pr-10 rounded-md text-black focus:outline-none'
                         value={searchTerm}
                         onChange={(event) => setSearchTerm(event.target.value)}
                     />
