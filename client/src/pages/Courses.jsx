@@ -38,7 +38,7 @@ const Courses = () => {
     return (
         <div className='h-full'>
 
-            <nav className='flex fixed w-full ml-[13.1rem] bg-green-700 py-[0.54rem] text-white'>
+            <nav className='flex fixed w-full ml-[13.1rem] bg-fuchsia-900 py-[0.63rem] text-white'>
                 <div className='flex justify-center ml-[0.5rem]'>
                     <input
                         type='text'
@@ -50,12 +50,12 @@ const Courses = () => {
                 </div>
                 <button
                     onClick={() => setOpenCreate(true)}
-                    className='ml-5 bg-green-700 border-[0.2rem] rounded-md border-green-900 px-4 py-1 duration-200 hover:bg-green-600 hover:border-green-800 text-lg text-white'>
+                    className='ml-5 bg-fuchsia-800 border-[0.1rem] border-fuchsia-950 rounded-lg px-4 py-1 duration-200 hover:bg-fuchsia-700 text-lg text-white'>
                     Asociar Teacher
                 </button>
                 <button
                     onClick={() => setOpenDelete(true)}
-                    className='ml-5 bg-green-700 border-[0.2rem] rounded-md border-green-900 px-4 py-1 duration-200 hover:bg-green-600 hover:border-green-800 text-lg text-white'>
+                    className='ml-5 bg-fuchsia-800 border-[0.1rem] border-fuchsia-950 rounded-lg px-4 py-1 duration-200 hover:bg-fuchsia-700 text-lg text-white'>
                     Eliminar asociación
                 </button>
             </nav>

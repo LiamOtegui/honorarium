@@ -41,7 +41,7 @@ const CoordinationDetails = ({ coordination }) => {
                                     setChoosenForEdit(coordination)
                                 }
                                 }
-                                className='bg-green-600 px-3 py-1 rounded-md border-[0.1rem] border-green-900 shadow-md hover:bg-green-500 hover:rounded-md hover:border-[0.1rem] hover:border-green-700 hover:duration-200'>
+                                className='bg-green-600 px-3 py-1 rounded-md border-[0.1rem] border-green-700 shadow-md hover:bg-green-500 hover:rounded-md hover:border-[0.1rem] hover:border-green-500 hover:duration-200'>
                                 Editar
                             </button>
                             <button
