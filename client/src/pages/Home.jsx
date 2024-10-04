@@ -7,7 +7,7 @@ const Home = () => {
 
     const [teachers, setTeachers] = useState([])
 
-    const [searchTerm, setSearchTerm] = useState('')
+    const [searchedTeacher, setSearchedTeacher] = useState('')
     const [filteredTeachers, setFilteredTeachers] = useState([])
 
     const getTeachers = async () => {
@@ -46,9 +46,9 @@ const Home = () => {
 
     useEffect(() => {
         setFilteredTeachers(
-            teachers.filter(teacher => teacher.name.toLowerCase().includes(searchTerm.toLowerCase()))
+            teachers.filter(teacher => teacher.name.toLowerCase().includes(searchedTeacher.toLowerCase()))
         )
-    }, [searchTerm, teachers])
+    }, [searchedTeacher, teachers])
 
     return (
         <div>
@@ -58,8 +58,8 @@ const Home = () => {
                         type='text'
                         placeholder='Buscar teacher...'
                         className='py-2 pl-3 pr-10 rounded-md text-black focus:outline-none'
-                        value={searchTerm}
-                        onChange={(event) => setSearchTerm(event.target.value)}
+                        value={searchedTeacher}
+                        onChange={(event) => setSearchedTeacher(event.target.value)}
                     />
                 </div>
             </nav>
