@@ -3,6 +3,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import { Landing, Home, TeacherTemplate, Courses, Coordinations, CreateTeacher, CreateCourse, CreateCoordination } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import tecLogo from '../public/tec-logo.svg'
 
 function App() {
 
@@ -17,7 +18,9 @@ function App() {
             <Link
               to='/home'
               className='flex text-3xl font-semibold bg-fuchsia-900 shadow-md text-white px-20 py-3 mb-7'>
-              TEC
+              <div>
+                TEC
+              </div>
             </Link>
             <div className='flex flex-col space-y-7 text-center'>
               <Link
