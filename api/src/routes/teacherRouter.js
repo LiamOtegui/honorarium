@@ -12,6 +12,6 @@ teacherRouter.post('/associate-course', associateTeacherToCourse)
 teacherRouter.delete('/delete-association/:teacherName/:courseName', deleteAssociation)
 
 teacherRouter.get('/:id/courses', getTeacherCourses)
-teacherRouter.get('/:id/coordinations', getTeacherCoordinations)
+teacherRouter.get('/:name/coordinations', getTeacherCoordinations)
 
 module.exports = teacherRouter

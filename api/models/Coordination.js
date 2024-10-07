@@ -28,6 +28,10 @@ const Coordination = sequelize.define(
         hours: {
             type: DataTypes.FLOAT,
             allowNull: false
+        },
+        teacherName: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {

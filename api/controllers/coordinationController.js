@@ -1,9 +1,17 @@
 const Coordination = require('../models/Coordination')
+const Teacher = require('../models/Teacher')
 const asyncHandler = require('express-async-handler')
 
 const postCoordination = asyncHandler(async (req, res) => {
     try {
-        const { name, day, days, hourlyPay, hours, teacherId } = req.body
+        const { name, day, days, hourlyPay, hours, teacherName } = req.body
+
+        const teacher = await Teacher.findOne({ where: { name: teacherName } })
+
+        if (!teacher) {
+            res.status(404)
+            throw new Error('Teacher not found')
+        }
 
         const coordination = await Coordination.create({
             name,
@@ -11,7 +19,7 @@ const postCoordination = asyncHandler(async (req, res) => {
             days,
             hourlyPay,
             hours,
-            teacherId
+            teacherName: teacher.name
         })
 
         res.json(coordination)
@@ -46,11 +54,11 @@ const getCoordinationById = asyncHandler(async (req, res) => {
 
 const updateCoordination = asyncHandler(async (req, res) => {
     try {
-        const { name, day, days, hourlyPay, hours, teacherId } = req.body
+        const { name, day, days, hourlyPay, hours, teacherName } = req.body
         const { id } = req.params
 
         const coordination = await Coordination.update(
-            { name, day, days, hourlyPay, hours, teacherId },
+            { name, day, days, hourlyPay, hours, teacherName },
             { where: { id: id } }
         )
 

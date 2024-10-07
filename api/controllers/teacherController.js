@@ -149,10 +149,21 @@ const getTeacherCourses = asyncHandler(async (req, res) => {
 
 const getTeacherCoordinations = asyncHandler(async (req, res) => {
     try {
-        const { id } = req.params
-        const coordination = await Coordination.findAll(
-            { where: { teacherId: id } }
+        const { name } = req.params
+
+        const teacher = await Teacher.findOne(
+            { where: { name } }
         )
+
+        if (!teacher) {
+            res.status(404)
+            throw new Error('Teacher not found')
+        }
+
+        const coordination = await Coordination.findAll(
+            { where: { teacherName: name } }
+        )
+
         res.json(coordination)
     } catch (error) {
         res.status(500)

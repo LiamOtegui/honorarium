@@ -14,7 +14,8 @@ const Teacher = sequelize.define(
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         title: {
             type: DataTypes.BOOLEAN,
@@ -30,12 +31,12 @@ Teacher.belongsToMany(Course, { through: TeacherCourse, foreignKey: 'teacherId' 
 Course.belongsToMany(Teacher, { through: TeacherCourse, foreignKey: 'courseId' })
 
 Teacher.hasMany(Coordination, {
-    foreignKey: 'teacherId',
-    sourceKey: 'id'
+    foreignKey: 'teacherName',
+    sourceKey: 'name'
 })
 Coordination.belongsTo(Teacher, {
-    foreignKey: 'teacherId',
-    targetKey: 'id'
+    foreignKey: 'teacherName',
+    targetKey: 'name'
 })
 
 module.exports = Teacher
