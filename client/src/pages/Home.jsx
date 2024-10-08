@@ -21,24 +21,29 @@ const Home = () => {
         }
     }
 
-    const getTeacherDetails = async (teacherId) => {
+    const getTeacherCourses = async (teacherId) => {
         try {
-            const coursesResponse = await axios.get(`http://localhost:5000/teacher/${teacherId}/courses`)
-            const coordinationsResponse = await axios.get(`http://localhost:5000/teacher/${teacherId}/coordinations`)
+            const response = await axios.get(`http://localhost:5000/teacher/${teacherId}/courses`)
 
-            return {
-                courses: coursesResponse.data,
-                coordinations: coordinationsResponse.data
-            }
+            return response.data
 
         } catch (error) {
-            toast.error(`Error fetching details for teacher ${teacherId}: ${error.message}`)
-            return {
-                courses: [],
-                coordinations: []
-            }
+            toast.error(`Error fetching courses for teacher ${teacherId}: ${error.message}`)
+            return []
         }
     }
+
+    const getTeacherCoordinations = async (teacherName) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/teacher/${teacherName}/coordinations`)
+            
+            return response.data
+
+        } catch (error) {
+            toast.error(`Error fetching coordinations for teacher ${teacherName}: ${error.message}`)
+            return []
+        }
+    } 
 
     useEffect(() => {
         getTeachers()
@@ -69,7 +74,7 @@ const Home = () => {
                     filteredTeachers.map((teacher, index) => (
                         <div key={index} className=''>
                             <div>
-                                <TeacherDetails teacher={teacher} getTeacherDetails={getTeacherDetails} />
+                                <TeacherDetails teacher={teacher} getTeacherCourses={getTeacherCourses} getTeacherCoordinations={getTeacherCoordinations} />
                             </div>
                         </div>
                     ))

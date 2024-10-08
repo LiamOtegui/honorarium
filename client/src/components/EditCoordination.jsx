@@ -10,8 +10,19 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
     days: 0,
     hourlyPay: 0,
     hours: 0,
-    teacherId: 0
+    teacherName: ''
   })
+  const [teachers, setTeachers] = useState([])
+
+  const getTeachers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/teacher`)
+      const sortedTeachers = response.data.sort((a, b) => a.name.localeCompare(b.name))
+      setTeachers(sortedTeachers)
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   useEffect(() => {
     if (choosen !== null) {
@@ -21,9 +32,10 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
         days: choosen.days,
         hourlyPay: choosen.hourlyPay,
         hours: choosen.hours,
-        teacherId: choosen.teacherId
+        teacherName: choosen.teacherName
       })
     }
+    getTeachers()
   }, [choosen])
 
   const updateCoordination = async (event) => {
@@ -104,10 +116,21 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
           </div>
           <div className='flex flex-col items-center mt-1'>
             <div className='mb-1 font-semibold'>
-              ID de Teacher asociado:
+              Teacher asociado:
             </div>
             <div>
-              <input type='number' name='teacherId' value={coordination.teacherId} onChange={handleChange} placeholder={coordination.teacherId} className='flex p-1 border border-black rounded-md' />
+              <select
+              name='teacherName'
+              value={coordination.teacherName}
+              onChange={handleChange} className='px-5 py-2 border rounded-md border-black overflow-y-auto'>
+                {
+                  teachers.map((teacher, index) => (
+                    <option key={index} value={teacher.name}>
+                      {teacher.name}
+                    </option>
+                  ))
+                }
+              </select>
             </div>
           </div>
           <button className='mt-4 bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-900 duration-200 hover:bg-green-800 hover:border-[0.1rem] hover:border-green-900 hover:duration-200'>

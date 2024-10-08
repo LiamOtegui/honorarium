@@ -33,7 +33,7 @@ const CreateCourse = () => {
   return (
     <div className='grid grid-rows-1 mb-[1rem] ml-[37rem] mt-[1.3rem] text-white font-medium bg-green-800 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-xl'>
-        <div className='text-[2rem] bg-green-600 py-5 px-16 rounded-md'>
+        <div className='text-[2rem] bg-green-600 py-5 px-16 rounded-lg'>
           Crear Nuevo Curso
         </div>
         <form onSubmit={create} className='flex flex-col items-center mt-7'>

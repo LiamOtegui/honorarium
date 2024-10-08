@@ -4,23 +4,23 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const TeacherDetails = ({ teacher, getTeacherDetails }) => {
+const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations }) => {
 
-    const [details, setDetails] = useState({
-        courses: [],
-        coordinations: []
-    })
+    const [courses, setCourses] = useState([])
+    const [coordinations, setCoordinations] = useState([])
 
     const [openForEdit, setOpenForEdit] = useState(false)
     const [choosenForEdit, setChoosenForEdit] = useState(null)
 
     useEffect(() => {
         const fetchDetails = async () => {
-            const details = await getTeacherDetails(teacher.id)
-            setDetails(details)
+            const coursesDetails = await getTeacherCourses(teacher.id)
+            const coordinationsDetails = await getTeacherCoordinations(teacher.name)
+            setCourses(coursesDetails)
+            setCoordinations(coordinationsDetails)
         }
         fetchDetails()
-    }, [teacher.id, getTeacherDetails])
+    }, [teacher.id, teacher.name, getTeacherCourses, getTeacherCoordinations])
 
     const deleteTeacher = async (id) => {
         try {
@@ -33,7 +33,7 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
             toast.error(error.message)
         }
     }
-
+    
     return (
         <div className='w-[60rem] ml-[24rem]'>
             <div
@@ -52,8 +52,8 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                     </Link>
                     <div className='flex gap-x-3 items-start justify-center p-3'>
                         {teacher.title === true
-                        ? <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: Sí</div>
-                        : <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: No</div>}
+                            ? <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: Sí</div>
+                            : <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: No</div>}
                         <div className='flex flex-row gap-x-3'>
                             <button
                                 onClick={() => {
@@ -73,8 +73,8 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1'>
-                    {details.courses.length > 0 ? (
-                        details.courses.map((course) => (
+                    {courses.length > 0 ? (
+                        courses.map((course) => (
                             <div key={course.id} className='flex items-center gap-2 text-center'>
                                 <div className='text-sm'>
                                     ID: {course.id}
@@ -89,8 +89,8 @@ const TeacherDetails = ({ teacher, getTeacherDetails }) => {
                     )}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1 mr-3'>
-                    {details.coordinations.length > 0 ? (
-                        details.coordinations.map((coordination) => (
+                    {coordinations.length > 0 ? (
+                        coordinations.map((coordination) => (
                             <div key={coordination.id} className='text-center'>{coordination.name}</div>
                         ))
                     ) : (
