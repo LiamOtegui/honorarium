@@ -43,7 +43,7 @@ const Home = () => {
             toast.error(`Error fetching coordinations for teacher ${teacherName}: ${error.message}`)
             return []
         }
-    } 
+    }
 
     useEffect(() => {
         getTeachers()

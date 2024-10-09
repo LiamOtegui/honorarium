@@ -12,10 +12,9 @@ const TeacherTemplate = () => {
     title: 0
   })
 
-  const [details, setDetails] = useState({
-    courses: [],
-    coordinations: []
-  })
+  const [courses, setCourses] = useState([])
+  const [coordinations, setCoordinations] = useState([])
+
   const [viaticos, setViaticos] = useState({
     travel: "",
     days: ""
@@ -23,21 +22,39 @@ const TeacherTemplate = () => {
   const [pagoTitle, setPagoTitle] = useState("")
   const [premio, setPremio] = useState("")
 
-  const [choosenDay, setChoosenDay] = useState("")
-
-  const handleInputChange = (e, index, type, field) => {
-    const newDetails = { ...details }
-    newDetails[type][index][field] = e.target.value === "" ? "" : Number(e.target.value)
-    setDetails(newDetails)
+  const handleInputChangeCourses = (event, index, field) => {
+    const { value } = event.target
+  
+    const newCourses = [...courses]
+  
+    newCourses[index] = {
+      ...newCourses[index],
+      [field]: value === "" ? "" : Number(value)
+    };
+  
+    setCourses(newCourses)
   }
+  
+  const handleInputChangeCoordinations = (event, index, field) => {
+    const { value } = event.target;
+  
+    // Crea una copia profunda del array de coordinations
+    const newCoordinations = [...coordinations];
+  
+    // Actualiza el campo específico (days, hours, hourlyPay) en el índice correspondiente
+    newCoordinations[index] = {
+      ...newCoordinations[index],
+      [field]: value === "" ? "" : Number(value)
+    };
+  
+    // Actualiza el estado con el nuevo array de coordinations
+    setCoordinations(newCoordinations);
+  };  
 
-  const handleInputChangeFotocopias = (e, index, field) => {
-    const updatedCourses = [...details.courses];
-    updatedCourses[index].fotocopias[field] = e.target.value === "" ? "" : Number(e.target.value);
-    setDetails({
-      ...details,
-      courses: updatedCourses
-    })
+  const handleInputChangeFotocopias = (event, index, field) => {
+    const updatedCourses = [...courses];
+    updatedCourses[index].fotocopias[field] = event.target.value === "" ? "" : Number(event.target.value);
+    setCourses(updatedCourses)
   }
 
   const getTeacherById = async (id) => {
@@ -52,12 +69,11 @@ const TeacherTemplate = () => {
     }
   }
 
-  const getTeacherDetails = async (teacherId) => {
+  const getTeacherCourses = async (teacherId) => {
     try {
-      const coursesResponse = await axios.get(`http://localhost:5000/teacher/${teacherId}/courses`)
-      const coordinationsResponse = await axios.get(`http://localhost:5000/teacher/${teacherId}/coordinations`)
+      const response = await axios.get(`http://localhost:5000/teacher/${teacherId}/courses`)
 
-      const coursesWithPhotocopies = coursesResponse.data.map((course) => ({
+      const coursesWithPhotocopies = response.data.map((course) => ({
         ...course,
         fotocopias: {
           precio: 0,
@@ -65,13 +81,21 @@ const TeacherTemplate = () => {
         }
       }))
 
-      setDetails({
-        courses: coursesWithPhotocopies,
-        coordinations: coordinationsResponse.data
-      })
+      setCourses(coursesWithPhotocopies)
 
     } catch (error) {
-      toast.error(`Error fetching details for teacher ${teacherId}: ${error.message}`)
+      toast.error(`Error fetching courses for teacher ${teacherId}: ${error.message}`)
+    }
+  }
+
+  const getTeacherCoordinations = async (teacherName) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/teacher/${teacherName}/coordinations`)
+
+      setCoordinations(response.data)
+
+    } catch (error) {
+      toast.error(`Error fetching coordinations for teacher ${teacherName}: ${error.message}`)
     }
   }
 
@@ -84,22 +108,28 @@ const TeacherTemplate = () => {
     }
     fetchData()
 
-    getTeacherDetails(teacherId)
+    getTeacherCourses(teacherId)
   }, [teacherId])
+
+  useEffect(() => {
+    if (teacherTemplate.name) {
+      getTeacherCoordinations(teacherTemplate.name)
+    }
+  }, [teacherTemplate.name])
 
   const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   const fecha = new Date()
   const mesNumero = fecha.getMonth()
   const mesActual = meses[mesNumero]
 
-  const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
 
   const calcularSubTotalCoordinaciones = () => {
-    return details.coordinations.reduce((acc, curr) => acc + (curr.days * (curr.hourlyPay * curr.hours)), 0)
+    return coordinations.reduce((acc, curr) => acc + (curr.days * (curr.hourlyPay * curr.hours)), 0)
   }
 
   const calcularSubTotalCursos = () => {
-    return details.courses.reduce((acc, curr) => acc + (curr.days * curr.payment), 0)
+    return courses.reduce((acc, curr) => acc + (curr.days * curr.payment), 0)
   }
 
   const calcularViaticos = () => {
@@ -108,7 +138,7 @@ const TeacherTemplate = () => {
   }
 
   const calcularFotocopias = (index) => {
-    const course = details.courses[index]
+    const course = courses[index]
     const total = course.fotocopias.precio * course.fotocopias.cantidad
     return total
   }
@@ -118,7 +148,7 @@ const TeacherTemplate = () => {
   const subTotalViaticos = calcularViaticos()
   const subTotalTitle = pagoTitle
   const subTotalPremio = premio
-  const subTotalFotocopias = details.courses.reduce((acc, _, index) => acc + calcularFotocopias(index), 0)
+  const subTotalFotocopias = courses.reduce((acc, _, index) => acc + calcularFotocopias(index), 0)
   const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalFotocopias
 
   return (
@@ -187,7 +217,7 @@ const TeacherTemplate = () => {
         </div>
 
         <div>
-          {details.coordinations.map((coordination, index) => (
+          {coordinations.map((coordination, index) => (
             <div key={index} className='border-[0.1rem] border-black rounded-lg p-3'>
               <div className='flex justify-between'>
                 <div className='flex justify-center items-center font-semibold'>{coordination.name}</div>
@@ -213,16 +243,16 @@ const TeacherTemplate = () => {
                     className='text-black border p-1 border-black rounded-lg w-1/5'
                     type="number"
                     value={coordination.days}
-                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'days')}
+                    onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
                   />
                 </div>
                 <div className='flex gap-1 justify-center items-center'>
-                  <div>Horas:</div>
+                  <div>Horas en clase:</div>
                   <input
                     className='text-black border p-1 border-black rounded-lg w-1/5'
                     type="number"
                     value={coordination.hours}
-                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'hours')}
+                    onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
                   />
                 </div>
                 <div className='flex gap-1 justify-center items-center'>
@@ -231,7 +261,7 @@ const TeacherTemplate = () => {
                     className='text-black border p-1 border-black rounded-lg w-1/5'
                     type="number"
                     value={coordination.hourlyPay}
-                    onChange={(e) => handleInputChange(e, index, 'coordinations', 'hourlyPay')}
+                    onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
                   />
                 </div>
                 <div className='font-semibold'>
@@ -243,7 +273,7 @@ const TeacherTemplate = () => {
         </div>
 
         <div className='space-y-3'>
-          {details.courses.map((course, index) => (
+          {courses.map((course, index) => (
             <div key={index} className='flex justify-between items-center space-x-3 py-12 border-[0.1rem] border-black p-3 rounded-lg'>
               <div className='flex flex-col space-y-1 mr-3'>
                 <div>Curso:</div>
@@ -303,7 +333,7 @@ const TeacherTemplate = () => {
                   className='text-black border p-1 border-black rounded-lg w-12'
                   type="number"
                   value={course.students}
-                  onChange={(e) => handleInputChange(e, index, 'courses', 'students')}
+                  onChange={(e) => handleInputChangeCourses(e, index, 'students')}
                 />
               </div>
               <div className='flex gap-1 items-center'>
@@ -312,7 +342,7 @@ const TeacherTemplate = () => {
                   className='text-black border p-1 border-black rounded-lg w-10'
                   type="number"
                   value={course.days}
-                  onChange={(e) => handleInputChange(e, index, 'courses', 'days')}
+                  onChange={(e) => handleInputChangeCourses(e, index, 'days')}
                 />
               </div>
               <div className='flex gap- items-center'>
@@ -321,7 +351,7 @@ const TeacherTemplate = () => {
                   className='text-black border p-1 border-black rounded-lg w-16'
                   type="number"
                   value={course.payment}
-                  onChange={(e) => handleInputChange(e, index, 'courses', 'payment')}
+                  onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
                 />
               </div>
               <div className='font-semibold'>
