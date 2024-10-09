@@ -46,6 +46,8 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
     })
   }
 
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+
   return (
     <div
       onClick={onClose}
@@ -73,7 +75,13 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
               Día:
             </div>
             <div>
-              <input type='text' name='day' value={course.day} onChange={handleChange} placeholder={course.day} className='flex p-1 border border-black rounded-md' />
+              <select name='day' value={course.day} onChange={handleChange} className='flex py-1 px-[3.1rem] border border-black rounded-md'>
+                {
+                  dias.map((dia) => (
+                    <option value={dia}>{dia}</option>
+                  ))
+                }
+              </select>
             </div>
           </div>
           <div className='flex flex-col items-center mt-2'>

@@ -31,6 +31,8 @@ const CreateCoordination = () => {
     })
   }
 
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+
   return (
     <div className='grid grid-rows-1 mb-[1rem] ml-[33.5rem] mt-[1.3rem] text-white font-medium bg-green-800 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
       <div className='flex flex-col items-center text-xl'>
@@ -45,7 +47,13 @@ const CreateCoordination = () => {
           <div className='mb-1'>
             Día:
           </div>
-          <input type='text' name='day' value={coordination.day} onChange={handleChange} placeholder="Día" className='text-black p-1 mb-2' />
+          <select name='day' value={coordination.day} onChange={handleChange} className='py-1 px-[4.6rem] text-black'>
+            {
+              dias.map((dia) => (
+                <option value={dia}>{dia}</option>
+              ))
+            }
+          </select>
           <div className='mb-1'>
             Cantidad de días:
           </div>

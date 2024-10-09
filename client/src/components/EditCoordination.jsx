@@ -60,6 +60,8 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
     })
   }
 
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+
   return (
     <div
       onClick={onClose}
@@ -87,7 +89,13 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
               Día:
             </div>
             <div>
-              <input type='text' name='day' value={coordination.day} onChange={handleChange} placeholder={coordination.day} className='flex p-1 border border-black rounded-md' />
+              <select name='day' value={coordination.day} onChange={handleChange} className='flex py-1 px-[3.1rem] border border-black rounded-md'>
+                {
+                  dias.map((dia) => (
+                    <option value={dia}>{dia}</option>
+                  ))
+                }
+              </select>
             </div>
           </div>
           <div className='flex flex-col items-center mt-1'>
@@ -120,9 +128,9 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
             </div>
             <div>
               <select
-              name='teacherName'
-              value={coordination.teacherName}
-              onChange={handleChange} className='px-5 py-2 border rounded-md border-black overflow-y-auto'>
+                name='teacherName'
+                value={coordination.teacherName}
+                onChange={handleChange} className='px-[1.5rem] py-2 border rounded-md border-black overflow-y-auto'>
                 {
                   teachers.map((teacher, index) => (
                     <option key={index} value={teacher.name}>
