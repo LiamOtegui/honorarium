@@ -30,26 +30,23 @@ const TeacherTemplate = () => {
     newCourses[index] = {
       ...newCourses[index],
       [field]: value === "" ? "" : Number(value)
-    };
+    }
   
     setCourses(newCourses)
   }
   
   const handleInputChangeCoordinations = (event, index, field) => {
-    const { value } = event.target;
+    const { value } = event.target
+
+    const newCoordinations = [...coordinations]
   
-    // Crea una copia profunda del array de coordinations
-    const newCoordinations = [...coordinations];
-  
-    // Actualiza el campo específico (days, hours, hourlyPay) en el índice correspondiente
     newCoordinations[index] = {
       ...newCoordinations[index],
       [field]: value === "" ? "" : Number(value)
-    };
+    }
   
-    // Actualiza el estado con el nuevo array de coordinations
     setCoordinations(newCoordinations);
-  };  
+  } 
 
   const handleInputChangeFotocopias = (event, index, field) => {
     const updatedCourses = [...courses];
