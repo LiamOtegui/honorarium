@@ -24,35 +24,40 @@ const TeacherTemplate = () => {
 
   const handleInputChangeCourses = (event, index, field) => {
     const { value } = event.target
-  
+
     const newCourses = [...courses]
-  
+
     newCourses[index] = {
       ...newCourses[index],
       [field]: value === "" ? "" : Number(value)
     }
-  
+
     setCourses(newCourses)
   }
-  
+
   const handleInputChangeCoordinations = (event, index, field) => {
     const { value } = event.target
 
     const newCoordinations = [...coordinations]
-  
+
     newCoordinations[index] = {
       ...newCoordinations[index],
       [field]: value === "" ? "" : Number(value)
     }
-  
+
     setCoordinations(newCoordinations);
-  } 
+  }
 
   const handleInputChangeFotocopias = (event, index, field) => {
     const updatedCourses = [...courses];
     updatedCourses[index].fotocopias[field] = event.target.value === "" ? "" : Number(event.target.value);
-    setCourses(updatedCourses)
+
+    const { precio, copias } = updatedCourses[index].fotocopias;
+    updatedCourses[index].fotocopias.total = precio * copias;
+
+    setCourses(updatedCourses);
   }
+
 
   const getTeacherById = async (id) => {
     try {
@@ -74,7 +79,8 @@ const TeacherTemplate = () => {
         ...course,
         fotocopias: {
           precio: 0,
-          cantidad: course.students * 2
+          copias: 2,
+          total: 0
         }
       }))
 
@@ -136,7 +142,7 @@ const TeacherTemplate = () => {
 
   const calcularFotocopias = (index) => {
     const course = courses[index]
-    const total = course.fotocopias.precio * course.fotocopias.cantidad
+    const total = course.fotocopias.precio * course.fotocopias.copias
     return total
   }
 
@@ -276,7 +282,7 @@ const TeacherTemplate = () => {
                 <div>Curso:</div>
                 <div className='font-semibold'>{course.name}</div>
               </div>
-              <div className='ml-3 flex gap-1'>
+              <div className='ml-3 flex gap-1 border-[0.1rem] border-gray-400 rounded-md p-3'>
                 <div className='flex items-center'>
                   Día:
                 </div>
@@ -297,7 +303,7 @@ const TeacherTemplate = () => {
                 </div>
               </div>
               <div className='flex'>
-                <div className='flex'>
+                <div className='flex border-[0.1rem] border-gray-400 rounded-md p-5'>
                   <div className='flex'>
                     <div className='flex items-center'>
                       Fotocopia: $
@@ -310,21 +316,32 @@ const TeacherTemplate = () => {
 
                     />
                   </div>
-                  <div className='flex space-x-1'>
+                  <div className='flex'>
+                    <div className='flex space-x-1'>
+                      <div className='flex items-center ml-3'>
+                        X
+                      </div>
+                      <input
+                        className='border p-1 border-black rounded-lg w-14 text-black'
+                        type="number"
+                        value={course.fotocopias.copias}
+                        onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
+
+                      />
+                    </div>
                     <div className='flex items-center ml-3'>
-                      Cantidad fotocopias:
+                      = $
                     </div>
                     <input
-                      className='border p-1 border-black rounded-lg w-14 text-black'
+                      className='border p-1 border-gray-300 rounded-lg w-14 text-black'
                       type="number"
-                      value={course.fotocopias.cantidad}
-                      onChange={(e) => handleInputChangeFotocopias(e, index, 'cantidad')}
-
+                      value={course.fotocopias.total}
+                      readOnly
                     />
                   </div>
                 </div>
               </div>
-              <div className='flex gap-1 items-center'>
+              <div className='flex gap-1 items-center ml-3'>
                 <div>Estudiantes:</div>
                 <input
                   className='text-black border p-1 border-black rounded-lg w-12'
@@ -352,7 +369,7 @@ const TeacherTemplate = () => {
                 />
               </div>
               <div className='font-semibold'>
-                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.cantidad * course.fotocopias.precio)}
+                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.copias * course.fotocopias.precio)}
               </div>
             </div>
           ))}
