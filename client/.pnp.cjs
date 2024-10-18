@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:5.1.0-rc-fb9a90fa48-20240614"],\
             ["eslint-plugin-react-refresh", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:0.4.11"],\
             ["globals", "npm:15.9.0"],\
+            ["html2canvas", "npm:1.4.1"],\
             ["html2pdf.js", "npm:0.10.2"],\
             ["postcss", "npm:8.4.45"],\
             ["react", "npm:18.3.1"],\
@@ -1633,6 +1634,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:5.1.0-rc-fb9a90fa48-20240614"],\
             ["eslint-plugin-react-refresh", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:0.4.11"],\
             ["globals", "npm:15.9.0"],\
+            ["html2canvas", "npm:1.4.1"],\
             ["html2pdf.js", "npm:0.10.2"],\
             ["postcss", "npm:8.4.45"],\
             ["react", "npm:18.3.1"],\

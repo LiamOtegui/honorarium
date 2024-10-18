@@ -196,13 +196,22 @@ const TeacherTemplate = () => {
 
   const downloadPDF = () => {
     const content = contentRef.current
+
+    content.classList.add('w-full', 'h-auto', 'p-4');
+
     const opt = {
       margin: 0,
       filename: `Liquidación ${teacherTemplate.name}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 1.5 },
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: {
+        scale: 2,
+        scrollX: 0,
+        scrollY: 0,
+        logging: true,
+        useCORS: true
+      },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      pagebreak: { mode: ['avoid-all', 'css'] }
     }
     html2pdf().from(content).set(opt).save()
   }
@@ -210,7 +219,7 @@ const TeacherTemplate = () => {
   return (
     <div className='ml-[20rem] p-6 bg-gray-50'>
       {/* Contenedor Principal */}
-      <div ref={contentRef} className='bg-white p-6 rounded-lg border border-black shadow-md'>
+      <div ref={contentRef} className='h-auto bg-white p-6 border border-black shadow-md'>
         {/* Encabezado del Profesor */}
         <div className='flex justify-between items-center mb-4'>
           <div className='flex space-x-4'>
@@ -219,7 +228,7 @@ const TeacherTemplate = () => {
           </div>
           <div className='flex space-x-4 items-center'>
             <div className='font-semibold'>Mes:</div>
-            <select className='border border-black p-1 rounded-md'>
+            <select className='border border-black px-1 rounded-md h-8 leading-8'>
               {meses.map((mes, index) => (
                 <option key={index} value={mes}>
                   {mes}
@@ -240,14 +249,14 @@ const TeacherTemplate = () => {
             <span>$</span>
             <input
               type='number'
-              className='border border-black p-1 w-16 text-right'
+              className='border border-black px-1 w-16 text-right h-8 leading-8'
               value={viaticos.travel}
               onChange={(e) => setViaticos({ ...viaticos, travel: e.target.value })}
             />
             <span>x</span>
             <input
               type='number'
-              className='border border-black p-1 w-16 text-right'
+              className='border border-black px-1 w-16 text-right h-8 leading-8'
               value={viaticos.days}
               onChange={(e) => setViaticos({ ...viaticos, days: e.target.value })}
             />
@@ -266,7 +275,7 @@ const TeacherTemplate = () => {
                   <div>Día:</div>
                   <select
                     defaultValue={coordination.day}
-                    className='border border-black p-1 rounded-md'>
+                    className='border border-black px-1 rounded-md h-8 leading-8'>
                     {dias.map((dia) => (
                       <option key={dia} value={dia}>
                         {dia}
@@ -278,7 +287,7 @@ const TeacherTemplate = () => {
                   <span>Días: </span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={coordination.days}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
                   />
@@ -287,7 +296,7 @@ const TeacherTemplate = () => {
                   <span>Horas en clase: </span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={coordination.hours}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
                   />
@@ -296,7 +305,7 @@ const TeacherTemplate = () => {
                   <span>Pago por hora: $</span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={coordination.hourlyPay}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
                   />
@@ -319,7 +328,7 @@ const TeacherTemplate = () => {
                   <div>Día:</div>
                   <select
                     defaultValue={course.day}
-                    className='border border-black p-1 rounded-md'>
+                    className='border border-black px-1 rounded-md h-8 leading-8'>
                     {dias.map((dia) => (
                       <option key={dia} value={dia}>
                         {dia}
@@ -331,7 +340,7 @@ const TeacherTemplate = () => {
                   <span>Estudiantes: </span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={course.students}
                     onChange={(e) => handleInputChangeCourses(e, index, 'students')}
                   />
@@ -340,7 +349,7 @@ const TeacherTemplate = () => {
                   <span>Clases por mes: </span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={course.days}
                     onChange={(e) => handleInputChangeCourses(e, index, 'days')}
                   />
@@ -349,7 +358,7 @@ const TeacherTemplate = () => {
                   <span>Pago por clase: $</span>
                   <input
                     type='number'
-                    className='border border-black p-1 w-16 text-right'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8'
                     value={course.payment}
                     onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
                   />
@@ -362,19 +371,19 @@ const TeacherTemplate = () => {
                 <span>Fotocopias: $</span>
                 <input
                   type='number'
-                  className='border border-black p-1 w-16 text-right'
+                  className='border border-black px-1 w-16 text-right h-8 leading-8'
                   value={course.fotocopias.precio}
                   onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
                 />
                 <span>x</span>
                 <input
                   type='number'
-                  className='border border-black p-1 w-16 text-right'
+                  className='border border-black px-1 w-16 text-right h-8 leading-8'
                   value={course.fotocopias.copias}
                   onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
                 />
                 <span>= $</span>
-                <span className='font-semibold'>
+                <span className='font-semibold h-8 leading-8'>
                   {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
                 </span>
               </div>
@@ -390,20 +399,20 @@ const TeacherTemplate = () => {
               <div key={index} className='flex items-center space-x-2 mb-2'>
                 <input
                   type='text'
-                  className='border border-black p-1 rounded-md w-1/2'
+                  className='border border-black px-1 rounded-md w-1/2 h-8 leading-8'
                   placeholder='Nombre'
                   value={adicional.nombre}
                   onChange={(e) => handleAdicionalChange(index, 'nombre', e.target.value)}
                 />
                 <input
                   type='number'
-                  className='border border-black p-1 rounded-md w-1/3'
+                  className='border border-black px-1 rounded-md w-1/3 h-8 leading-8'
                   placeholder='Valor'
                   value={adicional.valor}
                   onChange={(e) => handleAdicionalChange(index, 'valor', e.target.value)}
                 />
                 <button
-                  className='bg-red-500 text-white p-1 rounded-md'
+                  className='bg-red-500 text-white px-1 rounded-md h-8 leading-8'
                   onClick={() => handleRemoveAdicional(index)}
                 >
                   Eliminar
@@ -411,7 +420,7 @@ const TeacherTemplate = () => {
               </div>
             ))}
             <button
-              className='bg-green-500 text-white p-2 rounded-md'
+              className='bg-green-500 text-white px-2 py-1 rounded-md'
               onClick={handleAddAdicional}
             >
               Agregar Adicional
@@ -449,8 +458,9 @@ const TeacherTemplate = () => {
                       Título:
                     </div>
                     <div className='font-semibold'>
-                      $<input
-                        className='border pl-1 border-black rounded-lg w-16 font-semibold'
+                      <span>$</span>
+                      <input
+                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                         type='number'
                         value={pagoTitle}
                         onChange={(event) => setPagoTitle(Number(event.target.value))}
@@ -464,8 +474,9 @@ const TeacherTemplate = () => {
                   Premio por asistencia:
                 </div>
                 <div className='font-semibold'>
-                  $<input
-                    className='border pl-1 border-black rounded-lg w-16 font-semibold'
+                  <span>$</span>
+                  <input
+                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                     type='number'
                     value={premio}
                     onChange={(event) => setPremio(Number(event.target.value))}
@@ -476,7 +487,7 @@ const TeacherTemplate = () => {
               <div className='flex items-center'>
                 <div className='mr-1'>Feriados:</div>
                 <input
-                  className='text-black border px-1 border-black rounded-lg w-16 font-semibold'
+                  className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                   type='number'
                   value={feriados}
                   onChange={(event) => setFeriados(Number(event.target.value))}
@@ -489,13 +500,13 @@ const TeacherTemplate = () => {
             </div>
           </div>
         </div>
-        <button
-          className='mt-4 px-4 py-2 bg-blue-500 text-white rounded-md'
-          onClick={downloadPDF}
-        >
-          Descargar PDF
-        </button>
       </div>
+      <button
+        className='mt-4 px-4 py-2 bg-blue-500 text-white rounded-md'
+        onClick={downloadPDF}
+      >
+        Descargar PDF
+      </button>
     </div>
   )
 }
