@@ -166,7 +166,6 @@ const TeacherTemplate = () => {
       const costoPorClase = totalFotocopias / updatedCourses[index].days
       const ajusteFeriados = feriadosInput * costoPorClase
   
-      // Calcular el nuevo total
       updatedCourses[index].fotocopias.total = totalFotocopias - ajusteFeriados
     } else {
       updatedCourses[index].fotocopias.total = totalFotocopias
@@ -202,7 +201,6 @@ const TeacherTemplate = () => {
     setAdTotal(sum)
   }
 
-
   ///////////////////////////////
 
   const subTotalCoordinaciones = calcularSubTotalCoordinaciones()
@@ -237,9 +235,9 @@ const TeacherTemplate = () => {
 
   return (
     <div className='ml-[20rem] p-6 bg-gray-50'>
-      {/* Contenedor Principal */}
+      
       <div ref={contentRef} className='h-auto bg-white p-6 border border-black shadow-md'>
-        {/* Encabezado del Profesor */}
+        
         <div className='flex justify-between items-center mb-4'>
           <div className='flex space-x-4'>
             <div className='font-semibold'>Profesor/a:</div>
@@ -261,7 +259,7 @@ const TeacherTemplate = () => {
           </div>
         </div>
 
-        {/* Viáticos */}
+        
         <div className='flex items-center border-b border-gray-300 pb-4 mb-4'>
           <div className='font-semibold'>Viáticos:</div>
           <div className='flex items-center space-x-2'>
@@ -284,7 +282,7 @@ const TeacherTemplate = () => {
           </div>
         </div>
 
-        {/* Coordinaciones */}
+        
         <div className='mb-6'>
           {coordinations.map((coordination, index) => (
             <div key={index} className='border border-black p-4 rounded-md mb-3'>
@@ -337,7 +335,7 @@ const TeacherTemplate = () => {
           ))}
         </div>
 
-        {/* Cursos */}
+        
         <div className='mb-6'>
           {courses.map((course, index) => (
             <div key={index} className='border border-black p-4 rounded-md mb-3'>
@@ -421,7 +419,7 @@ const TeacherTemplate = () => {
           ))}
         </div>
 
-        {/* Totales y Adicionales */}
+        
         <div className='grid grid-cols-2 gap-6'>
           <div className='bg-white p-4 border border-black rounded-lg'>
             <h2 className='text-lg font-semibold mb-3'>Adicionales</h2>

@@ -46,7 +46,7 @@ const CreateCourse = () => {
           <div className='mb-1'>
             Día:
           </div>
-          <select name='day' value={course.day} onChange={handleChange} className='py-1 px-[4.6rem] text-black'>
+          <select name='day' value={course.day} onChange={handleChange} className='w-full py-1 pr-1 text-black'>
             {
               dias.map((dia) => (
                 <option value={dia}>{dia}</option>

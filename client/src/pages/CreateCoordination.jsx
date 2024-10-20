@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -12,6 +12,18 @@ const CreateCoordination = () => {
     hours: null,
     teacherName: null
   })
+
+  const [teachers, setTeachers] = useState([])
+
+  const getTeachers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/teacher`)
+      const sortedTeachers = response.data.sort((a, b) => a.name.localeCompare(b.name))
+      setTeachers(sortedTeachers)
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   const create = async (event) => {
     event.preventDefault()
@@ -31,6 +43,10 @@ const CreateCoordination = () => {
     })
   }
 
+  useEffect(() => {
+    getTeachers()
+  }, [])
+
   const dias = ["Lunes", "Martes", "Miércoles", "Jueves"]
 
   return (
@@ -47,7 +63,7 @@ const CreateCoordination = () => {
           <div className='mb-1'>
             Día:
           </div>
-          <select name='day' value={coordination.day} onChange={handleChange} className='py-1 px-[4.6rem] text-black'>
+          <select name='day' value={coordination.day} onChange={handleChange} className='w-full py-1 pr-1 text-black'>
             {
               dias.map((dia) => (
                 <option value={dia}>{dia}</option>
@@ -69,7 +85,24 @@ const CreateCoordination = () => {
           <div className='mb-1'>
             Teacher:
           </div>
-          <input type='text' name='teacherName' value={coordination.teacherName} onChange={handleChange} placeholder="Teacher's name" className='text-black p-1 mb-2' />
+          <select
+            name='teacherName'
+            value={coordination.teacherName}
+            onChange={handleChange}
+            className='w-full text-black border-gray-300 py-1 pr-1 shadow-sm overflow-y-auto'
+            size={1}
+          >
+            {teachers.map((teacher, index) => (
+              <option
+                key={index}
+                value={teacher.name}
+                className='text-gray-700'
+              >
+                {teacher.name}
+              </option>
+            ))}
+          </select>
+          {/* <input type='text' name='teacherName' value={coordination.teacherName} onChange={handleChange} placeholder="Teacher's name" className='text-black p-1 mb-2' /> */}
           <button className='bg-green-600 py-2 px-3 rounded-md mt-8 hover:bg-green-500 duration-200'>Crear</button>
         </form>
       </div>
