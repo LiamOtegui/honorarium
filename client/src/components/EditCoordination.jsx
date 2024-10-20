@@ -60,7 +60,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
     })
   }
 
-  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves"]
 
   return (
     <div

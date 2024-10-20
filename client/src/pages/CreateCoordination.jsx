@@ -31,7 +31,7 @@ const CreateCoordination = () => {
     })
   }
 
-  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves"]
 
   return (
     <div className='grid grid-rows-1 mb-[1rem] ml-[33.5rem] mt-[1.3rem] text-white font-medium bg-green-800 pb-[3rem] pt-[3rem] px-[5rem] rounded-md'>
