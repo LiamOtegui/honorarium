@@ -23,8 +23,6 @@ const TeacherTemplate = () => {
   const [pagoTitle, setPagoTitle] = useState("")
   const [premio, setPremio] = useState("")
 
-  const [feriados, setFeriados] = useState("")
-
   const [adicionales, setAdicionales] = useState([]);
   const [adTotal, setAdTotal] = useState(0)
   const [adAdded, setAdAdded] = useState(false)
@@ -67,7 +65,6 @@ const TeacherTemplate = () => {
     setCourses(updatedCourses);
   }
 
-
   const getTeacherById = async (id) => {
     try {
       const response = await axios.get(`http://localhost:5000/teacher/${id}`)
@@ -84,16 +81,17 @@ const TeacherTemplate = () => {
     try {
       const response = await axios.get(`http://localhost:5000/teacher/${teacherId}/courses`)
 
-      const coursesWithPhotocopies = response.data.map((course) => ({
+      const coursesWithDetails = response.data.map((course) => ({
         ...course,
         fotocopias: {
           precio: 0,
           copias: 2,
-          total: 0
+          total: 0,
+          feriados: 0
         }
       }))
 
-      setCourses(coursesWithPhotocopies)
+      setCourses(coursesWithDetails)
 
     } catch (error) {
       toast.error(`Error fetching courses for teacher ${teacherId}: ${error.message}`)
@@ -134,7 +132,7 @@ const TeacherTemplate = () => {
   const mesNumero = fecha.getMonth()
   const mesActual = meses[mesNumero]
 
-  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves"]
 
   const calcularSubTotalCoordinaciones = () => {
     return coordinations.reduce((acc, curr) => acc + (curr.days * (curr.hourlyPay * curr.hours)), 0)
@@ -151,9 +149,30 @@ const TeacherTemplate = () => {
 
   const calcularFotocopias = (index) => {
     const course = courses[index]
-    const totalDays = course.days - feriados
+    const totalDays = course.days
     const total = totalDays > 0 ? course.fotocopias.total * totalDays : 0
     return total
+  }
+
+  const handleInputChangeFeriados = (event, index) => {
+    const updatedCourses = [...courses]
+  
+    const feriadosInput = event.target.value === "" ? 0 : Number(event.target.value)
+    updatedCourses[index].feriados = feriadosInput
+  
+    const totalFotocopias = updatedCourses[index].fotocopias.copias * updatedCourses[index].fotocopias.precio
+  
+    if (updatedCourses[index].days > 0) {
+      const costoPorClase = totalFotocopias / updatedCourses[index].days
+      const ajusteFeriados = feriadosInput * costoPorClase
+  
+      // Calcular el nuevo total
+      updatedCourses[index].fotocopias.total = totalFotocopias - ajusteFeriados
+    } else {
+      updatedCourses[index].fotocopias.total = totalFotocopias
+    }
+  
+    setCourses(updatedCourses);
   }
 
   ///////////////////////////////
@@ -249,14 +268,14 @@ const TeacherTemplate = () => {
             <span>$</span>
             <input
               type='number'
-              className='border border-black px-1 w-16 text-right h-8 leading-8'
+              className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
               value={viaticos.travel}
               onChange={(e) => setViaticos({ ...viaticos, travel: e.target.value })}
             />
             <span>x</span>
             <input
               type='number'
-              className='border border-black px-1 w-16 text-right h-8 leading-8'
+              className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
               value={viaticos.days}
               onChange={(e) => setViaticos({ ...viaticos, days: e.target.value })}
             />
@@ -287,7 +306,7 @@ const TeacherTemplate = () => {
                   <span>Días: </span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={coordination.days}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
                   />
@@ -296,7 +315,7 @@ const TeacherTemplate = () => {
                   <span>Horas en clase: </span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={coordination.hours}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
                   />
@@ -305,7 +324,7 @@ const TeacherTemplate = () => {
                   <span>Pago por hora: $</span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={coordination.hourlyPay}
                     onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
                   />
@@ -340,7 +359,7 @@ const TeacherTemplate = () => {
                   <span>Estudiantes: </span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={course.students}
                     onChange={(e) => handleInputChangeCourses(e, index, 'students')}
                   />
@@ -349,7 +368,7 @@ const TeacherTemplate = () => {
                   <span>Clases por mes: </span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={course.days}
                     onChange={(e) => handleInputChangeCourses(e, index, 'days')}
                   />
@@ -358,34 +377,45 @@ const TeacherTemplate = () => {
                   <span>Pago por clase: $</span>
                   <input
                     type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                     value={course.payment}
                     onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
                   />
                 </div>
                 <div className='font-semibold'>
-                  Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.copias * course.fotocopias.precio)}
+                  Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.days)}
                 </div>
               </div>
-              <div className='flex items-center mt-3'>
-                <span>Fotocopias: $</span>
-                <input
-                  type='number'
-                  className='border border-black px-1 w-16 text-right h-8 leading-8'
-                  value={course.fotocopias.precio}
-                  onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
-                />
-                <span>x</span>
-                <input
-                  type='number'
-                  className='border border-black px-1 w-16 text-right h-8 leading-8'
-                  value={course.fotocopias.copias}
-                  onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
-                />
-                <span>= $</span>
-                <span className='font-semibold h-8 leading-8'>
-                  {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
-                </span>
+              <div className='flex items-center mt-3 space-x-7'>
+                <div>
+                  <span>Fotocopias por clase: $</span>
+                  <input
+                    type='number'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                    value={course.fotocopias.precio}
+                    onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
+                  />
+                  <span>x</span>
+                  <input
+                    type='number'
+                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                    value={course.fotocopias.copias}
+                    onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
+                  />
+                  <span>= $</span>
+                  <span className='font-semibold h-8 leading-8'>
+                    {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
+                  </span>
+                </div>
+                <div className='flex items-center'>
+                  <div className='mr-1'>Feriados:</div>
+                  <input
+                    className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                    type='number'
+                    value={courses.feriados}
+                    onChange={(e) => handleInputChangeFeriados(e, index)}
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -484,15 +514,6 @@ const TeacherTemplate = () => {
                 </div>
               </div>
 
-              <div className='flex items-center'>
-                <div className='mr-1'>Feriados:</div>
-                <input
-                  className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
-                  type='number'
-                  value={feriados}
-                  onChange={(event) => setFeriados(Number(event.target.value))}
-                />
-              </div>
               <div className='flex justify-between'>
                 <span>Total a Pagar:</span>
                 <span className='font-bold text-xl'>${total}</span>
