@@ -430,7 +430,7 @@ const TeacherTemplate = () => {
         </div>
 
 
-        <div className='grid grid-cols-2 gap-6 text-sm'>
+        <div className='flex gap-3 text-sm'>
           <div className='bg-white p-4 border border-black rounded-lg'>
             <h2 className='text-base font-semibold mb-3'>Adicionales</h2>
             {adicionales.map((adicional, index) => (
@@ -468,8 +468,10 @@ const TeacherTemplate = () => {
             </div>
           </div>
 
-          <div className='bg-white p-4 border border-black rounded-lg'>
-            <h2 className='font-semibold mb-3 text-base'>Totales</h2>
+          <div className='bg-white py-4 px-10 border border-black rounded-lg'>
+            <h2 className='font-semibold mb-3 text-base'>
+              Totales
+            </h2>
             <div className='space-y-2'>
               <div className='flex space-x-1'>
                 <span>Total Coordinación:</span>
