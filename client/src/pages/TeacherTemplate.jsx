@@ -156,21 +156,21 @@ const TeacherTemplate = () => {
 
   const handleInputChangeFeriados = (event, index) => {
     const updatedCourses = [...courses]
-  
+
     const feriadosInput = event.target.value === "" ? 0 : Number(event.target.value)
     updatedCourses[index].feriados = feriadosInput
-  
+
     const totalFotocopias = updatedCourses[index].fotocopias.copias * updatedCourses[index].fotocopias.precio
-  
+
     if (updatedCourses[index].days > 0) {
       const costoPorClase = totalFotocopias / updatedCourses[index].days
       const ajusteFeriados = feriadosInput * costoPorClase
-  
+
       updatedCourses[index].fotocopias.total = totalFotocopias - ajusteFeriados
     } else {
       updatedCourses[index].fotocopias.total = totalFotocopias
     }
-  
+
     setCourses(updatedCourses);
   }
 
@@ -234,11 +234,11 @@ const TeacherTemplate = () => {
   }
 
   return (
-    <div className='ml-[20rem] p-6 bg-gray-50'>
-      
-      <div ref={contentRef} className='h-auto bg-white p-6 border border-black shadow-md'>
-        
-        <div className='flex justify-between items-center mb-4'>
+    <div className='ml-[27.5rem] p-6 bg-gray-50'>
+
+      <div ref={contentRef} className='h-auto bg-white p-6 border border-black shadow-md w-[49.7rem]'>
+
+        <div className='flex justify-between items-center mb-4 text-sm'>
           <div className='flex space-x-4'>
             <div className='font-semibold'>Profesor/a:</div>
             <div>{teacherTemplate.name}</div>
@@ -259,8 +259,8 @@ const TeacherTemplate = () => {
           </div>
         </div>
 
-        
-        <div className='flex items-center border-b border-gray-300 pb-4 mb-4'>
+
+        <div className='flex items-center border-b border-gray-300 pb-4 mb-4 text-sm'>
           <div className='font-semibold'>Viáticos:</div>
           <div className='flex items-center space-x-2'>
             <span>$</span>
@@ -282,52 +282,58 @@ const TeacherTemplate = () => {
           </div>
         </div>
 
-        
-        <div className='mb-6'>
+
+        <div className='mb-6 text-xs'>
           {coordinations.map((coordination, index) => (
-            <div key={index} className='border border-black p-4 rounded-md mb-3'>
-              <div className='flex justify-between items-center'>
-                <div className='font-semibold'>{coordination.name}</div>
-                <div className='flex items-center space-x-2'>
-                  <div>Día:</div>
-                  <select
-                    defaultValue={coordination.day}
-                    className='border border-black px-1 rounded-md h-8 leading-8'>
-                    {dias.map((dia) => (
-                      <option key={dia} value={dia}>
-                        {dia}
-                      </option>
-                    ))}
-                  </select>
+            <div key={index} className='border border-black p-3 rounded-md'>
+              <div className='flex items-center'>
+                <div className='font-semibold mr-8'>{coordination.name}</div>
+                <div className='flex flex-col'>
+                  <div className='flex'>
+                    <div className='flex items-center space-x-2'>
+                      <div>Día:</div>
+                      <select
+                        defaultValue={coordination.day}
+                        className='border border-black px-1 rounded-md h-8 leading-8'>
+                        {dias.map((dia) => (
+                          <option key={dia} value={dia}>
+                            {dia}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className='flex items-center space-x-2 ml-8'>
+                      <span>Días: </span>
+                      <input
+                        type='number'
+                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        value={coordination.days}
+                        onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
+                      />
+                    </div>
+                  </div>
+                  <div className='flex space-x-8 mt-3'>
+                    <div className='flex items-center space-x-2'>
+                      <span>Horas en clase: </span>
+                      <input
+                        type='number'
+                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        value={coordination.hours}
+                        onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
+                      />
+                    </div>
+                    <div className='flex items-center'>
+                      <span>Pago por hora: $</span>
+                      <input
+                        type='number'
+                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        value={coordination.hourlyPay}
+                        onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className='flex items-center'>
-                  <span>Días: </span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={coordination.days}
-                    onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
-                  />
-                </div>
-                <div className='flex items-center'>
-                  <span>Horas en clase: </span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={coordination.hours}
-                    onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
-                  />
-                </div>
-                <div className='flex items-center'>
-                  <span>Pago por hora: $</span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={coordination.hourlyPay}
-                    onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
-                  />
-                </div>
-                <div className='font-semibold'>
+                <div className='font-semibold flex pl-[6.5rem]'>
                   Subtotal Coordinación: ${coordination.days * coordination.hours * coordination.hourlyPay}
                 </div>
               </div>
@@ -335,94 +341,98 @@ const TeacherTemplate = () => {
           ))}
         </div>
 
-        
-        <div className='mb-6'>
+
+        <div className='mb-6 text-xs'>
           {courses.map((course, index) => (
-            <div key={index} className='border border-black p-4 rounded-md mb-3'>
-              <div className='flex justify-between items-center'>
-                <div className='font-semibold'>{course.name}</div>
-                <div className='flex items-center space-x-2'>
-                  <div>Día:</div>
-                  <select
-                    defaultValue={course.day}
-                    className='border border-black px-1 rounded-md h-8 leading-8'>
-                    {dias.map((dia) => (
-                      <option key={dia} value={dia}>
-                        {dia}
-                      </option>
-                    ))}
-                  </select>
+            <div key={index} className='border border-black p-3 rounded-md mb-3 flex justify-between'>
+              <div className='flex flex-col'>
+                <div className='flex space-x-8 items-center'>
+                  <div className='font-semibold'>{course.name}</div>
+                  <div className='flex items-center space-x-2'>
+                    <div>Día:</div>
+                    <select
+                      defaultValue={course.day}
+                      className='border border-black px-1 rounded-md h-8 leading-8'>
+                      {dias.map((dia) => (
+                        <option key={dia} value={dia}>
+                          {dia}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <span>Estudiantes: </span>
+                    <input
+                      type='number'
+                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      value={course.students}
+                      onChange={(e) => handleInputChangeCourses(e, index, 'students')}
+                    />
+                  </div>
+                  <div className='flex items-center'>
+                    <span>Pago por clase: $</span>
+                    <input
+                      type='number'
+                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      value={course.payment}
+                      onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
+                    />
+                  </div>
                 </div>
-                <div className='flex items-center'>
-                  <span>Estudiantes: </span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={course.students}
-                    onChange={(e) => handleInputChangeCourses(e, index, 'students')}
-                  />
-                </div>
-                <div className='flex items-center'>
-                  <span>Clases por mes: </span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={course.days}
-                    onChange={(e) => handleInputChangeCourses(e, index, 'days')}
-                  />
-                </div>
-                <div className='flex items-center'>
-                  <span>Pago por clase: $</span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={course.payment}
-                    onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
-                  />
-                </div>
-                <div className='font-semibold'>
-                  Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.days)}
+                <div className='flex items-center mt-3'>
+                  <div>
+                    <span>Fotoc. por clase: $</span>
+                    <input
+                      type='number'
+                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      value={course.fotocopias.precio}
+                      onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
+                    />
+                    <span>x</span>
+                    <input
+                      type='number'
+                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      value={course.fotocopias.copias}
+                      onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
+                    />
+                    <span>= $</span>
+                    <span className='font-semibold h-8 leading-8'>
+                      {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className='flex ml-5 space-x-5'>
+                    <div className='flex items-center space-x-2'>
+                      <div className=''>Feriados:</div>
+                      <input
+                        className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                        type='number'
+                        value={courses.feriados}
+                        onChange={(e) => handleInputChangeFeriados(e, index)}
+                      />
+                    </div>
+                    <div className='flex items-center space-x-2'>
+                      <span>Clases por mes: </span>
+                      <input
+                        type='number'
+                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        value={course.days}
+                        onChange={(e) => handleInputChangeCourses(e, index, 'days')}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className='flex items-center mt-3 space-x-7'>
-                <div>
-                  <span>Fotocopias por clase: $</span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={course.fotocopias.precio}
-                    onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
-                  />
-                  <span>x</span>
-                  <input
-                    type='number'
-                    className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                    value={course.fotocopias.copias}
-                    onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
-                  />
-                  <span>= $</span>
-                  <span className='font-semibold h-8 leading-8'>
-                    {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
-                  </span>
-                </div>
-                <div className='flex items-center'>
-                  <div className='mr-1'>Feriados:</div>
-                  <input
-                    className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
-                    type='number'
-                    value={courses.feriados}
-                    onChange={(e) => handleInputChangeFeriados(e, index)}
-                  />
-                </div>
+              <div className='font-semibold flex'>
+                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.days)}
               </div>
             </div>
           ))}
         </div>
 
-        
-        <div className='grid grid-cols-2 gap-6'>
+
+        <div className='grid grid-cols-2 gap-6 text-sm'>
           <div className='bg-white p-4 border border-black rounded-lg'>
-            <h2 className='text-lg font-semibold mb-3'>Adicionales</h2>
+            <h2 className='text-base font-semibold mb-3'>Adicionales</h2>
             {adicionales.map((adicional, index) => (
               <div key={index} className='flex items-center space-x-2 mb-2'>
                 <input
@@ -459,7 +469,7 @@ const TeacherTemplate = () => {
           </div>
 
           <div className='bg-white p-4 border border-black rounded-lg'>
-            <h2 className='text-lg font-semibold mb-3'>Totales</h2>
+            <h2 className='font-semibold mb-3 text-base'>Totales</h2>
             <div className='space-y-2'>
               <div className='flex space-x-1'>
                 <span>Total Coordinación:</span>
@@ -481,7 +491,7 @@ const TeacherTemplate = () => {
               {
                 teacherTemplate.title
                   ?
-                  <div className='flex space-x-1'>
+                  <div className='flex space-x-1 items-center'>
                     <div>
                       Título:
                     </div>
@@ -497,7 +507,7 @@ const TeacherTemplate = () => {
                   </div>
                   : ""
               }
-              <div className='flex space-x-1'>
+              <div className='flex space-x-1 items-center'>
                 <div>
                   Premio por asistencia:
                 </div>
@@ -512,9 +522,9 @@ const TeacherTemplate = () => {
                 </div>
               </div>
 
-              <div className='flex justify-between'>
-                <span>Total a Pagar:</span>
-                <span className='font-bold text-xl'>${total}</span>
+              <div className='flex justify-between text-lg'>
+                <span className='font-semibold'>Total a percibir:</span>
+                <span className='font-bold text-lg'>${total}</span>
               </div>
             </div>
           </div>
