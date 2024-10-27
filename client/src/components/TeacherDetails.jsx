@@ -42,9 +42,6 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                     <Link to={`/home/${teacher.id}`} state={{ teacherId: teacher.id }}>
                         <button
                             className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-fuchsia-700 hover:bg-fuchsia-400 hover:rounded-lg hover:border-[0.1rem] hover:border-fuchsia-300 hover:duration-200'>
-                            <div className='flex text-sm'>
-                                ID: {teacher.id}
-                            </div>
                             <div className='flex justify-center'>
                                 {teacher.name}
                             </div>
@@ -52,8 +49,8 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                     </Link>
                     <div className='flex gap-x-3 items-start justify-center p-3'>
                         {teacher.title === true
-                            ? <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: Sí</div>
-                            : <div className='bg-fuchsia-400 border-[0.1rem] rounded-lg px-1 py-1'>Título: No</div>}
+                            ? <div className='bg-fuchsia-700 border-[0.1rem] rounded-lg px-1 py-1'>Título: Sí</div>
+                            : <div className='bg-fuchsia-700 border-[0.1rem] rounded-lg px-1 py-1'>Título: No</div>}
                         <div className='flex flex-row gap-x-3'>
                             <button
                                 onClick={() => {
@@ -82,7 +79,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                             </div>
                         ))
                     ) : (
-                        <div className='text-fuchsia-800 bg-fuchsia-400 px-4 my-1 py-1 rounded-md'>Sin cursos</div>
+                        <div className='text-white bg-fuchsia-800 px-14 my-1 py-1 rounded-md'>Sin cursos</div>
                     )}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1 mr-3'>
@@ -91,7 +88,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                             <div key={coordination.id} className='text-center'>{coordination.name}</div>
                         ))
                     ) : (
-                        <div className='text-fuchsia-800 bg-fuchsia-400 px-4 my-1 py-1 rounded-md'>Sin coordinación</div>
+                        <div className='text-white bg-fuchsia-800 px-7 my-1 py-1 rounded-md'>Sin coordinación</div>
                     )}
                 </div>
             </div>

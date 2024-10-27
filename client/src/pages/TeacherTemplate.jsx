@@ -262,22 +262,24 @@ const TeacherTemplate = () => {
 
         <div className='flex items-center border-b border-gray-300 pb-4 mb-4 text-sm'>
           <div className='font-semibold'>Viáticos:</div>
-          <div className='flex items-center space-x-2'>
-            <span>$</span>
+          <div className='flex items-center'>
+            <span className='ml-2'>$</span>
             <input
               type='number'
               className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
               value={viaticos.travel}
               onChange={(e) => setViaticos({ ...viaticos, travel: e.target.value })}
+              onWheel={(e) => e.target.blur()}
             />
-            <span>x</span>
+            <span className='mx-2'>Cantidad de viajes:</span>
             <input
               type='number'
               className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
               value={viaticos.days}
               onChange={(e) => setViaticos({ ...viaticos, days: e.target.value })}
+              onWheel={(e) => e.target.blur()}
             />
-            <span>=</span>
+            <span className='mx-2'>=</span>
             <span className='font-semibold'>${subTotalViaticos}</span>
           </div>
         </div>
@@ -309,6 +311,7 @@ const TeacherTemplate = () => {
                         className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                         value={coordination.days}
                         onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                   </div>
@@ -320,6 +323,7 @@ const TeacherTemplate = () => {
                         className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                         value={coordination.hours}
                         onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                     <div className='flex items-center'>
@@ -329,6 +333,7 @@ const TeacherTemplate = () => {
                         className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                         value={coordination.hourlyPay}
                         onChange={(e) => handleInputChangeCoordinations(e, index, 'hourlyPay')}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                   </div>
@@ -346,7 +351,7 @@ const TeacherTemplate = () => {
           {courses.map((course, index) => (
             <div key={index} className='border border-black p-3 rounded-md mb-3 flex justify-between'>
               <div className='flex flex-col'>
-                <div className='flex space-x-8 items-center'>
+                <div className='flex space-x-3 items-center'>
                   <div className='font-semibold'>{course.name}</div>
                   <div className='flex items-center space-x-2'>
                     <div>Día:</div>
@@ -367,6 +372,7 @@ const TeacherTemplate = () => {
                       className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                       value={course.students}
                       onChange={(e) => handleInputChangeCourses(e, index, 'students')}
+                      onWheel={(e) => e.target.blur()}
                     />
                   </div>
                   <div className='flex items-center'>
@@ -376,6 +382,7 @@ const TeacherTemplate = () => {
                       className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                       value={course.payment}
                       onChange={(e) => handleInputChangeCourses(e, index, 'payment')}
+                      onWheel={(e) => e.target.blur()}
                     />
                   </div>
                 </div>
@@ -387,6 +394,7 @@ const TeacherTemplate = () => {
                       className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                       value={course.fotocopias.precio}
                       onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
+                      onWheel={(e) => e.target.blur()}
                     />
                     <span>x</span>
                     <input
@@ -394,13 +402,14 @@ const TeacherTemplate = () => {
                       className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                       value={course.fotocopias.copias}
                       onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
+                      onWheel={(e) => e.target.blur()}
                     />
                     <span>= $</span>
                     <span className='font-semibold h-8 leading-8'>
                       {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
                     </span>
                   </div>
-                  <div className='flex ml-5 space-x-5'>
+                  <div className='flex ml-3 space-x-3'>
                     <div className='flex items-center space-x-2'>
                       <div className=''>Feriados:</div>
                       <input
@@ -408,6 +417,7 @@ const TeacherTemplate = () => {
                         type='number'
                         value={courses.feriados}
                         onChange={(e) => handleInputChangeFeriados(e, index)}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                     <div className='flex items-center space-x-2'>
@@ -417,6 +427,7 @@ const TeacherTemplate = () => {
                         className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
                         value={course.days}
                         onChange={(e) => handleInputChangeCourses(e, index, 'days')}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                   </div>
@@ -448,6 +459,7 @@ const TeacherTemplate = () => {
                   placeholder='Valor'
                   value={adicional.valor}
                   onChange={(e) => handleAdicionalChange(index, 'valor', e.target.value)}
+                  onWheel={(e) => e.target.blur()}
                 />
                 <button
                   className='bg-red-500 text-white px-1 rounded-md h-8 leading-8'
@@ -468,7 +480,7 @@ const TeacherTemplate = () => {
             </div>
           </div>
 
-          <div className='bg-white py-4 px-10 border border-black rounded-lg'>
+          <div className='bg-white py-4 pr-10 pl-4 border border-black rounded-lg'>
             <h2 className='font-semibold mb-3 text-base'>
               Totales
             </h2>
@@ -493,33 +505,35 @@ const TeacherTemplate = () => {
               {
                 teacherTemplate.title
                   ?
-                  <div className='flex space-x-1 items-center'>
+                  <div className='flex flex-col space-x-1'>
                     <div>
                       Título:
                     </div>
                     <div className='font-semibold'>
                       <span>$</span>
                       <input
-                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8 mt-2'
                         type='number'
                         value={pagoTitle}
                         onChange={(event) => setPagoTitle(Number(event.target.value))}
+                        onWheel={(e) => e.target.blur()}
                       />
                     </div>
                   </div>
                   : ""
               }
-              <div className='flex space-x-1 items-center'>
+              <div className='flex flex-col space-x-1'>
                 <div>
-                  Premio por asistencia:
+                  Bonificación por asistencia:
                 </div>
                 <div className='font-semibold'>
                   <span>$</span>
                   <input
-                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8 mt-2'
                     type='number'
                     value={premio}
                     onChange={(event) => setPremio(Number(event.target.value))}
+                    onWheel={(e) => e.target.blur()}
                   />
                 </div>
               </div>
