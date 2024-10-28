@@ -315,7 +315,7 @@ const TeacherTemplate = () => {
                       />
                     </div>
                   </div>
-                  <div className='flex space-x-8 mt-3'>
+                  <div className='flex space-x-5 mt-3'>
                     <div className='flex items-center space-x-2'>
                       <span>Horas en clase: </span>
                       <input

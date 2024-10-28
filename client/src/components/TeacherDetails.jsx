@@ -37,7 +37,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
     return (
         <div className='w-[60rem] ml-[24rem]'>
             <div
-                className='grid grid-cols-[2.6fr_1fr_1fr] py-3 items-center text-md gap-x-4 mt-8 mb-8 bg-fuchsia-900 rounded-xl text-white border-[0.2rem] border-fuchsia-700'>
+                className='grid grid-cols-[2.6fr_1fr_1fr] py-3 items-center text-md gap-x-4 mt-8 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-700'>
                 <div className='flex items-center bg-fuchsia-700 rounded-lg m-3 justify-between'>
                     <Link to={`/home/${teacher.id}`} state={{ teacherId: teacher.id }}>
                         <button
@@ -63,7 +63,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                             </button>
                             <button
                                 onClick={() => deleteTeacher(teacher.id)}
-                                className='bg-red-800 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-900 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
+                                className='bg-fuchsia-800 px-3 py-1 rounded-md border-[0.1rem] border-white shadow-md duration-200 hover:bg-fuchsia-950 hover:rounded-md hover:border-[0.1rem] hover:border-white hover:duration-200'>
                                 Eliminar
                             </button>
                         </div>
