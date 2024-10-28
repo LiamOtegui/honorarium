@@ -28,7 +28,7 @@ const CreateTeacher = () => {
   }
 
   const handleChangeTitle = async (event) => {
-    const newTitle = event.target.value = "yes"
+    const newTitle = event.target.value
     setTeacher({
       ...teacher,
       title: newTitle
@@ -49,9 +49,9 @@ const CreateTeacher = () => {
           <div className='mb-1'>
             Título:
           </div>
-          <select value={teacher.title ? "yes" : "no"} onChange={handleChangeTitle} className='text-black p-1'>
-            <option value={"yes"}>Con título</option>
-            <option value={"no"}>Sin título</option>
+          <select value={teacher.title} onChange={handleChangeTitle} className='text-black p-1'>
+            <option value={true}>Con título</option>
+            <option value={false}>Sin título</option>
           </select>
           <button className='bg-green-600 py-2 px-3 rounded-md mt-8 hover:bg-green-500 duration-200'>Crear</button>
         </form>
