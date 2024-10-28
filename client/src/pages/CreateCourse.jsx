@@ -6,10 +6,10 @@ const CreateCourse = () => {
 
   const [course, setCourse] = useState({
     name: "",
-    day: "",
-    days: null,
-    students: null,
-    payment: null
+    day: "Lunes",
+    days: "",
+    students: "",
+    payment: ""
   })
 
   const create = async (event) => {
@@ -48,8 +48,12 @@ const CreateCourse = () => {
           </div>
           <select name='day' value={course.day} onChange={handleChange} className='w-full py-1 pr-1 text-black'>
             {
-              dias.map((dia) => (
-                <option value={dia}>{dia}</option>
+              dias.map((dia, index) => (
+                <option
+                  key={index}
+                  value={dia}>
+                  {dia}
+                </option>
               ))
             }
           </select>

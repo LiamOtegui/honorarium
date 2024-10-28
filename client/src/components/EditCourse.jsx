@@ -75,10 +75,15 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
               Día:
             </div>
             <div>
-              <select name='day' value={course.day} onChange={handleChange} className='flex py-1 px-[3.1rem] border border-black rounded-md'>
+              <select
+              name='day'
+              value={course.day}
+              onChange={handleChange}
+              className='flex py-1 px-[3.1rem] border border-black rounded-md'
+              >
                 {
-                  dias.map((dia) => (
-                    <option value={dia}>{dia}</option>
+                  dias.map((dia, index) => (
+                    <option key={index} value={dia}>{dia}</option>
                   ))
                 }
               </select>

@@ -6,11 +6,11 @@ const CreateCoordination = () => {
 
   const [coordination, setCoordination] = useState({
     name: "",
-    day: "",
-    days: null,
-    hourlyPay: null,
-    hours: null,
-    teacherName: null
+    day: "Lunes",
+    days: "",
+    hourlyPay: "",
+    hours: "",
+    teacherName: ""
   })
 
   const [teachers, setTeachers] = useState([])
@@ -20,6 +20,14 @@ const CreateCoordination = () => {
       const response = await axios.get(`http://localhost:5000/teacher`)
       const sortedTeachers = response.data.sort((a, b) => a.name.localeCompare(b.name))
       setTeachers(sortedTeachers)
+
+      if (sortedTeachers.length > 0) {
+        setCoordination(prev => ({
+          ...prev,
+          teacherName: sortedTeachers[0].name
+        }))
+      }
+
     } catch (error) {
       toast.error(error.message)
     }
@@ -65,8 +73,12 @@ const CreateCoordination = () => {
           </div>
           <select name='day' value={coordination.day} onChange={handleChange} className='w-full py-1 pr-1 text-black'>
             {
-              dias.map((dia) => (
-                <option value={dia}>{dia}</option>
+              dias.map((dia, index) => (
+                <option
+                  key={index}
+                  value={dia}>
+                  {dia}
+                </option>
               ))
             }
           </select>

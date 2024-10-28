@@ -42,7 +42,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                     <Link to={`/home/${teacher.id}`} state={{ teacherId: teacher.id }}>
                         <button
                             className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-fuchsia-700 hover:bg-fuchsia-400 hover:rounded-lg hover:border-[0.1rem] hover:border-fuchsia-300 hover:duration-200'>
-                            <div className='flex justify-center'>
+                            <div className='flex justify-center text-lg'>
                                 {teacher.name}
                             </div>
                         </button>
