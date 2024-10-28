@@ -149,8 +149,8 @@ const TeacherTemplate = () => {
 
   const calcularFotocopias = (index) => {
     const course = courses[index]
-    const totalDays = course.days
-    const total = totalDays > 0 ? course.fotocopias.total * totalDays : 0
+    const totalStudents = course.students
+    const total = totalStudents > 0 ? course.fotocopias.total * totalStudents : 0
     return total
   }
 
@@ -218,7 +218,7 @@ const TeacherTemplate = () => {
 
     const opt = {
       margin: 0,
-      filename: `Liquidación ${teacherTemplate.name}.pdf`,
+      filename: `Liquidación de honorarios ${mesActual} ${teacherTemplate.name}.pdf`,
       image: { type: 'jpeg', quality: 1 },
       html2canvas: {
         scale: 2,
@@ -245,7 +245,9 @@ const TeacherTemplate = () => {
           </div>
           <div className='flex space-x-4 items-center'>
             <div className='font-semibold'>Mes:</div>
-            <select className='border border-black px-1 rounded-md h-8 leading-8'>
+            <select
+              defaultValue={mesActual}
+              className='border border-black px-1 rounded-md h-8 leading-8'>
               {meses.map((mes, index) => (
                 <option key={index} value={mes}>
                   {mes}
@@ -292,7 +294,7 @@ const TeacherTemplate = () => {
                 <div className='font-semibold mr-8'>{coordination.name}</div>
                 <div className='flex flex-col'>
                   <div className='flex'>
-                    <div className='flex items-center space-x-2'>
+                    <div className='flex items-center space-x-1'>
                       <div>Día:</div>
                       <select
                         defaultValue={coordination.day}
@@ -304,7 +306,7 @@ const TeacherTemplate = () => {
                         ))}
                       </select>
                     </div>
-                    <div className='flex items-center space-x-2 ml-8'>
+                    <div className='flex items-center space-x-1 ml-8'>
                       <span>Días: </span>
                       <input
                         type='number'
@@ -316,7 +318,7 @@ const TeacherTemplate = () => {
                     </div>
                   </div>
                   <div className='flex space-x-5 mt-3'>
-                    <div className='flex items-center space-x-2'>
+                    <div className='flex items-center space-x-1'>
                       <span>Horas en clase: </span>
                       <input
                         type='number'
@@ -353,7 +355,7 @@ const TeacherTemplate = () => {
               <div className='flex flex-col'>
                 <div className='flex space-x-3 items-center'>
                   <div className='font-semibold'>{course.name}</div>
-                  <div className='flex items-center space-x-2'>
+                  <div className='flex items-center space-x-1'>
                     <div>Día:</div>
                     <select
                       defaultValue={course.day}
@@ -365,13 +367,13 @@ const TeacherTemplate = () => {
                       ))}
                     </select>
                   </div>
-                  <div className='flex items-center space-x-2'>
-                    <span>Estudiantes: </span>
+                  <div className='flex items-center space-x-1'>
+                    <span>Clases por mes: </span>
                     <input
                       type='number'
                       className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                      value={course.students}
-                      onChange={(e) => handleInputChangeCourses(e, index, 'students')}
+                      value={course.days}
+                      onChange={(e) => handleInputChangeCourses(e, index, 'days')}
                       onWheel={(e) => e.target.blur()}
                     />
                   </div>
@@ -391,7 +393,7 @@ const TeacherTemplate = () => {
                     <span>Fotoc. por clase: $</span>
                     <input
                       type='number'
-                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      className='border border-black px-1 w-14 text-right h-8 leading-8 rounded-md'
                       value={course.fotocopias.precio}
                       onChange={(e) => handleInputChangeFotocopias(e, index, 'precio')}
                       onWheel={(e) => e.target.blur()}
@@ -399,34 +401,35 @@ const TeacherTemplate = () => {
                     <span>x</span>
                     <input
                       type='number'
-                      className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                      className='border border-black px-1 w-14 text-right h-8 leading-8 rounded-md'
                       value={course.fotocopias.copias}
                       onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
                       onWheel={(e) => e.target.blur()}
                     />
-                    <span>= $</span>
+                    <span className='ml-1'>= $</span>
                     <span className='font-semibold h-8 leading-8'>
                       {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
                     </span>
                   </div>
-                  <div className='flex ml-3 space-x-3'>
-                    <div className='flex items-center space-x-2'>
-                      <div className=''>Feriados:</div>
+                  <span className='ml-1'>x</span>
+                  <div className='flex ml-1 space-x-3'>
+                    <div className='flex items-center space-x-1'>
+                      <span>Estudiantes: </span>
                       <input
-                        className='text-black border px-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                         type='number'
-                        value={courses.feriados}
-                        onChange={(e) => handleInputChangeFeriados(e, index)}
+                        className='border border-black px-1 w-14 text-right h-8 leading-8 rounded-md'
+                        value={course.students}
+                        onChange={(e) => handleInputChangeCourses(e, index, 'students')}
                         onWheel={(e) => e.target.blur()}
                       />
                     </div>
-                    <div className='flex items-center space-x-2'>
-                      <span>Clases por mes: </span>
+                    <div className='flex items-center space-x-1'>
+                      <div className=''>Feriados:</div>
                       <input
+                        className='text-black border px-1 border-black rounded-lg w-14 font-semibold h-8 leading-8'
                         type='number'
-                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
-                        value={course.days}
-                        onChange={(e) => handleInputChangeCourses(e, index, 'days')}
+                        value={courses.feriados}
+                        onChange={(e) => handleInputChangeFeriados(e, index)}
                         onWheel={(e) => e.target.blur()}
                       />
                     </div>
@@ -434,7 +437,7 @@ const TeacherTemplate = () => {
                 </div>
               </div>
               <div className='font-semibold flex'>
-                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.days)}
+                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.students)}
               </div>
             </div>
           ))}
@@ -505,14 +508,14 @@ const TeacherTemplate = () => {
               {
                 teacherTemplate.title
                   ?
-                  <div className='flex flex-col space-x-1'>
-                    <div>
+                  <div className='flex items-center space-x-1'>
+                    <div className=''>
                       Título:
                     </div>
                     <div className='font-semibold'>
                       <span>$</span>
                       <input
-                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8 mt-2'
+                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                         type='number'
                         value={pagoTitle}
                         onChange={(event) => setPagoTitle(Number(event.target.value))}
@@ -522,14 +525,14 @@ const TeacherTemplate = () => {
                   </div>
                   : ""
               }
-              <div className='flex flex-col space-x-1'>
+              <div className='flex items-center space-x-1'>
                 <div>
-                  Bonificación por asistencia:
+                  Asistencia 100%:
                 </div>
                 <div className='font-semibold'>
                   <span>$</span>
                   <input
-                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8 mt-2'
+                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
                     type='number'
                     value={premio}
                     onChange={(event) => setPremio(Number(event.target.value))}
