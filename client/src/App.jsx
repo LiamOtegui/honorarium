@@ -4,6 +4,7 @@ import { Landing, Home, TeacherTemplate, Courses, Coordinations, CreateTeacher, 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthenticateRoute from './components/AuthenticateRoute'
+import tecLogo from '../public/tec-logo.svg'
 
 function App() {
 
@@ -21,10 +22,8 @@ function App() {
               <nav className='flex flex-col items-center bg-green-900 text-white h-screen'>
                 <Link
                   to='/home'
-                  className='flex text-3xl font-semibold bg-fuchsia-900 shadow-md text-white px-20 py-3 mb-7'>
-                  <div>
-                    TEC
-                  </div>
+                  className='flex text-3xl font-semibold bg-fuchsia-900 shadow-md text-white px-[3.1rem] py-3 mb-7'>
+                  <img src={tecLogo} className='size-[7rem]' />
                 </Link>
                 <div className='flex flex-col space-y-7 text-center'>
                   <Link

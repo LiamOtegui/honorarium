@@ -37,11 +37,11 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
     return (
         <div className='w-[60rem] ml-[24rem]'>
             <div
-                className='grid grid-cols-[2.6fr_1fr_1fr] py-3 items-center text-md gap-x-4 mt-8 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-700'>
-                <div className='flex items-center bg-fuchsia-700 rounded-lg m-3 justify-between'>
+                className='grid grid-cols-[2.6fr_1fr_1fr] py-3 items-center text-md gap-x-4 mt-8 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-600'>
+                <div className='flex items-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg m-3 justify-between'>
                     <Link to={`/home/${teacher.id}`} state={{ teacherId: teacher.id }}>
                         <button
-                            className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-fuchsia-700 hover:bg-fuchsia-400 hover:rounded-lg hover:border-[0.1rem] hover:border-fuchsia-300 hover:duration-200'>
+                            className='flex flex-col m-2 p-2 items-center border-[0.1rem] duration-200 border-fuchsia-700 rounded-lg hover:bg-fuchsia-500 hover:rounded-lg hover:border-[0.1rem] hover:border-fuchsia-300 hover:duration-200'>
                             <div className='flex justify-center text-lg'>
                                 {teacher.name}
                             </div>
@@ -58,7 +58,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                                     setChoosenForEdit(teacher)
                                 }
                                 }
-                                className='bg-fuchsia-600 px-3 py-1 rounded-md border-[0.1rem] border-fuchsia-300 shadow-md hover:bg-fuchsia-400 hover:rounded-md hover:border-[0.1rem] hover:border-fuchsia-400 hover:duration-200'>
+                                className='bg-fuchsia-600 px-3 py-1 rounded-md border-[0.1rem] border-white shadow-md hover:bg-fuchsia-400 hover:rounded-md hover:border-[0.1rem] hover:border-fuchsia-400 hover:duration-200'>
                                 Editar
                             </button>
                             <button
@@ -69,7 +69,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1 border-[0.1rem] border-fuchsia-500'>
                     {courses.length > 0 ? (
                         courses.map((course) => (
                             <div key={course.id} className='flex items-center gap-2 text-center'>
@@ -82,7 +82,7 @@ const TeacherDetails = ({ teacher, getTeacherCourses, getTeacherCoordinations })
                         <div className='text-white bg-fuchsia-800 px-14 my-1 py-1 rounded-md'>Sin cursos</div>
                     )}
                 </div>
-                <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1 mr-3'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 rounded-lg py-1 mr-3 border-[0.1rem] border-fuchsia-500'>
                     {coordinations.length > 0 ? (
                         coordinations.map((coordination) => (
                             <div key={coordination.id} className='text-center'>{coordination.name}</div>

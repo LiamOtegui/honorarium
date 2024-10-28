@@ -23,8 +23,8 @@ const CoordinationDetails = ({ coordination }) => {
     return (
         <div className='w-[90rem]'>
             <div
-                className='grid grid-cols-[3.3fr_1.5fr_1.5fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mt-8 mb-8 bg-green-700 rounded-xl text-white border-[0.2rem] border-green-900'>
-                <div className='flex items-center bg-green-800 rounded-lg m-3 justify-between'>
+                className='grid grid-cols-[3.3fr_1.5fr_1.5fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mt-8 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-600'>
+                <div className='flex items-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg m-3 justify-between'>
                     <div className='flex flex-col my-2 mx-1 p-2 items-center'>
                         <div className='flex items-center'>
                             {coordination.name}
@@ -38,30 +38,30 @@ const CoordinationDetails = ({ coordination }) => {
                                     setChoosenForEdit(coordination)
                                 }
                                 }
-                                className='bg-green-600 px-3 py-1 rounded-md border-[0.1rem] border-green-700 shadow-md hover:bg-green-500 hover:rounded-md hover:border-[0.1rem] hover:border-green-500 hover:duration-200'>
+                                className='bg-fuchsia-600 px-3 py-1 rounded-md border-[0.1rem] border-white shadow-md hover:bg-fuchsia-400 hover:rounded-md hover:border-[0.1rem] hover:border-fuchsia-400 hover:duration-200'>
                                 Editar
                             </button>
                             <button
                                 onClick={() => deleteCoordination(coordination.id)}
-                                className='bg-red-800 px-3 py-1 rounded-md border-[0.1rem] border-red-950 shadow-md duration-200 hover:bg-red-900 hover:rounded-md hover:border-[0.1rem] hover:border-red-950 hover:duration-200'>
+                                className='bg-fuchsia-800 px-3 py-1 rounded-md border-[0.1rem] border-white shadow-md duration-200 hover:bg-fuchsia-950 hover:rounded-md hover:border-[0.1rem] hover:border-white hover:duration-200'>
                                 Eliminar
                             </button>
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mt-10'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1 mt-10'>
                     Día: {coordination.day}
                 </div>
-                <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mt-10'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1 mt-10'>
                     Cantidad de días: {coordination.days}
                 </div>
-                <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mt-10'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1 mt-10'>
                     Pago por hora: ${coordination.hourlyPay}
                 </div>
-                <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mt-10 mr-3'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1 mt-10 mr-3'>
                     Horas trabajando: {coordination.hours}
                 </div>
-                <div className='flex flex-col items-center justify-center bg-green-800 rounded-lg py-1 mr-3 mb-3 ml-3'>
+                <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1 mr-3 mb-3 ml-3'>
                     Teacher asociado: {coordination.teacherName ? coordination.teacherName : "No tiene"}
                 </div>
             </div>

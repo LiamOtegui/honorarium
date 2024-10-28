@@ -145,7 +145,7 @@ const EditCoordination = ({ open, choosen, onClose, children }) => {
               </select>
             </div>
           </div>
-          <button className='mt-4 bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-900 duration-200 hover:bg-green-800 hover:border-[0.1rem] hover:border-green-900 hover:duration-200'>
+          <button className='mt-4 bg-fuchsia-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-fuchsia-900 duration-200 hover:bg-fuchsia-800 hover:border-[0.1rem] hover:border-fuchsia-900 hover:duration-200'>
             Editar
           </button>
         </form>
