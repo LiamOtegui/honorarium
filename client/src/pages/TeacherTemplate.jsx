@@ -22,7 +22,6 @@ const TeacherTemplate = () => {
     feriados: ""
   })
   const [pagoTitle, setPagoTitle] = useState("")
-  const [premio, setPremio] = useState("")
 
   const [adicionales, setAdicionales] = useState([]);
   const [adTotal, setAdTotal] = useState(0)
@@ -207,9 +206,19 @@ const TeacherTemplate = () => {
   const subTotalCursos = calcularSubTotalCursos()
   const subTotalViaticos = calcularViaticos()
   const subTotalTitle = pagoTitle === "" ? 0 : pagoTitle
-  const subTotalPremio = premio === "" ? 0 : premio
+
+  const totalBruto = subTotalCoordinaciones + subTotalCursos
+
+  const [asistencia, setAsistencia] = useState(totalBruto * 0.1)
+  const subTotalAsistencia = asistencia
+  
   const subTotalFotocopias = courses.reduce((acc, _, index) => acc + calcularFotocopias(index), 0)
-  const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalTitle + subTotalPremio + subTotalFotocopias + adTotal
+  
+  const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalTitle + subTotalAsistencia + subTotalFotocopias + adTotal
+
+  useEffect(() => {
+    setAsistencia(totalBruto * 0.1)
+  }, [totalBruto])
 
   const downloadPDF = () => {
     const content = contentRef.current
@@ -282,7 +291,7 @@ const TeacherTemplate = () => {
               onWheel={(e) => e.target.blur()}
             />
             <span className='mx-2'>=</span>
-            <span className='font-semibold'>${subTotalViaticos}</span>
+            <span className='font-semibold'>${subTotalViaticos.toFixed(0)}</span>
             <span className='flex ml-16 mr-2 font-semibold'>Feriados:</span>
             <input
               type='number'
@@ -349,7 +358,7 @@ const TeacherTemplate = () => {
                   </div>
                 </div>
                 <div className='font-semibold flex pl-[6.5rem]'>
-                  Subtotal Coordinación: ${coordination.days * coordination.hours * coordination.hourlyPay}
+                  Subtotal Coordinación: ${(coordination.days * coordination.hours * coordination.hourlyPay).toFixed(0)}
                 </div>
               </div>
             </div>
@@ -414,10 +423,6 @@ const TeacherTemplate = () => {
                       onChange={(e) => handleInputChangeFotocopias(e, index, 'copias')}
                       onWheel={(e) => e.target.blur()}
                     />
-                    <span className='ml-1'>= $</span>
-                    <span className='font-semibold h-8 leading-8'>
-                      {(course.fotocopias.copias * course.fotocopias.precio).toFixed(2)}
-                    </span>
                   </div>
                   <span className='ml-1'>x</span>
                   <div className='flex ml-1 space-x-3'>
@@ -430,6 +435,10 @@ const TeacherTemplate = () => {
                         onChange={(e) => handleInputChangeCourses(e, index, 'students')}
                         onWheel={(e) => e.target.blur()}
                       />
+                      <span className='ml-1'>= $</span>
+                      <span className='font-semibold h-8 leading-8'>
+                        {(course.fotocopias.total * course.students).toFixed(0)}
+                      </span>
                     </div>
                     <div className='flex items-center space-x-1'>
                       <div className=''>Feriados:</div>
@@ -446,7 +455,7 @@ const TeacherTemplate = () => {
               </div>
               <div className='flex flex-col'>
                 <div className='flex font-semibold'>
-                  Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.students)}
+                  Subtotal Curso: ${((course.days * course.payment) + (course.fotocopias.total * course.students)).toFixed(0)}
                 </div>
                 <div className='flex items-center mt-2'>
                   <span className='mr-2'>Asistencia:</span>
@@ -507,18 +516,18 @@ const TeacherTemplate = () => {
             <div className='space-y-2'>
               <div className='flex space-x-1'>
                 <span>Total Coordinación:</span>
-                <span className='font-semibold'>${subTotalCoordinaciones}</span>
+                <span className='font-semibold'>${(subTotalCoordinaciones).toFixed(0)}</span>
               </div>
               <div className='flex space-x-1'>
                 <span>Total Cursos:</span>
-                <span className='font-semibold'>${subTotalCursos}</span>
+                <span className='font-semibold'>${(subTotalCursos + subTotalFotocopias).toFixed(0)}</span>
               </div>
               <div className='flex space-x-1'>
                 <div>
                   Viáticos:
                 </div>
                 <div className='font-semibold'>
-                  ${subTotalViaticos}
+                  ${(subTotalViaticos).toFixed(0)}
                 </div>
               </div>
               <br />
@@ -549,18 +558,24 @@ const TeacherTemplate = () => {
                 <div className='font-semibold'>
                   <span>$</span>
                   <input
-                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-7 leading-8'
+                    className='border pl-1 border-black rounded-lg w-20 font-semibold h-7 leading-8'
                     type='number'
-                    value={premio}
-                    onChange={(event) => setPremio(Number(event.target.value))}
+                    value={asistencia.toFixed(0)}
+                    onChange={(event) => setAsistencia(Number(event.target.value))}
                     onWheel={(e) => e.target.blur()}
                   />
                 </div>
               </div>
 
-              <div className='flex justify-between text-lg'>
-                <span className='font-semibold'>Total a percibir:</span>
-                <span className='font-bold text-lg'>${total}</span>
+              <div className='flex flex-col justify-between pt-5'>
+                <div className='flex space-x-1'>
+                  <span>Total Bruto:</span>
+                  <span className='font-semibold'>${(totalBruto).toFixed(0)}</span>
+                </div>
+                <div className='flex space-x-1 text-lg'>
+                  <span className='font-semibold'>Total a percibir:</span>
+                  <span className='font-bold'>${(total).toFixed(0)}</span>
+                </div>
               </div>
             </div>
           </div>
