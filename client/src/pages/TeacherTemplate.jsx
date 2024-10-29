@@ -18,14 +18,14 @@ const TeacherTemplate = () => {
 
   const [viaticos, setViaticos] = useState({
     travel: "",
-    days: ""
+    days: "",
+    feriados: ""
   })
   const [pagoTitle, setPagoTitle] = useState("")
   const [premio, setPremio] = useState("")
 
   const [adicionales, setAdicionales] = useState([]);
   const [adTotal, setAdTotal] = useState(0)
-  const [adAdded, setAdAdded] = useState(false)
 
   const contentRef = useRef(null)
 
@@ -143,7 +143,7 @@ const TeacherTemplate = () => {
   }
 
   const calcularViaticos = () => {
-    const total = viaticos.travel * viaticos.days
+    const total = viaticos.travel * (viaticos.days - viaticos.feriados)
     return total
   }
 
@@ -273,7 +273,7 @@ const TeacherTemplate = () => {
               onChange={(e) => setViaticos({ ...viaticos, travel: e.target.value })}
               onWheel={(e) => e.target.blur()}
             />
-            <span className='mx-2'>Cantidad de viajes:</span>
+            <span className='mx-2 font-semibold'>Cantidad de viajes:</span>
             <input
               type='number'
               className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
@@ -283,6 +283,14 @@ const TeacherTemplate = () => {
             />
             <span className='mx-2'>=</span>
             <span className='font-semibold'>${subTotalViaticos}</span>
+            <span className='flex ml-16 mr-2 font-semibold'>Feriados:</span>
+            <input
+              type='number'
+              className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+              value={viaticos.feriados}
+              onChange={(e) => setViaticos({ ...viaticos, feriados: e.target.value })}
+              onWheel={(e) => e.target.blur()}
+            />
           </div>
         </div>
 
@@ -436,8 +444,17 @@ const TeacherTemplate = () => {
                   </div>
                 </div>
               </div>
-              <div className='font-semibold flex'>
-                Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.students)}
+              <div className='flex flex-col'>
+                <div className='flex font-semibold'>
+                  Subtotal Curso: ${(course.days * course.payment) + (course.fotocopias.total * course.students)}
+                </div>
+                <div className='flex items-center mt-2'>
+                  <span className='mr-2'>Asistencia:</span>
+                  <select className='font-semibold h-7 leading-8'>
+                    <option>Sí</option>
+                    <option>No</option>
+                  </select>
+                </div>
               </div>
             </div>
           ))}
@@ -473,7 +490,7 @@ const TeacherTemplate = () => {
               </div>
             ))}
             <button
-              className='bg-green-500 text-white px-2 py-1 rounded-md'
+              className='bg-green-500 text-white px-2 rounded-md h-8'
               onClick={handleAddAdicional}
             >
               Agregar Adicional
@@ -515,7 +532,7 @@ const TeacherTemplate = () => {
                     <div className='font-semibold'>
                       <span>$</span>
                       <input
-                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                        className='border pl-1 border-black rounded-lg w-16 font-semibold h-7 leading-8'
                         type='number'
                         value={pagoTitle}
                         onChange={(event) => setPagoTitle(Number(event.target.value))}
@@ -532,7 +549,7 @@ const TeacherTemplate = () => {
                 <div className='font-semibold'>
                   <span>$</span>
                   <input
-                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-8 leading-8'
+                    className='border pl-1 border-black rounded-lg w-16 font-semibold h-7 leading-8'
                     type='number'
                     value={premio}
                     onChange={(event) => setPremio(Number(event.target.value))}
