@@ -6,12 +6,15 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
 
     const [associate, setAssociate] = useState({
         teacherName: "",
-        courseName: ""
+        courseName: "",
+        assignedDay: ""
     })
+
     const [deleted, setDeleted] = useState({
         teacherName: "",
         courseName: ""
     })
+
     const [teachers, setTeachers] = useState([])
     const [courses, setCourses] = useState([])
 
@@ -64,10 +67,17 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
 
     useEffect(() => {
         if (teachers.length > 0 && courses.length > 0) {
-            setAssociate((prev) => ({ ...prev, teacherName: teachers[0].name })),
-                setAssociate((prev) => ({ ...prev, courseName: courses[0].name })),
-                setDeleted((prev) => ({ ...prev, teacherName: teachers[0].name })),
-                setDeleted((prev) => ({ ...prev, courseName: courses[0].name }))
+            setAssociate((prev) => ({
+                ...prev,
+                teacherName: teachers[0].name,
+                courseName: courses[0].name,
+                assignedDay: courses[0].day  // Establecemos un día por defecto
+            }))
+            setDeleted((prev) => ({
+                ...prev,
+                teacherName: teachers[0].name,
+                courseName: courses[0].name
+            }))
         }
     }, [teachers, courses])
 
@@ -84,49 +94,69 @@ const TeacherCourse = ({ openCreate, openDelete, onCloseCreate, onCloseDeleted, 
                         {children}
                     </div>
                     <button onClick={onCloseCreate} className='absolute right-2 top-0'>x</button>
-                    <form
-                        onSubmit={createAssociation}
-                        className='flex flex-col items-center mt-3'>
-                        <div className='flex space-x-10'>
-                            <div className='flex flex-col items-center'>
-                                <div className='font-semibold'>
-                                    Teacher:
+                    <div className='flex space-x-10 mb-10'>
+                        <form
+                            onSubmit={createAssociation}
+                            className='flex flex-col items-center mt-3'>
+                            <div className='flex space-x-10'>
+                                <div className='flex flex-col items-center'>
+                                    <div className='font-semibold'>Teacher:</div>
+                                    <select
+                                        value={associate.teacherName}
+                                        onChange={(event) => setAssociate({ ...associate, teacherName: event.target.value })}
+                                        className='flex justify-center p-1 mb-3 border-[0.1rem] border-black rounded-lg overflow-y-auto'
+                                        size="8">
+                                        {teachers.map((teacher, index) => (
+                                            <option
+                                                key={index}
+                                                value={teacher.name}>
+                                                {teacher.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
-                                <select
-                                    value={associate.teacherName}
-                                    onChange={(event) => setAssociate({ ...associate, teacherName: event.target.value })}
-                                    className='flex justify-center p-1 mb-3 border-[0.1rem] border-black rounded-lg overflow-y-auto'
-                                    size="8">
-                                    {teachers.map((teacher, index) => (
-                                        <option
-                                            key={index}
-                                            value={teacher.name}>
-                                            {teacher.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                <div className='flex flex-col items-center'>
+                                    <div className='font-semibold'>Curso:</div>
+                                    <select
+                                        value={associate.courseName}
+                                        onChange={(event) => {
+                                            const selectedCourse = courses.find(course => course.name === event.target.value)
+                                            setAssociate({
+                                                ...associate,
+                                                courseName: event.target.value,
+                                                assignedDay: selectedCourse.day  // Establece el día por defecto
+                                            })
+                                        }}
+                                        className='flex justify-center p-1 mb-3 border-[0.1rem] border-black rounded-lg overflow-auto'
+                                        size="8">
+                                        {courses.map((course, index) => (
+                                            <option key={index} value={course.name}>
+                                                {course.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
-                            <div className='flex flex-col items-center'>
-                                <div className='font-semibold'>
-                                    Curso:
-                                </div>
+                            <div className='flex flex-col items-center mt-3'>
+                                <div className='font-semibold'>Día:</div>
                                 <select
-                                    value={associate.courseName}
-                                    onChange={(event) => setAssociate({ ...associate, courseName: event.target.value })}
+                                    value={associate.assignedDay}
+                                    onChange={(event) => setAssociate({ ...associate, assignedDay: event.target.value })}
                                     className='flex justify-center p-1 mb-3 border-[0.1rem] border-black rounded-lg overflow-auto'
-                                    size="8">
-                                    {courses.map((course, index) => (
-                                        <option key={index} value={course.name}>
-                                            {course.name}
-                                        </option>
-                                    ))}
+                                    size="2">
+                                    <option value={courses.find(course => course.name === associate.courseName)?.day}>
+                                        {courses.find(course => course.name === associate.courseName)?.day}
+                                    </option>
+                                    <option value={courses.find(course => course.name === associate.courseName)?.day2}>
+                                        {courses.find(course => course.name === associate.courseName)?.day2}
+                                    </option>
                                 </select>
                             </div>
-                        </div>
-                        <button className='relative bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-800 duration-200 hover:bg-green-600 hover:border-[0.1rem] hover:border-green-700 hover:duration-200'>
-                            Asociar
-                        </button>
-                    </form>
+                            <button className='absolute bottom-3 bg-green-700 text-white px-3 py-1 rounded-md border-[0.1rem] border-green-800 duration-200 hover:bg-green-600 hover:border-[0.1rem] hover:border-green-700 hover:duration-200'>
+                                Asociar
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

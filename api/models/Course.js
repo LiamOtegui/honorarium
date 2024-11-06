@@ -17,6 +17,10 @@ const Course = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        day2: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         days: {
             type: DataTypes.INTEGER,
             allowNull: false

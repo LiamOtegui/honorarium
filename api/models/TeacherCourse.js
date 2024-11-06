@@ -28,6 +28,10 @@ const TeacherCourse = sequelize.define(
                 model: Course,
                 key: 'id'
             }
+        },
+        assignedDay: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     },
     {

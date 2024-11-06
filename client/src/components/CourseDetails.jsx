@@ -23,7 +23,7 @@ const CourseDetails = ({ course }) => {
     return (
         <div className='w-[90rem]'>
             <div
-                className='grid grid-cols-[3fr_1.5fr_1.5fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-600'>
+                className='grid grid-cols-[3fr_2fr_1.5fr_1.5fr_1.5fr] ml-72 items-center text-md gap-x-4 mb-8 bg-purple-950 rounded-xl text-white border-[0.2rem] border-fuchsia-600'>
                 <div className='flex items-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg m-3 justify-between'>
                     <div className='flex flex-col my-2 mx-1 p-2 items-center rounded-xl border-[0.1rem] duration-200 border-fuchsia-700'>
                         <div>
@@ -50,7 +50,7 @@ const CourseDetails = ({ course }) => {
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1'>
-                    Día: {course.day}
+                    Días: {course.day} y {course.day2}
                 </div>
                 <div className='flex flex-col items-center justify-center bg-fuchsia-700 border-[0.1rem] border-fuchsia-500 rounded-lg p-1'>
                     Cantidad de días: {course.days}

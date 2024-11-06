@@ -28,18 +28,19 @@ const TeacherTemplate = () => {
 
   const contentRef = useRef(null)
 
-  const handleInputChangeCourses = (event, index, field) => {
-    const { value } = event.target
+  const handleInputChangeCourses = (e, index, field) => {
+    const value = e.target.value;
 
-    const newCourses = [...courses]
-
-    newCourses[index] = {
-      ...newCourses[index],
-      [field]: value === "" ? "" : Number(value)
+    const updatedCourses = [...courses];
+    if (field === 'students' || field === 'days' || field === 'payment') {
+      updatedCourses[index][field] = value === "" ? "" : Number(value);
+    } else {
+      updatedCourses[index][field] = value; // Asignar valor directamente para otros campos
     }
 
-    setCourses(newCourses)
-  }
+    setCourses(updatedCourses);
+  };
+
 
   const handleInputChangeCoordinations = (event, index, field) => {
     const { value } = event.target
@@ -87,13 +88,32 @@ const TeacherTemplate = () => {
           copias: 2,
           total: 0,
           feriados: 0
-        }
+        },
+        assignedDay: ''
       }))
 
       setCourses(coursesWithDetails)
 
     } catch (error) {
       toast.error(`Error fetching courses for teacher ${teacherId}: ${error.message}`)
+    }
+  }
+
+  const getAssignedDay = async (teacherName, courseName, index) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/teacher/${teacherName}/${courseName}/assigned-day`)
+      const assignedDay = response.data.assignedDay
+
+      // Only set the assignedDay if it hasn't been set already
+      setCourses((prevCourses) => {
+        const updatedCourses = [...prevCourses]
+        if (updatedCourses[index].assignedDay === '') {
+          updatedCourses[index].assignedDay = assignedDay
+        }
+        return updatedCourses
+      })
+    } catch (error) {
+      toast.error(`Error fetching assigned day for ${courseName}: ${error.message}`)
     }
   }
 
@@ -113,11 +133,10 @@ const TeacherTemplate = () => {
       if (teacherId) {
         const details = await getTeacherById(teacherId)
         setTeacherTemplate(details)
+        await getTeacherCourses(teacherId)
       }
     }
     fetchData()
-
-    getTeacherCourses(teacherId)
   }, [teacherId])
 
   useEffect(() => {
@@ -125,6 +144,22 @@ const TeacherTemplate = () => {
       getTeacherCoordinations(teacherTemplate.name)
     }
   }, [teacherTemplate.name])
+
+  useEffect(() => {
+    const fetchAssignedDays = async () => {
+      for (let index = 0; index < courses.length; index++) {
+        const course = courses[index]
+        if (!course.assignedDay) { // Only fetch if assignedDay is not already set
+          await getAssignedDay(teacherTemplate.name, course.name, index)
+        }
+      }
+    }
+
+    if (courses.length > 0) {
+      fetchAssignedDays()
+    }
+  }, [courses, teacherTemplate.name])
+
 
   const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   const fecha = new Date()
@@ -211,9 +246,9 @@ const TeacherTemplate = () => {
 
   const [asistencia, setAsistencia] = useState(totalBruto * 0.1)
   const subTotalAsistencia = asistencia
-  
+
   const subTotalFotocopias = courses.reduce((acc, _, index) => acc + calcularFotocopias(index), 0)
-  
+
   const total = subTotalCoordinaciones + subTotalCursos + subTotalViaticos + subTotalTitle + subTotalAsistencia + subTotalFotocopias + adTotal
 
   useEffect(() => {
@@ -290,9 +325,7 @@ const TeacherTemplate = () => {
               onChange={(e) => setViaticos({ ...viaticos, days: e.target.value })}
               onWheel={(e) => e.target.blur()}
             />
-            <span className='mx-2'>=</span>
-            <span className='font-semibold'>${subTotalViaticos.toFixed(0)}</span>
-            <span className='flex ml-16 mr-2 font-semibold'>Feriados:</span>
+            <span className='flex ml-2 mr-2 font-semibold'>Feriados:</span>
             <input
               type='number'
               className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
@@ -300,6 +333,8 @@ const TeacherTemplate = () => {
               onChange={(e) => setViaticos({ ...viaticos, feriados: e.target.value })}
               onWheel={(e) => e.target.blur()}
             />
+            <span className='mx-2'>=</span>
+            <span className='font-semibold'>${subTotalViaticos.toFixed(0)}</span>
           </div>
         </div>
 
@@ -327,7 +362,7 @@ const TeacherTemplate = () => {
                       <span>Días: </span>
                       <input
                         type='number'
-                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        className='border border-black px-1 w-12 text-right h-8 leading-8 rounded-md'
                         value={coordination.days}
                         onChange={(e) => handleInputChangeCoordinations(e, index, 'days')}
                         onWheel={(e) => e.target.blur()}
@@ -336,10 +371,10 @@ const TeacherTemplate = () => {
                   </div>
                   <div className='flex space-x-5 mt-3'>
                     <div className='flex items-center space-x-1'>
-                      <span>Horas en clase: </span>
+                      <span>Cantidad de horas: </span>
                       <input
                         type='number'
-                        className='border border-black px-1 w-16 text-right h-8 leading-8 rounded-md'
+                        className='border border-black px-1 w-12 text-right h-8 leading-8 rounded-md'
                         value={coordination.hours}
                         onChange={(e) => handleInputChangeCoordinations(e, index, 'hours')}
                         onWheel={(e) => e.target.blur()}
@@ -375,8 +410,10 @@ const TeacherTemplate = () => {
                   <div className='flex items-center space-x-1'>
                     <div>Día:</div>
                     <select
-                      defaultValue={course.day}
-                      className='border border-black px-1 rounded-md h-8 leading-8'>
+                      value={course.assignedDay}
+                      className='border border-black px-1 rounded-md h-8 leading-8'
+                      onChange={(e) => handleInputChangeCourses(e, index, 'assignedDay')}
+                    >
                       {dias.map((dia) => (
                         <option key={dia} value={dia}>
                           {dia}

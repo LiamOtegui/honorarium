@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { postTeacher, getTeachers, getTeacherById, updateTeacher, deleteTeacher, associateTeacherToCourse, deleteAssociation, getTeacherCourses, getTeacherCoordinations } = require('../../controllers/teacherController')
+const { postTeacher, getTeachers, getTeacherById, updateTeacher, deleteTeacher, associateTeacherToCourse, deleteAssociation, getTeacherCourses, getAssignedDay, getTeacherCoordinations } = require('../../controllers/teacherController')
 const teacherRouter = Router()
 
 teacherRouter.post('/', postTeacher)
@@ -12,6 +12,7 @@ teacherRouter.post('/associate-course', associateTeacherToCourse)
 teacherRouter.delete('/delete-association/:teacherName/:courseName', deleteAssociation)
 
 teacherRouter.get('/:id/courses', getTeacherCourses)
+teacherRouter.get('/:teacherName/:courseName/assigned-day', getAssignedDay)
 teacherRouter.get('/:name/coordinations', getTeacherCoordinations)
 
 module.exports = teacherRouter

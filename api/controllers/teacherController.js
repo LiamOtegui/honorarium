@@ -1,6 +1,7 @@
 const Teacher = require('../models/Teacher')
 const Course = require('../models/Course')
 const Coordination = require('../models/Coordination')
+const TeacherCourse = require('../models/TeacherCourse')
 const asyncHandler = require('express-async-handler')
 
 const postTeacher = asyncHandler(async (req, res) => {
@@ -82,7 +83,7 @@ const deleteTeacher = asyncHandler(async (req, res) => {
 
 const associateTeacherToCourse = asyncHandler(async (req, res) => {
     try {
-        const { teacherName, courseName } = req.body
+        const { teacherName, courseName, assignedDay } = req.body
 
         const teacher = await Teacher.findOne({ where: { name: teacherName } })
         const course = await Course.findOne({ where: { name: courseName } })
@@ -92,7 +93,11 @@ const associateTeacherToCourse = asyncHandler(async (req, res) => {
             throw new Error('Teacher or Course not found')
         }
 
-        await teacher.addCourse(course)
+        await TeacherCourse.create({
+            teacherId: teacher.id,
+            courseId: course.id,
+            assignedDay: assignedDay  // 'day' o 'day2' según lo que elija en el req.body
+        })
 
         res.json({ message: 'Teacher associated with Course successfully' })
     } catch (error) {
@@ -147,6 +152,37 @@ const getTeacherCourses = asyncHandler(async (req, res) => {
     }
 })
 
+const getAssignedDay = asyncHandler(async (req, res) => {
+    try {
+        const { teacherName, courseName } = req.params
+
+        const teacher = await Teacher.findOne({ where: { name: teacherName } })
+        const course = await Course.findOne({ where: { name: courseName } })
+
+        if (!teacher || !course) {
+            res.status(404)
+            throw new Error('Teacher or Course not found')
+        }
+
+        const teacherCourse = await TeacherCourse.findOne({
+            where: {
+                teacherId: teacher.id,
+                courseId: course.id
+            }
+        })
+
+        if (!teacherCourse) {
+            res.status(404)
+            throw new Error('Association not found')
+        }
+
+        res.json({ assignedDay: teacherCourse.assignedDay })
+    } catch (error) {
+        res.status(500)
+        throw new Error(error.message)
+    }
+})
+
 const getTeacherCoordinations = asyncHandler(async (req, res) => {
     try {
         const { name } = req.params
@@ -180,5 +216,6 @@ module.exports = {
     associateTeacherToCourse,
     deleteAssociation,
     getTeacherCourses,
+    getAssignedDay,
     getTeacherCoordinations
 }

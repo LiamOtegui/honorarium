@@ -7,6 +7,7 @@ const CreateCourse = () => {
   const [course, setCourse] = useState({
     name: "",
     day: "Lunes",
+    day2: "Lunes",
     days: "",
     students: "",
     payment: ""
@@ -44,9 +45,23 @@ const CreateCourse = () => {
           </div>
           <input type='text' name='name' value={course.name} onChange={handleChange} placeholder="Nombre" className='text-black p-1 mb-2' />
           <div className='mb-1'>
-            Día:
+            Día 1:
           </div>
-          <select name='day' value={course.day} onChange={handleChange} className='w-full py-1 pr-1 text-black'>
+          <select name='day' value={course.day} onChange={handleChange} className='w-full py-1 pr-1 text-black mb-1'>
+            {
+              dias.map((dia, index) => (
+                <option
+                  key={index}
+                  value={dia}>
+                  {dia}
+                </option>
+              ))
+            }
+          </select>
+          <div className='mb-1'>
+            Día 2:
+          </div>
+          <select name='day2' value={course.day2} onChange={handleChange} className='w-full py-1 pr-1 text-black mb-1'>
             {
               dias.map((dia, index) => (
                 <option

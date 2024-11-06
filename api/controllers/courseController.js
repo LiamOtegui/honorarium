@@ -3,11 +3,12 @@ const asyncHandler = require('express-async-handler')
 
 const postCourse = asyncHandler(async (req, res) => {
     try {
-        const { name, day, days, students, payment } = req.body
+        const { name, day, day2, days, students, payment } = req.body
 
         const course = await Course.create({
             name,
             day,
+            day2,
             days,
             students,
             payment
@@ -45,11 +46,11 @@ const getCourseById = asyncHandler(async (req, res) => {
 
 const updateCourse = asyncHandler(async (req, res) => {
     try {
-        const { name, day, days, students, payment } = req.body
+        const { name, day, day2, days, students, payment } = req.body
         const { id } = req.params
 
         const course = await Course.update(
-            { name, day, days, students, payment },
+            { name, day, day2, days, students, payment },
             { where: { id: id } }
         )
 

@@ -7,6 +7,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
   const [course, setCourse] = useState({
     name: '',
     day: '',
+    day2: '',
     days: 0,
     students: 0,
     payment: 0
@@ -17,6 +18,7 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
       setCourse({
         name: choosen.name,
         day: choosen.day,
+        day2: choosen.day2,
         days: choosen.days,
         students: choosen.students,
         payment: choosen.payment
@@ -76,10 +78,29 @@ const EditCourse = ({ open, choosen, onClose, children }) => {
             </div>
             <div>
               <select
-              name='day'
-              value={course.day}
-              onChange={handleChange}
-              className='flex py-1 px-[3.1rem] border border-black rounded-md'
+                name='day'
+                value={course.day}
+                onChange={handleChange}
+                className='flex py-1 px-[3.1rem] border border-black rounded-md'
+              >
+                {
+                  dias.map((dia, index) => (
+                    <option key={index} value={dia}>{dia}</option>
+                  ))
+                }
+              </select>
+            </div>
+          </div>
+          <div className='flex flex-col items-center mt-2'>
+            <div className='mb-1 font-semibold'>
+              Día 2:
+            </div>
+            <div>
+              <select
+                name='day2'
+                value={course.day2}
+                onChange={handleChange}
+                className='flex py-1 px-[3.1rem] border border-black rounded-md'
               >
                 {
                   dias.map((dia, index) => (
